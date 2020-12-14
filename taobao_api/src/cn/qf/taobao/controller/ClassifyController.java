@@ -1,31 +1,37 @@
 package cn.qf.taobao.controller;
 
-import cn.qf.taobao.pojo.entity.User;
-import cn.qf.taobao.service.UserService;
-import cn.qf.taobao.service.impl.UserServiceImpl;
+import cn.qf.taobao.pojo.entity.Classify;
+import cn.qf.taobao.service.CommodityService;
+import cn.qf.taobao.service.impl.CommodityServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
-//登录
-@WebServlet("/login.t")
-public class UserQuery extends BaseController{
-    private   UserService userService = new UserServiceImpl();
+/**
+ * 分类查询
+ */
+@WebServlet("/classify.t")
+public class ClassifyController extends BaseController{
+
+    private CommodityService commodityService = new CommodityServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        User use = convertParamsToEntity(req, User.class);
         try {
-            User user = userService.userSelectService(use.getUserName(), use.getPassword(),use.getVerification(),req);
-            writerSuccessResult(user,resp);
+            List<Classify> classifies = commodityService.classifyService();
+            writerSuccessResult(classifies,resp);
+
         }catch (RuntimeException e){
             String message = e.getMessage();
-           writerErrorResult(message,resp);
+            writerErrorResult(message,resp);
+
         }
+
+
     }
 
     @Override

@@ -40,8 +40,8 @@ public class BaseController extends HttpServlet {
     protected void writerSuccessResult(Object data, HttpServletResponse resp) {
         BaseRespVO result = new BaseRespVO<>();
         result.setData(data);
-
         String json = JSON.toJSONString(result);
+
         try {
             resp.getWriter().write(json);
         } catch (IOException e) {

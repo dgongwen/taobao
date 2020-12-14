@@ -24,6 +24,10 @@ public class AuthenticationFilter implements Filter {
     static {
         whiteList.add("login.t");
         whiteList.add("verification.t");
+        whiteList.add("commodityClassify.t");
+        whiteList.add("classify.t");
+
+
 
     }
 
