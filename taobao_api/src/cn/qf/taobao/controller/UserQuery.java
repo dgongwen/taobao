@@ -19,16 +19,11 @@ public class UserQuery extends BaseController{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User use = convertParamsToEntity(req, User.class);
-        System.out.println(use);
         try {
-            User user = userService.userSelectService(use.getUserName(), use.getPassword());
-            System.out.println(user);
+            User user = userService.userSelectService(use.getUserName(), use.getPassword(),use.getVerification(),req);
             writerSuccessResult(user,resp);
-           // resp.sendRedirect("home.html");
-           // req.getRequestDispatcher("home.html").forward(req,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();
-            System.out.println(message);
            writerErrorResult(message,resp);
         }
     }

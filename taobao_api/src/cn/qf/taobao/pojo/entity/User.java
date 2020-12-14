@@ -16,6 +16,15 @@ public class User {
     private double blance;//账户余额
     private String email;//用户邮箱
     private Long paymentPassword;//用户支付密码
+    private String verification;//用户支付密码
+
+    public String getVerification() {
+        return verification;
+    }
+
+    public void setVerification(String verification) {
+        this.verification = verification;
+    }
 
     public double getBlance() {
         return blance;

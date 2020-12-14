@@ -22,6 +22,7 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<!--自定义工具-->
 		<script src="tao_js/HttpUtil.js"></script>
+		<script src="tao_js/Data.js"></script>
 		<!--参数校验工具-->
 		<script src="tao_js/jquery.validate.min.js"></script>
 		<script src="tao_js/messages_zh.min.js"></script>
@@ -51,6 +52,7 @@
 
 							  <label for="user" class="error"></label>
 							  <label for="password" class="error"></label>
+							  <label for="verification" class="error"></label>
 							  <div class="user-name">
 
 								    <label class="a" for="user"><i class="am-icon-user"></i></label>
@@ -66,8 +68,8 @@
 				 </div>
 							  <div class="user-pass">
 
-						      <input style="width: 40%;padding: 0px 0px 0px 20px;float: left" class="verification" type="text" >
-							  <img style="float: right" src="http://localhost:8080//taobao_api/verification.t">
+						      <input id="verification" name="verification" style="width: 40%;padding: 0px 0px 0px 20px;float: left" class="verification" type="text" placeholder="验证码">
+							  <img onclick="img()" id="img" style="float: right" src="http://localhost:8080//taobao_api/verification.t">
 							  </div>
 							  <div class="am-cf">
 								  <input type="submit" onclick="formSubmit()" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm">
@@ -136,6 +138,9 @@
 						},
 						password:{
 							required:true
+						},
+						verification:{
+							required:true
 						}
 					},
 					messages:{}
@@ -145,29 +150,11 @@
 
 	}
 
+	function img() {
 
-/*	$("#login").validate({
-		rules: {
-			userName: {
-				// remote: "http://localhost:8080/server-demo/checkUserExist"
-				remote: {
-					url: "http://localhost:8080/taobao/login.t",
-					method: "post",
-					data: {
-						userName: function () {
-							return $("[name='userName']").val();
-						}
-
-					}
-				}
-			}
-		},
-		messages: {
-			userName: {
-				remote: "用户名不存在"
-			}
-		},
-	})*/
+		let url="http://localhost:8080//taobao_api/verification.t";
+		get()
+	}
 	function formSubmit() {
 
 		//获取验证框架结果
@@ -180,13 +167,15 @@
 		//获取表单数据
 		let userNameValue = $("#user").val();
 		let passwordValue = $("#password").val();
+		var verificationValue = $("#verification").val();
 
 		//发起http 请求
 		let url = "login.t";
-		let params = {userName: userNameValue, password: passwordValue};
+		let params = {userName: userNameValue, password: passwordValue,verification:verificationValue};
 
 		postWithJson(url,params,function (data) {
-			
+
+			saveToLocalStorage("seller", data);
 			window.location.href="http://localhost:8080//taobao_html/home.html";
 		})
 
