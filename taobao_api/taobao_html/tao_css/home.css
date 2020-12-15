@@ -1,0 +1,9 @@
+.list_img{
+    width: 240px;
+    height: 200px;
+}
+.list_div{
+    width: 240px;
+    height: 300px;
+    float: left;
+}

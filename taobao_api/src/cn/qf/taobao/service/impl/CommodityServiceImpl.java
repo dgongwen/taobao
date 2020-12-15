@@ -30,4 +30,17 @@ public class CommodityServiceImpl  implements CommodityService {
         }
         return classifies;
     }
+
+    @Override
+    public List<Commodity> randomCommodityService() {
+
+
+        List<Commodity> commodities = commodityDao.selectRandomCommodity();
+
+        if (commodities==null){
+            throw new RuntimeException("随机商品查询失败");
+        }
+
+        return commodities;
+    }
 }

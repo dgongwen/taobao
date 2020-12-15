@@ -15,7 +15,13 @@ public interface CommodityService {
 
     /**
      * 分类查询
-     * @return分类集合 抛出异常信息
+     * @return分类商品集合 抛出异常信息
      */
     List<Classify> classifyService();
+
+    /**
+     * 随机展示15个商品
+     * @return 商品集合 抛出异常信息
+     */
+    List<Commodity> randomCommodityService();
 }

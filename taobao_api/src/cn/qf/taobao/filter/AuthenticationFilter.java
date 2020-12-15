@@ -26,6 +26,8 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("verification.t");
         whiteList.add("commodityClassify.t");
         whiteList.add("classify.t");
+        whiteList.add("random.t");
+
 
 
 

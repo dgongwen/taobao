@@ -19,4 +19,10 @@ public interface CommodityDao {
       */
      List<Classify> selectClassify();
 
+     /**
+      * 查询随机15个商品
+      * @return
+      */
+     List<Commodity> selectRandomCommodity();
+
 }
