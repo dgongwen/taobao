@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 
 //登录
 @WebServlet("/login.t")
-public class UserQueryController extends BaseController{
+public class UserLoginController extends BaseController{
     private   UserService userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
