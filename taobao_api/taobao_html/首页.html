@@ -99,17 +99,8 @@
 
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
-							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
-							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
+
+
 						</div>
 		        				
 						<!--侧边导航 -->
@@ -185,11 +176,11 @@
 						<div class="demo">
 
 							<ul>
-								<li class="title-first"><a target="_blank" href="#">
+								<li class="title-first"><a target="_blank">
 									<img src="images/TJ2.jpg"></img>
 									<span>[特惠]</span>商城爆品1分秒								
 								</a></li>
-								<li class="title-first"><a target="_blank" href="#">
+								<li class="title-first"><a target="_blank" >
 									<span>[公告]</span>商城与广州市签署战略合作协议
 								     <img src="images/TJ.jpg"></img>
 								     <p>XXXXXXXXXXXXXXXXXX</p>
@@ -202,7 +193,7 @@
 								</a>
 								<em>
 									Hi,<span class="s-name">小叮当</span>
-									<a href="#"><p>点击更多优惠活动</p></a>									
+									<a ><p>点击更多优惠活动</p></a>
 								</em>
 							</div>
 							<div class="member-logout">
@@ -218,9 +209,9 @@
 							<div class="clear"></div>	
 						</div>																	    
 							    
-								<li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-								<li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-								<li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
+								<li><a target="_blank" ><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
+								<li><a target="_blank" ><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
+								<li><a target="_blank" ><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
 								
 							</ul>
                         <div class="advTip"><img src="images/advTip.jpg"/></div>
@@ -229,7 +220,7 @@
 					<div class="clear"></div>
 				</div>
 				<script type="text/javascript">
-					if ($(window).width() < 640) {
+					if ($(window).width() &lt; 640) {
 						function autoScroll(obj) {
 							$(obj).find("ul").animate({
 								marginTop: "-39px"
@@ -298,18 +289,19 @@
 				<div id="div_list" class="list_to">
 
 
-					<div  class="list_div">
+					<div v-for="commodity,i in commodityList" class="list_div">
 
-								<div class="list_img">
-									<img src="//gw.alicdn.com/tps/i4/361068359/O1CN01xsX2pE2BcTKWQsMNO_!!361068359.jpg_Q75.jpg">
+								<div  class="list_img">
+									<a :href="'http://localhost:8080//taobao_html/introduction.html?id='+commodity.id" rel="external nofollow"><img :src= "commodity.commodityImgUrl"  style="width: 80%"></a>
+
 								</div>
 								<div class="div-goods-remark">
-									<b>￥40.0包邮</b><br>
-									<strong>论语智慧</strong><br>
-									<small>浪色服饰专营店</small>
+									<b>￥{{commodity.commodityPrice}}</b><br>
+									<p >{{commodity.commodityName}}</p>
+									<br>
 								</div>
 								<div class="div-goods-score">
-									<small>评分：4.8</small>
+									<small>销量{{commodity.commoditySales}}</small>
 								</div>
 
 					</div>
@@ -561,11 +553,11 @@
 					this.refreshSellerList();
 				}
 			});
-/*
+
 			var vm = new Vue({
 				el: '#div_list',
 				data: {
-					sellerList:[]
+					commodityList:[]
 				},
 				methods: {
 					refreshSellerList: function () {
@@ -573,7 +565,7 @@
 						let url = "random.t";
 						let thisObj = this;
 						get(url, function (data) {
-							thisObj.sellerList = data;
+							thisObj.commodityList = data;
 						})
 					}
 				},
@@ -581,7 +573,9 @@
 					//页面加载完成，并且vue对象加载完成之后调用
 					this.refreshSellerList();
 				}
-			});*/
+			});
+			
+
 			//window.jQuery || document.write('&lt;script src="basic/js/jquery.min.js ">&lt;\/script>');
 		</script>
 		<script type="text/javascript " src="basic/js/quick_links.js "></script>

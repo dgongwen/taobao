@@ -51,7 +51,7 @@ public class CommodityDaoImpl implements CommodityDao {
     @Override
     public List<Commodity> selectRandomCommodity() {
         int i = random.nextInt(95);
-        System.out.println(i);
+
         String sql="SELECT * FROM t_commodity LIMIT ?,15";
 
         //开启下划线->驼峰转换所用
@@ -62,9 +62,9 @@ public class CommodityDaoImpl implements CommodityDao {
         try {
 
 
-            List<Commodity> query = queryRunner.query(sql, commodityList,i);
-            System.out.println(query);
-            return query;
+            return queryRunner.query(sql, commodityList,i);
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();

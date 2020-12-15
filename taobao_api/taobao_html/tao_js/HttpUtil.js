@@ -77,3 +77,14 @@ function postWithJson(url, params, callback) {
         }
     });
 }
+
+function getUrlParam(id) {
+    var regExp = new RegExp('([?]|&)' + id+ '=([^&]*)(&|$)');
+    var result = window.location.href.match(regExp);
+    if (result) {
+        return decodeURIComponent(result[2]);
+    } else {
+        return null;
+    }
+
+}

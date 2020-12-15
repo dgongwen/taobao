@@ -25,4 +25,5 @@ public interface CommodityDao {
       */
      List<Commodity> selectRandomCommodity();
 
+
 }

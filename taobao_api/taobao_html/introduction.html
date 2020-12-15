@@ -21,6 +21,15 @@
 		<script type="text/javascript" src="js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="js/list.js"></script>
 
+		<!--bootstrap 依赖jQuery-->
+		<script src="js/jquery.js"></script>
+
+		<!--自定义工具-->
+		<script src="tao_js/HttpUtil.js"></script>
+		<script src="tao_js/Data.js"></script>
+		<!--参数校验工具-->
+		<script src="tao_js/vue.min.js"></script>
+
 	</head>
 
 	<body>
@@ -1329,6 +1338,14 @@
 				</div>
 			</div>
 
+
+	<script>
+		var urlParam = getUrlParam("id");
+
+		let url="";
+		getWithParams()
+		console.log(urlParam);
+	</script>
 	</body>
 
 </html>
