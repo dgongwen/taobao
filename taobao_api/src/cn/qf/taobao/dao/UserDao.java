@@ -19,5 +19,5 @@ public interface UserDao {
      * @param password
      * @return
      */
-    User userRegister(String userName,String password);
+    Integer userRegister(String userName,String password);
 }

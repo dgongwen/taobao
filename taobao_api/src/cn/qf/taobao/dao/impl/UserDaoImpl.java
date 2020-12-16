@@ -35,8 +35,21 @@ public class  UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User userRegister(String userName, String password) {
-        String sql = "insert into t_user (user_name,password) values (?, ?)";
+    public Integer userRegister(String userName, String password) {
+        String sql = "INSERT INTO `taobao`.`t_user`( `user_name`, `password`) VALUES ( ? , ? )";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+
+        BeanHandler<User> userBeanHandler = new BeanHandler<>(User.class,processor);
+
+        try {
+            return  queryRunner.update(sql, userBeanHandler,userName);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
         return null;
     }
 }
