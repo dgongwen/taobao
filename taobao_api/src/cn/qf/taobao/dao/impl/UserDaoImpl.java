@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * 用户DAO
  */
-public class UserDaoImpl implements UserDao {
+public class  UserDaoImpl implements UserDao {
     //创建DBUtil工具
     private  QueryRunner queryRunner = new QueryRunner(DruidUtil.getDataSource());
     @Override
@@ -31,6 +31,12 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
 
         }
+        return null;
+    }
+
+    @Override
+    public User userRegister(String userName, String password) {
+        String sql = "insert into t_user (user_name,password) values (?, ?)";
         return null;
     }
 }
