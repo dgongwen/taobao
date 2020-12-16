@@ -148,4 +148,34 @@ public class CommodityDaoImpl implements CommodityDao {
         }
         return 0;
     }
+
+    @Override
+    public int addFootprint(Long commodityId, Long userId) {
+           String sql="INSERT INTO `t_footprint`(`user_id`, `commodity_id`) VALUES (?, ?);";
+
+        try {
+            int update = queryRunner.update(sql,userId,commodityId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Commodity> selectFootprint(Long userId) {
+
+
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_footprint tf ON tf.commodity_id=tc.id WHERE tf.user_id=?";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class,processor);
+
+        try {
+            return  queryRunner.query(sql,commodityBeanListHandler,userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

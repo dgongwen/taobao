@@ -1,5 +1,8 @@
 package cn.qf.taobao.pojo.entity;
 
+/**
+ * 收藏夹
+ */
 public class Favorite {
     private Long userId;
     private Long commodityId;

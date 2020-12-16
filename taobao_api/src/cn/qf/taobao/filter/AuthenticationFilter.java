@@ -31,6 +31,8 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("add.t");
         whiteList.add("favorite.t");
         whiteList.add("deleteFavorite.t");
+        whiteList.add("selectFootprint.t");
+
 
     }
 
