@@ -2,9 +2,13 @@ package cn.qf.taobao.dao;
 
 import cn.qf.taobao.pojo.entity.Classify;
 import cn.qf.taobao.pojo.entity.Commodity;
+import cn.qf.taobao.pojo.entity.Favorite;
 
 import java.util.List;
 
+/**
+ * 商品DAO层
+ */
 public interface CommodityDao {
 
      /**
@@ -24,6 +28,41 @@ public interface CommodityDao {
       * @return
       */
      List<Commodity> selectRandomCommodity();
+
+     /**
+      * id查询单个商品
+      * @return返回商品对象 返回null
+      */
+      Commodity oneCommodity(Long id);
+
+    /**
+     *收藏夹 添加商品
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+      int addCommodity(Long commodityId,Long userId);
+
+    /**
+     * 用户收藏夹
+     * @param userId
+     * @return  商品集合 null
+     */
+    List<Commodity> favoriteCommodity(Long userId);
+
+    /**
+     * 查询收藏夹商品
+     * @return
+     */
+    Favorite selectFavoriteCommodity(Long commodityId, Long userId);
+
+    /**
+     * 删除收藏夹商品
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+     int deleteFavoriteCommodity(Long commodityId, Long userId);
 
 
 }

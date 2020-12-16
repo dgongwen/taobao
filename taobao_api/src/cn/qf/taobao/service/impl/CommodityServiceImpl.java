@@ -4,6 +4,7 @@ import cn.qf.taobao.dao.CommodityDao;
 import cn.qf.taobao.dao.impl.CommodityDaoImpl;
 import cn.qf.taobao.pojo.entity.Classify;
 import cn.qf.taobao.pojo.entity.Commodity;
+import cn.qf.taobao.pojo.entity.Favorite;
 import cn.qf.taobao.service.CommodityService;
 
 import java.util.List;
@@ -42,5 +43,53 @@ public class CommodityServiceImpl  implements CommodityService {
         }
 
         return commodities;
+    }
+
+    @Override
+    public Commodity oneCommodityService(Long id) {
+
+        Commodity commodity = commodityDao.oneCommodity(id);
+        if (commodity==null){
+            throw  new RuntimeException("查询单个商品失败");
+        }
+        return commodity;
+    }
+
+    @Override
+    public boolean addCommodityService(Long commodityId, Long userId) {
+
+        Favorite favorite = commodityDao.selectFavoriteCommodity(commodityId, userId);
+        if (favorite==null){
+            int i = commodityDao.addCommodity(commodityId, userId);
+            if (i==0){
+                throw new RuntimeException("添加收藏夹商品失败");
+            }
+            return true;
+        }
+        throw new RuntimeException("商品已收藏");
+
+
+    }
+
+    @Override
+    public List<Commodity> favoriteCommodityService(Long userId) {
+
+        List<Commodity> commodities = commodityDao.favoriteCommodity(userId);
+
+        if (commodities==null){
+            throw new RuntimeException("没有收藏商品哦！");
+        }
+        return commodities;
+    }
+
+    @Override
+    public boolean deleteFavoriteCommodityService(Long commodityId, Long userId) {
+
+        int i = commodityDao.deleteFavoriteCommodity(commodityId, userId);
+        if (i==0){
+            throw new RuntimeException("删除收藏商品失败");
+        }
+
+        return true;
     }
 }
