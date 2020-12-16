@@ -39,11 +39,11 @@
 									<form method="post">
                  <div class="user-phone">
 								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-								    <input type="tel" name="" id="phone" placeholder="请输入手机号">
+								    <input type="tel" name="userName" id="phone" placeholder="请输入手机号">
                  </div>																			
 										<div class="verification">
 											<label for="code"><i class="am-icon-code-fork"></i></label>
-											<input type="tel" name="" id="code" style="width: 45%;"  placeholder="请输入验证码">
+											<input type="tel" name="verification" id="code" style="width: 45%;"  placeholder="请输入验证码">
 											<img onclick="img()" id="img" style="float: right;width: 160px;height: 40px" src="http://localhost:8080//taobao_api/verification.t">
 
 
@@ -54,7 +54,7 @@
                  </div>										
                  <div class="user-pass">
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
+								    <input type="password" name="password" id="passwordRepeat" placeholder="确认密码">
                  </div>	
 									</form>
 								 <div class="login-links">
@@ -63,7 +63,7 @@
 										</label>
 							  	</div>
 										<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+											<input type="submit" onclick="formSubmit()" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
 								
 									<hr>
@@ -100,3 +100,29 @@
 	</body>
 
 </html>
+<script>
+	function formSubmit() {
+
+		//获取验证框架结果
+		let validateResult = $("#login").valid();
+		if (!validateResult) {
+			//校验不通过
+			return;
+		}
+
+		//获取表单数据
+		let userNameValue = $("#user").val();
+		let passwordValue = $("#password").val();
+		var verificationValue = $("#verification").val();
+
+		//发起http 请求
+		let url = "register.t";
+		let params = {userName: userNameValue, password: passwordValue,verification:verificationValue};
+
+		postWithJson(url,params,function (data) {
+
+			saveToLocalStorage("seller", data);
+			window.location.href="http://localhost:8080//taobao_html/首页.html";
+		})
+	}
+</script>
