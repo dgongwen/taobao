@@ -17,5 +17,9 @@ public interface UserService {
      */
       User userSelectService(String userName, String password, String Verification, HttpServletRequest req);
 
+    /**
+     *用户注册
+     * @return
+     */
       User userRegisterService(String userName,String password,String Verification,HttpServletRequest req);
 }
