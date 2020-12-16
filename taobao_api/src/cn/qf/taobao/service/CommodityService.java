@@ -24,4 +24,50 @@ public interface CommodityService {
      * @return 商品集合 抛出异常信息
      */
     List<Commodity> randomCommodityService();
+
+    /**
+     * id查询单个商品
+     * @return
+     */
+    Commodity oneCommodityService(Long id);
+
+    /**
+     * 添加收藏夹商品
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    boolean addCommodityService(Long commodityId,Long userId);
+
+    /**
+     * 用户收藏夹
+     * @param userId
+     * @return 商品集合 抛出异常
+     */
+    List<Commodity> favoriteCommodityService(Long userId);
+
+    /**
+     * 删除收藏夹商品
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    boolean deleteFavoriteCommodityService(Long commodityId, Long userId);
+
+    /**
+     * 足迹
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    boolean addFootprint(Long commodityId, Long userId);
+
+    /**
+     * 查询足迹
+     * @param userId
+     * @return
+     */
+   List<Commodity> selectFootprint(Long userId);
+
+
 }

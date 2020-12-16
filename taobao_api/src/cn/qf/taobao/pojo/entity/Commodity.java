@@ -12,6 +12,15 @@ public class Commodity {
     private Long classificationId;//分类id
     private Long commoditySales;//商品销量
     private Long commodityState;//商品上下架 1 上架 0 下架
+    private String creationTime;//时间
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
 
     public Long getId() {
         return id;
@@ -69,6 +78,7 @@ public class Commodity {
         this.commodityState = commodityState;
     }
 
+
     @Override
     public String toString() {
         return "Commodity{" +
@@ -79,6 +89,7 @@ public class Commodity {
                 ", classificationId=" + classificationId +
                 ", commoditySales=" + commoditySales +
                 ", commodityState=" + commodityState +
+                ", creationTime='" + creationTime + '\'' +
                 '}';
     }
 }

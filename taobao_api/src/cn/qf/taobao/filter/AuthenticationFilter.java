@@ -27,8 +27,11 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("commodityClassify.t");
         whiteList.add("classify.t");
         whiteList.add("random.t");
-
-
+        whiteList.add("details.t");
+        whiteList.add("add.t");
+        whiteList.add("favorite.t");
+        whiteList.add("deleteFavorite.t");
+        whiteList.add("selectFootprint.t");
 
 
     }

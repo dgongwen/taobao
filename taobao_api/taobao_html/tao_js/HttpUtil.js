@@ -1,6 +1,8 @@
 function appendHost(url) {
     let host = "http://localhost:8080/taobao_api/";
+    //alert(host + url);
     return host + url;
+
 }
 
 /**
@@ -16,8 +18,9 @@ function handlerResp(json, callback) {
         //成功，调用回调方法
         callback(resp.data);
     } else if (resp.code == 200) {
+
         alert(resp.msg);
-        //用户未登录
+        用户未登录
         location.href = "http://localhost:8080//taobao_html/登录.html";
     } else {
         //业务处理失败，统一提示错误信息
@@ -76,4 +79,15 @@ function postWithJson(url, params, callback) {
             handlerResp(resp, callback);
         }
     });
+}
+
+function getUrlParam(id) {
+    var regExp = new RegExp('([?]|&)' + id+ '=([^&]*)(&|$)');
+    var result = window.location.href.match(regExp);
+    if (result) {
+        return decodeURIComponent(result[2]);
+    } else {
+        return null;
+    }
+
 }
