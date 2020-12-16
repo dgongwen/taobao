@@ -54,5 +54,20 @@ public interface CommodityService {
      */
     boolean deleteFavoriteCommodityService(Long commodityId, Long userId);
 
+    /**
+     * 足迹
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    boolean addFootprint(Long commodityId, Long userId);
+
+    /**
+     * 查询足迹
+     * @param userId
+     * @return
+     */
+   List<Commodity> selectFootprint(Long userId);
+
 
 }

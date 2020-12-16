@@ -64,5 +64,20 @@ public interface CommodityDao {
      */
      int deleteFavoriteCommodity(Long commodityId, Long userId);
 
+    /**
+     * 足迹添加
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+     int addFootprint(Long commodityId, Long userId);
+
+    /**
+     *查询足迹
+     * @param userId
+     * @return
+     */
+    List<Commodity> selectFootprint(Long userId);
+
 
 }

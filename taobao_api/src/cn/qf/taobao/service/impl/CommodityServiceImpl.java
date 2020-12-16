@@ -92,4 +92,25 @@ public class CommodityServiceImpl  implements CommodityService {
 
         return true;
     }
+
+    @Override
+    public boolean addFootprint(Long commodityId, Long userId) {
+
+        int i = commodityDao.addFootprint(commodityId, userId);
+        if (i==0){
+            throw new RuntimeException("足迹记录失败");
+        }
+        return true;
+    }
+
+    @Override
+    public List<Commodity> selectFootprint(Long userId) {
+
+        List<Commodity> commodities = commodityDao.selectFootprint(userId);
+        if (commodities==null){
+            throw new RuntimeException("查询足迹失败");
+        }
+
+        return commodities;
+    }
 }

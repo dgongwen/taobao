@@ -292,7 +292,7 @@
 					<div v-for="commodity in commodityList" class="list_div">
 
 								<div  class="list_img">
-									<a :href="'http://localhost:8080//taobao_html/introduction.html?id='+commodity.id" rel="external nofollow"><img :src= "commodity.commodityImgUrl"  style="width: 80%"></a>
+									<a :href="'http://localhost:8080//taobao_html/introduction.html?id='+commodity.id" :type="commodity.id" onclick="find(this.type)" rel="external nofollow"><img :src= "commodity.commodityImgUrl"  style="width: 80%"></a>
 
 								</div>
 								<div class="div-goods-remark">
@@ -513,6 +513,9 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+
+
+
 			var from = getFromLocalStorage("seller");
 			if (from==null){
 				var vm = new Vue({
@@ -574,6 +577,27 @@
 					this.refreshSellerList();
 				}
 			});
+
+
+
+			find = function (id){
+
+				let  fromLocalStorage = getFromLocalStorage("seller");
+
+				if (fromLocalStorage==null){
+					return;
+				}
+				let findId = fromLocalStorage.id;
+
+				let url="footprint.t?userId="+findId+"&commodityId="+id;
+
+				get(url,function (data) {
+
+
+				})
+
+
+			}
 			
 
 			//window.jQuery || document.write('&lt;script src="basic/js/jquery.min.js ">&lt;\/script>');
