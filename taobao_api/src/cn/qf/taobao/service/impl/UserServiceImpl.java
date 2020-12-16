@@ -34,17 +34,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User userRegisterService(String userName, String password, HttpServletRequest req) {
+    public User userRegisterService(String userName, String password, String Verification, HttpServletRequest req) {
         User user = userDao.userSelect(userName);
         System.out.println("Service"+user);
         Integer integer = userDao.userRegister(userName, password);
         if (user!=null){
             throw new RuntimeException("用户名不可用");
         }
+
+        HttpSession session = req.getSession();
+        String verificationVal = (String)session.getAttribute("verification");
+        if (!verificationVal.equals(Verification)){
+            throw new RuntimeException("验证码错误");
+
+        }
         if (integer!=1){
             throw new RuntimeException("注册失败");
         }
-         user = userDao.userSelect(userName);
+        user = userDao.userSelect(userName);
         return user;
     }
 }

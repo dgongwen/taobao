@@ -20,8 +20,8 @@ public class UserRegisterController extends BaseController{
         // 获取前端参数然后转换成对象
         User use = convertParamsToEntity(req, User.class);
         try {
-            // 将对象返回前端
-            User user = userService.userRegisterService(use.getUserName(), use.getPassword(),req);
+            // 将对象返回前端并将用户信息保存到session
+            User user = userService.userRegisterService(use.getUserName(), use.getPassword(),use.getVerification(),req);
             HttpSession session = req.getSession();
             session.setAttribute("seller",user);
             writerSuccessResult(user,resp);
