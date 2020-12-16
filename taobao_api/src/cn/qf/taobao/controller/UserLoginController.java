@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -21,6 +22,8 @@ public class UserLoginController extends BaseController{
         User use = convertParamsToEntity(req, User.class);
         try {
             User user = userService.userSelectService(use.getUserName(), use.getPassword(),use.getVerification(),req);
+            HttpSession session = req.getSession();
+            session.setAttribute("seller",user);
             writerSuccessResult(user,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();
