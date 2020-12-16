@@ -73,6 +73,21 @@ public interface CommodityDao {
      int addFootprint(Long commodityId, Long userId);
 
     /**
+     * 查询足迹是否存在
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    Favorite existFootprint(Long commodityId, Long userId);
+
+    /**
+     * 删除足迹
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+     int   deleteFootprint(Long commodityId, Long userId);
+    /**
      *查询足迹
      * @param userId
      * @return
