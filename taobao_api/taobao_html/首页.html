@@ -112,7 +112,7 @@
 										<ul  v-for="seller in sellerList" class="category-list" id="js_climit_li">
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/cake.png"></i><a href="#" class="ml-22" title="点心">{{seller.classificationName}}</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/cake.png"></i><a href="#" onclick="classify(this.type)" class="ml-22" :type="seller.classificationId" title="点心">{{seller.classificationName}}</a></h3>
 													<em>&gt;</em></div>
 
 											<b class="arrow"></b>	
@@ -579,7 +579,11 @@
 			});
 
 
+	    function classify(id){
 
+	    	location.href="http://localhost:8080//taobao_html/search.html?num="+id;
+
+			}
 			find = function (id){
 
 				let  fromLocalStorage = getFromLocalStorage("seller");

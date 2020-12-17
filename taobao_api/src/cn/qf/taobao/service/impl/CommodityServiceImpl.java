@@ -35,7 +35,6 @@ public class CommodityServiceImpl  implements CommodityService {
     @Override
     public List<Commodity> randomCommodityService() {
 
-
         List<Commodity> commodities = commodityDao.selectRandomCommodity();
 
         if (commodities==null){
@@ -96,7 +95,6 @@ public class CommodityServiceImpl  implements CommodityService {
     @Override
     public boolean addFootprint(Long commodityId, Long userId) {
 
-
         Favorite favorite = commodityDao.existFootprint(commodityId, userId);
         if (favorite!=null){
             int i = commodityDao.deleteFootprint(commodityId, userId);
@@ -123,6 +121,48 @@ public class CommodityServiceImpl  implements CommodityService {
         List<Commodity> commodities = commodityDao.selectFootprint(userId);
         if (commodities==null){
             throw new RuntimeException("查询足迹失败");
+        }
+
+        return commodities;
+    }
+
+    @Override
+    public boolean addShopCatService(Long commodityId, Long userId,Long num) {
+
+        Commodity commodity = commodityDao.oneCommodity(commodityId);
+        String commodityPrice = commodity.getCommodityPrice();
+        Double totalPrices = Double.valueOf(commodityPrice)*num;
+        String Prices = totalPrices.toString();
+
+        Favorite favorite = commodityDao.existShopCat(commodityId, userId);
+        if (favorite==null){
+            int i = commodityDao.addShopCat(commodityId, userId,num,Prices);
+            if (i==0){
+                throw new RuntimeException("添加购物车失败！");
+            }
+            return true;
+        }
+        throw new RuntimeException("商品已在购物车哦");
+
+
+    }
+
+    @Override
+    public List<Commodity> selectShopCatService(Long userId) {
+
+        List<Commodity> commodities = commodityDao.selectShopCat(userId);
+        if (commodities==null){
+            throw new RuntimeException("购物车里没有商品哦");
+        }
+        return commodities;
+    }
+
+    @Override
+    public List<Commodity> selectClassifyCommodityIdService(Long classifyId) {
+
+        List<Commodity> commodities = commodityDao.selectClassifyCommodityId(classifyId);
+        if (commodities==null){
+            throw new RuntimeException("查询分类商品失败!");
         }
 
         return commodities;
