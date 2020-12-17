@@ -13,6 +13,7 @@ public class UserLogoutController extends BaseController{
     // 退出登录就是把存在浏览器上面的session跟cookie删除
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //TODO 还没写好前端按钮进行测试
         //删除session
         HttpSession session = req.getSession();
         session.removeAttribute("user");
