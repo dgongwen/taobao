@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
 
         HttpSession session = req.getSession();
         String verificationVal = (String)session.getAttribute("verification");
-        if (!verificationVal.equals(Verification)){
+        // equalsIgnoreCase不区分大小写
+        if (!verificationVal.equalsIgnoreCase(Verification)){
             throw new RuntimeException("验证码错误");
 
         }
