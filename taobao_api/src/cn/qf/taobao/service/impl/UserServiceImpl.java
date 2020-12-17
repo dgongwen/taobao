@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User userRegisterService(String userName, String password, String Verification, HttpServletRequest req) {
         User user = userDao.userSelect(userName);
-        System.out.println("Service"+user);
+        System.out.println("Service   "+user);
         Integer integer = userDao.userRegister(userName, password);
         if (user!=null){
             throw new RuntimeException("用户名不可用");
