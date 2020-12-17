@@ -13,4 +13,11 @@ public interface UserDao {
      */
     User userSelect(String userName);
 
+    /**
+     * 用户注册
+     * @param userName
+     * @param password
+     * @return
+     */
+    Integer userRegister(String userName,String password);
 }

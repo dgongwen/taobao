@@ -36,6 +36,7 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("selectShop.t");
         whiteList.add("classifyCommodity.t");
 
+        whiteList.add("register.t");
 
     }
 
