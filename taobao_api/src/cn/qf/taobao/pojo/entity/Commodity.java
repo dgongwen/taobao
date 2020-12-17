@@ -11,8 +11,17 @@ public class Commodity {
     private String commodityImgUrl;//商品图片
     private Long classificationId;//分类id
     private Long commoditySales;//商品销量
+    private Long cartNum;//商品数量
     private String commodityState;//商品上下架 1 上架 0 下架
     private String creationTime;//时间
+
+    public Long getCartNum() {
+        return cartNum;
+    }
+
+    public void setCartNum(Long cartNum) {
+        this.cartNum = cartNum;
+    }
 
     public String getCreationTime() {
         return creationTime;
@@ -88,7 +97,8 @@ public class Commodity {
                 ", commodityImgUrl='" + commodityImgUrl + '\'' +
                 ", classificationId=" + classificationId +
                 ", commoditySales=" + commoditySales +
-                ", commodityState=" + commodityState +
+                ", cartNum=" + cartNum +
+                ", commodityState='" + commodityState + '\'' +
                 ", creationTime='" + creationTime + '\'' +
                 '}';
     }

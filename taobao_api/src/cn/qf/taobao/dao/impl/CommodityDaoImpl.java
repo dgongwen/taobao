@@ -206,4 +206,67 @@ public class CommodityDaoImpl implements CommodityDao {
         }
         return null;
     }
+
+    @Override
+    public int addShopCat(Long commodityId, Long userId,Long num,String Prices) {
+
+        String sql="INSERT INTO t_shop_cart(`user_id`, `commodity_id`,cart_num,commodity_total_price) VALUES (?,?,?,?);";
+        try {
+            return  queryRunner.update(sql,userId,commodityId,num,Prices);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    @Override
+    public List<Commodity> selectShopCat(Long userId) {
+
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_shop_cart ts ON tc.id=ts.commodity_id WHERE ts.user_id=?";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class,processor);
+
+        try {
+          return   queryRunner.query(sql,commodityBeanListHandler,userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Favorite existShopCat(Long commodityId, Long userId) {
+        String sql="SELECT * FROM t_shop_cart WHERE user_id=? AND commodity_id=?;";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanHandler<Favorite> favoriteBeanHandler = new BeanHandler<>(Favorite.class,processor);
+
+        try {
+          return   queryRunner.query(sql,favoriteBeanHandler,userId,commodityId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Commodity> selectClassifyCommodityId(Long classifyId) {
+
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架'";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class, processor);
+
+        try {
+           return queryRunner.query(sql,commodityBeanListHandler,classifyId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -53,7 +53,7 @@
 					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 				</div>
 				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+					<div class="menu-hd"><a id="mc-menu-hd" href="http://localhost:8080//taobao_html/shopcart.html" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 				</div>
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="http://localhost:8080//taobao_html/collection.html" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -185,7 +185,7 @@
 														<div class="cart-title number">数量</div>
 														<dd>
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
+															<input  id="num" name="" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
 															<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
 														</dd>
@@ -255,7 +255,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<input id="shop" :name="oneList.id" onclick="shopCart()" type="button"  style="width: 100px;height: 30px" value="加入购物车">
 								</div>
 							</li>
 						</div>
@@ -1230,8 +1230,28 @@
 
 
 	<script>
+		function shopCart() {
 
+
+
+
+			var fromLocalStorage = getFromLocalStorage("seller");
+			if (fromLocalStorage==null){
+				alert("未登录哦！");
+				location.href="http://localhost:8080//taobao_html/登录.html";
+				return;
+			}
+			var id = fromLocalStorage.id;
+			var num = $("#num").val();
+			var jQuery = $("#shop").attr("name");
+			let url="addShop.t?commodityId="+jQuery+"&userId="+id+"&num="+num;
+			get(url,function (data) {
+				alert("添加购物车成功");
+			})
+
+		}
 		function collect() {
+
 
 			var fromLocalStorage = getFromLocalStorage("seller");
 			if (fromLocalStorage==null){

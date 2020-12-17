@@ -69,5 +69,25 @@ public interface CommodityService {
      */
    List<Commodity> selectFootprint(Long userId);
 
+    /**
+     *添加购物车
+     * @return
+     */
+    boolean addShopCatService(Long commodityId,Long userId,Long num);
+
+    /**
+     * 查询购物车
+     * @param userId
+     * @return
+     */
+    List<Commodity> selectShopCatService(Long userId);
+
+    /**
+     * 分类上商品查询
+     * @param classifyId
+     * @return
+     */
+    List<Commodity> selectClassifyCommodityIdService(Long classifyId);
+
 
 }

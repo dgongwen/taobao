@@ -5,23 +5,23 @@ package cn.qf.taobao.pojo.entity;
  */
 public class Classify {
 
-    private Long id; //分类id
+    private Long classificationId; //分类id
     private String classificationName; //分类名
 
     @Override
     public String toString() {
         return "Classify{" +
-                "id=" + id +
+                "classificationId=" + classificationId +
                 ", classificationName='" + classificationName + '\'' +
                 '}';
     }
 
-    public Long getId() {
-        return id;
+    public Long getClassificationId() {
+        return classificationId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClassificationId(Long classificationId) {
+        this.classificationId = classificationId;
     }
 
     public String getClassificationName() {

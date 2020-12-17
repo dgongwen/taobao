@@ -33,4 +33,6 @@ public interface CommoditySearchService {
      * @return 商品信息列表
      */
     List<Commodity> searchByKeyWord(String searchContent,int currentPage);
+
+
 }

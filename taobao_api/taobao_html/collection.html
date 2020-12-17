@@ -230,7 +230,7 @@
 				location.href="http://localhost:8080//taobao_html/登录.html";
 				return;
 			}
-			refresh();
+
 		})
 
 
@@ -241,7 +241,7 @@
 
 			let url="deleteFavorite.t?userId="+findId+"&commodityId="+id;
 			get(url,function (data) {
-				//refresh();
+
 				alert("删除成功");
 				location.href="http://localhost:8080//taobao_html/collection.html";
 				
@@ -249,7 +249,7 @@
 
 
 		}
-		function refresh() {
+
 
 			let vm = new Vue({
 
@@ -279,7 +279,7 @@
 
 
 
-		}
+
 
 
 

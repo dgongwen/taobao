@@ -86,13 +86,43 @@ public interface CommodityDao {
      * @param userId
      * @return
      */
-     int   deleteFootprint(Long commodityId, Long userId);
+     int  deleteFootprint(Long commodityId, Long userId);
     /**
      *查询足迹
      * @param userId
      * @return
      */
     List<Commodity> selectFootprint(Long userId);
+
+    /**
+     * 添加购物车
+     * @return
+     */
+    int addShopCat(Long commodityId, Long userId,Long num,String Prices);
+
+    /**
+     * 查询购物车
+     * @param userId
+     * @return
+     */
+    List<Commodity> selectShopCat(Long userId);
+
+    /**
+     * 查询购物车是否有此商品
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    Favorite existShopCat(Long commodityId, Long userId);
+
+
+    /**
+     * 查询分类商品
+     * @param classifyId
+     * @return
+     */
+    List<Commodity> selectClassifyCommodityId(Long classifyId);
+
 
 
 }
