@@ -36,15 +36,13 @@ public class  UserDaoImpl implements UserDao {
 
     @Override
     public Integer userRegister(String userName, String password) {
+        // 将数据插入数据库
         String sql = "INSERT INTO `taobao`.`t_user`( `user_name`, `password`) VALUES ( ? , ? )";
-        System.out.println("dao   "+sql);
-
         try {
+            // 返回受影响行数
             return  queryRunner.update(sql,userName,password);
-
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
         return null;
     }
