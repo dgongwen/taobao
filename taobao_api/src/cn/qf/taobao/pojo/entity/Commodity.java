@@ -11,7 +11,7 @@ public class Commodity {
     private String commodityImgUrl;//商品图片
     private Long classificationId;//分类id
     private Long commoditySales;//商品销量
-    private Long commodityState;//商品上下架 1 上架 0 下架
+    private String commodityState;//商品上下架 1 上架 0 下架
     private String creationTime;//时间
 
     public String getCreationTime() {
@@ -70,14 +70,14 @@ public class Commodity {
         this.commoditySales = commoditySales;
     }
 
-    public Long getCommodityState() {
+
+    public String getCommodityState() {
         return commodityState;
     }
 
-    public void setCommodityState(Long commodityState) {
+    public void setCommodityState(String commodityState) {
         this.commodityState = commodityState;
     }
-
 
     @Override
     public String toString() {

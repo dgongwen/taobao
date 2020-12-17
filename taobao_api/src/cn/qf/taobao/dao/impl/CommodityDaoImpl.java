@@ -113,7 +113,8 @@ public class CommodityDaoImpl implements CommodityDao {
         RowProcessor processor = new BasicRowProcessor(bean);
         BeanListHandler<Commodity> commodityList = new BeanListHandler<>(Commodity.class,processor);
         try {
-           return queryRunner.query(sql,commodityList,userId);
+          return queryRunner.query(sql, commodityList, userId);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -154,7 +155,34 @@ public class CommodityDaoImpl implements CommodityDao {
            String sql="INSERT INTO `t_footprint`(`user_id`, `commodity_id`) VALUES (?, ?);";
 
         try {
-            int update = queryRunner.update(sql,userId,commodityId);
+           return queryRunner.update(sql,userId,commodityId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public Favorite existFootprint(Long commodityId, Long userId) {
+
+        String sql="SELECT * FROM t_footprint WHERE user_id=? AND commodity_id=?";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanHandler<Favorite> favoriteBeanHandler = new BeanHandler<>(Favorite.class);
+        try {
+           return queryRunner.query(sql,favoriteBeanHandler,userId,commodityId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public int deleteFootprint(Long commodityId, Long userId) {
+        String sql="DELETE FROM t_footprint WHERE user_id = ? AND commodity_id=?;";
+        try {
+            return  queryRunner.update(sql,userId,commodityId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -165,7 +193,7 @@ public class CommodityDaoImpl implements CommodityDao {
     public List<Commodity> selectFootprint(Long userId) {
 
 
-        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_footprint tf ON tf.commodity_id=tc.id WHERE tf.user_id=?";
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_footprint tf ON tf.commodity_id=tc.id WHERE tf.user_id=? ORDER BY creation_time DESC";
         //开启下划线->驼峰转换所用
         BeanProcessor bean = new GenerousBeanProcessor();
         RowProcessor processor = new BasicRowProcessor(bean);
