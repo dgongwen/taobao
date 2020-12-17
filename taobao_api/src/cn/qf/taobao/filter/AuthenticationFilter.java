@@ -33,6 +33,7 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("deleteFavorite.t");
         whiteList.add("selectFootprint.t");
         whiteList.add("register.t");
+        whiteList.add("logout.t");
 
     }
 
