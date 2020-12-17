@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+    <title>管理中心</title>
+
+    <link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+
+    <link href="css/personal.css" rel="stylesheet" type="text/css">
+    <link href="css/addstyle.css" rel="stylesheet" type="text/css">
+    <script src="AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+
+    <!--bootstrap -->
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css"/>
+    <!--bootstrap 依赖jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!--自定义工具-->
+    <script src="tao_js/HttpUtil.js"></script>
+    <script src="tao_js/vue.min.js"></script>
+    <!--参数校验工具-->
+    <script src="tao_js/jquery.validate.min.js"></script>
+    <script src="tao_js/messages_zh.min.js"></script>
+    <script src="tao_js/vue.min.js"></script>
+    <link href="tao_css/login.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<!--头 -->
+<header>
+    <article>
+        <div class="mt-logo">
+            <!--顶部导航条 -->
+            <div class="am-container header">
+                <ul class="message-l">
+                    <div class="topMessage">
+                        <div class="menu-hd">
+                            <a href="#" target="_top" class="h">亲，请登录</a>
+                        </div>
+                    </div>
+                </ul>
+                <ul class="message-r">
+                    <div class="topMessage home">
+                        <div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+                    </div>
+                    <div class="topMessage my-shangcheng">
+                        <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i
+                                class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                    </div>
+
+                </ul>
+            </div>
+
+            <!--悬浮搜索框-->
+
+
+
+            <div class="clear"></div>
+        </div>
+        </div>
+    </article>
+</header>
+
+<div class="nav-table">
+    <div class="long-title"><span class="all-goods">全部分类</span></div>
+    <div class="nav-cont">
+
+        <div class="nav-extra">
+            <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>添加商品
+            <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+        </div>
+    </div>
+</div>
+<b class="line"></b>
+
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+
+            <div class="user-address">
+                <!--标题 -->
+
+
+                </li>
+                </ul>
+                <div class="clear"></div>
+                <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}"></a>
+                <!--例子-->
+                <div class="am-modal am-modal-no-btn" id="doc-modal-1">
+
+                    <div class="add-dress">
+
+                        <!--标题 -->
+                        <div class="am-cf am-padding">
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">添加商品</strong> / <small>recycle
+                                bin
+                            </small></div>
+                        </div>
+                        <hr/>
+
+                        <div class="am-u-md-12 am-u-lg-12" style="margin-top: 20px;">
+                            <div id="div_vue" class="container-fluid">
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <form class="form-horizontal" id="insertCommodity">
+                                            <div class="form-group">
+                                                <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="commodityName" placeholder="商品名称">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="commodityImgUrl" class="col-sm-2 control-label">商品图片链接</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="commodityImgUrl" placeholder="商品图片链接" onchange="a()">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="commodityImgUrl" class="col-sm-2 control-label">商品展示图</label>
+                                                <div class="col-sm-9">
+                                                    <img src="" width="150px" height="150px" id="showImage" onkeyup="a(this.id)">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="commodityPrice" class="col-sm-2 control-label">商品价格</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="commodityPrice" placeholder="商品价格">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="commodityNum" class="col-sm-2 control-label">商品库存</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="commodityNum" placeholder="商品库存">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <form class="form-horizontal">
+                                                        <label for="commodityState" class="col-sm-2 control-label">&nbsp;&nbsp;&nbsp;商品状态</label>
+                                                        <div class="col-sm-9">
+                                                            <p class="form-control-static" id="commodityState" value="下架">&nbsp;&nbsp;&nbsp;下架</p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="form-group">
+                                                <form class="form-horizontal">
+                                                <label for="classificationId" class="col-sm-2 control-label">商品类别&nbsp;&nbsp;</label>
+                                                <div class="col-sm-9">
+                                                    <form>
+                                                        <select class="form-control" id="classificationId">
+                                                            <option value="1">服饰</option>
+                                                            <option value="2">配饰</option>
+                                                            <option value="3">家居</option>
+                                                            <option value="4">母婴</option>
+                                                            <option value="5">零食</option>
+                                                            <option value="6">美容</option>
+                                                            <option value="7">数码</option>
+                                                            <option value="8">文体</option>
+                                                            <option value="9">医药</option>
+                                                            <option value="10">汽车</option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="commodityNum" class="col-sm-2 control-label"></label>
+                                                <div class="col-sm-9">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" onclick="formInsert()">添加</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(".new-option-r").click(function () {
+                        $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+                    });
+
+                    var $ww = $(window).width();
+                    if ($ww > 640) {
+                        $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+                    }
+
+                })
+            </script>
+
+            <div class="clear"></div>
+
+        </div>
+        <!--底部-->
+        <div class="footer">
+            <div class="footer-hd">
+
+                <p>
+                <div style="margin-left: 40% ; margin-bottom: 7px">
+                    <a href="#">恒望科技</a>
+                    <b>|</b>
+                    <a href="#">商城首页</a>
+                    <b>|</b>
+                    <a href="#">支付宝</a>
+                    <b>|</b>
+                    <a href="#">物流</a>
+                </div>
+                </p>
+
+            </div>
+            <div class="footer-bd" style="margin-left: 32%">
+                <p>
+                    <a href="#">关于恒望</a>
+                    <a href="#">合作伙伴</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">网站地图</a>
+                    <em>© 2015-2025 Hengwang.com 版权所有</em>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <aside class="menu">
+        <ul>
+            <li class="person active">
+                <a href="adminCenter.html">管理中心</a>
+            </li>
+            <li class="person">
+                <a href="adminCenter.html" style="color: red">商品管理</a>
+
+                <ul>
+                    <li>&nbsp;</li>
+                    <li><a href="adminAllCommodity.html" style="color: darkorange">所有商品</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="adminUpDataCommodity.html" style="color: darkorange">已上架商品</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="adminSoldDataCommodity.html" style="color: darkorange">未上架商品</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="adminInsertCommodity.html" style="color: darkorange">添加商品</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="adminRecycle.html" style="color: darkorange">回收站</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </aside>
+</div>
+
+
+</body>
+
+</html>
+<script>
+function a(){
+    let commodityImgUrl= $("#commodityImgUrl").val();
+}
+    $(function () {
+        from();
+    })
+
+    function from(){
+        $("#insertCommodity").validate(
+            {
+                rules:{
+                    commodityName:{
+                        required:true
+                    },
+                    commodityPrice:{
+                        required:true
+                    },
+                    commodityImgUrl:{
+                        required:true
+                    },
+                    commodityNum:{
+                        required:true
+                    },
+                    classificationName:{
+                        required:true
+                    }
+                },
+                messages:{}
+            }
+        );
+    }
+
+
+    function formInsert() {
+
+        let validateResult = $("#insertCommodity").valid();
+        if (!validateResult) {
+            //校验不通过
+            alert("数据不能为空");
+            return;
+        }
+
+        let commodityName= $("#commodityName").val();
+        let commodityPrice= $("#commodityPrice").val();
+        let commodityImgUrl= $("#commodityImgUrl").val();
+        let commodityNum= $("#commodityNum").val();
+        let commodityState='下架'
+        let classificationId= $("#classificationId").val();
+        console.log(commodityName)
+        console.log(commodityPrice)
+        console.log(commodityImgUrl)
+        console.log(commodityNum)
+        console.log(commodityState)
+        console.log(classificationId)
+        let url="/insertCommodity.t?commodityName="+commodityName+"&commodityPrice="+commodityPrice+"&commodityImgUrl="+commodityImgUrl+"&commodityNum="+commodityNum+"&commodityState="+commodityState+"&classificationId="+classificationId;
+        console.log(url)
+        get(url, function (resp) {
+            alert("添加成功!")
+        });
+    }
+
+
+</script>

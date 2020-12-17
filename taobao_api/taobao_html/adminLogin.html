@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>管理员登录</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+		<link rel="stylesheet" href="AmazeUI-2.4.2/assets/css/amazeui.css" />
+		<link href="css/dlstyle.css" rel="stylesheet" type="text/css">
+
+		<!--bootstrap -->
+		<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+		<link href="bootstrap/css/bootstrap.min.css"rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css"/>
+		<!--bootstrap 依赖jQuery-->
+		<script src="js/jquery.js"></script>
+		<script src="bootstrap/js/jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<!--自定义工具-->
+		<script src="tao_js/HttpUtil.js"></script>
+		<!--参数校验工具-->
+		<script src="tao_js/jquery.validate.min.js"></script>
+		<script src="tao_js/messages_zh.min.js"></script>
+		<script src="tao_js/vue.min.js"></script>
+		<link href="tao_css/login.css" type="text/css" rel="stylesheet">
+	</head>
+
+	<body>
+	<label for="adminUserPassword" class="error"></label>
+
+
+		<div class="login-boxtitle">
+		</div>
+
+		<div class="login-banner">
+			<div class="login-main">
+				<div class="login-banner-bg"><span></span><img src="images/big.jpg" /></div>
+				<div class="login-box">
+
+							<h3 class="title">商城管理系统登录</h3>
+
+							<div class="clear"></div>
+
+						<div class="login-form">
+
+						  <form   method="post" onsubmit="return false" id="login">
+
+							  <label for="adminUserName" class="error"></label>
+							  <label for="adminUserPassword" class="error"></label>
+							  <div class="user-name">
+
+								    <label class="a" for="adminUserName"><i class="am-icon-user"></i></label>
+								    <input type="text" name="adminUserName" id="adminUserName" placeholder="邮箱/手机/用户名">
+
+                 </div>
+
+                            <div class="user-pass">
+
+								    <label class="a" for="adminUserPassword"><i class="am-icon-lock"></i></label>
+								    <input type="password" name="adminUserPassword" id="adminUserPassword" placeholder="请输入密码">
+
+				 </div>
+
+							  <div class="am-cf">
+								  <input type="submit" onclick="formSubmit()" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm">
+							  </div>
+
+              </form>
+
+           </div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+					<div class="footer ">
+						<div class="footer-hd ">
+
+						</div>
+						<div class="footer-bd ">
+							<p>
+								<a href="# ">联系我们</a>
+								<a href="# ">网站地图</a>
+							</p>
+						</div>
+					</div>
+	</body>
+
+</html>
+
+<script>
+
+	$(function () {
+
+		from();
+
+
+	})
+
+	function from(){
+
+
+		$("#login").validate(
+
+				{
+					rules:{
+
+						adminUserName:{
+							required:true
+						},
+						adminUserPassword:{
+							required:true
+						}
+					},
+					messages:{}
+				}
+		);
+
+
+	}
+
+
+/*	$("#login").validate({
+		rules: {
+			userName: {
+				// remote: "http://localhost:8080/server-demo/checkUserExist"
+				remote: {
+					url: "http://localhost:8080/taobao/login.t",
+					method: "post",
+					data: {
+						userName: function () {
+							return $("[name='userName']").val();
+						}
+
+					}
+				}
+			}
+		},
+		messages: {
+			userName: {
+				remote: "用户名不存在"
+			}
+		},
+	})*/
+	function formSubmit() {
+
+		//获取验证框架结果
+		let validateResult = $("#login").valid();
+		if (!validateResult) {
+			//校验不通过
+			return;
+		}
+
+		//获取表单数据
+		let adminUserName = $("#adminUserName").val();
+		let adminUserPassword = $("#adminUserPassword").val();
+		console.log(adminUserName)
+		console.log(adminUserPassword)
+		//发起http 请求
+		let url = "/adminLogin";
+		let params = {adminUserName:adminUserName, adminUserPassword: adminUserPassword};
+
+		postWithJson(url,params,function (json) {
+				window.location.href="http://localhost:8080//taobao_html/adminCenter.html";
+
+		})
+
+
+	}
+
+
+
+
+</script>

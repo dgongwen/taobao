@@ -10,14 +10,10 @@ import java.util.Properties;
  * DBUtil连接池
  */
 public class DruidUtil {
-
         private static DataSource dataSource;
         static {
-
                 Properties properties = new Properties();
                 InputStream resourceAsStream = DruidUtil.class.getClassLoader().getResourceAsStream("db.properties");
-
-
                 try {
                         properties.load(resourceAsStream);
                         dataSource =  DruidDataSourceFactory.createDataSource(properties);
@@ -26,7 +22,6 @@ public class DruidUtil {
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
-
 
         }
 
