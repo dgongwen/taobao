@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         User user = userDao.userSelect(userName);
         System.out.println("Service   "+user);
         Integer integer = userDao.userRegister(userName, password);
+        System.out.println(integer);
         if (user!=null){
             throw new RuntimeException("用户名不可用");
         }
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("注册失败");
         }
         user = userDao.userSelect(userName);
+        System.out.println("service   "+user);
         return user;
     }
 }
