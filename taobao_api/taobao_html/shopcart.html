@@ -161,7 +161,7 @@
 												<div class="item-amount ">
 													<div class="sl">
 														<input  v-on:click="jian(index)" name="" type="button" value="-" />
-														<input  name="" v-model="commodity.cartNum" type="text"  style="width:30px;" />
+														<input  :name="commodity.id" :value="commodity.cartNum" onchange="shopCartNum(this.name,this.value)"   style="width:30px;" />
 														<input  v-on:click="add(index)"  name="" type="button" value="+" />
 													</div>
 												</div>
@@ -169,14 +169,14 @@
 										</li>
 										<li class="td td-sum">
 											<div class="td-inner">
-												<em tabindex="0" class="J_ItemSum number">{{commodity.commodityPrice*commodity.cartNum}}</em>
+												<em tabindex="0" class="J_ItemSum number">{{commodity.commodityTotalPrice}}</em>
 											</div>
 										</li>
 										<li class="td td-op">
 											<div class="td-inner">
 												<a title="移入收藏夹" class="btn-fav" href="#">
 													移入收藏夹</a>
-												<a href="javascript:;" data-point-url="#" v-on:click="del(index)" class="delete">
+												<a href="javascript:;" data-point-url="#" :name="commodity.id" onclick="deleteShop(this.name)" class="delete">
 													删除</a>
 											</div>
 										</li>
@@ -227,6 +227,8 @@
 								<span>结&nbsp;算</span></a>
 						</div>
 					</div>
+
+
 
 
 
@@ -281,34 +283,42 @@
 
 <script type="text/javascript">
 
+function shopCartNum(type,value){
 
+	var fromLocalStorage = getFromLocalStorage("seller");
+	var id = fromLocalStorage.id;
+
+	let url = "alterShopCat.t?commodityId=" +type+"&userId="+id+"&num="+value;
+	get(url,function (data) {
+		v.commodityShop=data;
+	})
+
+}
+function deleteShop(t){
+
+	alert("确定要删除吗?");
+	var fromLocalStorage = getFromLocalStorage("seller");
+	var id = fromLocalStorage.id;
+
+	let url = "deleteShopCat.t?commodityId=" +t+"&userId="+id;
+	get(url,function (data) {
+		v.commodityShop=data;
+	})
+
+}
 
 	//value="commodity.id"
 
-	check=function (id) {
+	/*check=function (id) {
 		var newVar = $("[type=\"checkbox\"]").is(":checked");
 
 		console.log(newVar+":"+id);
-	}
-/*
-
-
-	$(function () {
-
-		new Vue({
-			el: "#div_shop",
-			data() {
-				return {
-					msg:[]
-				}
-			},
-
-	})
-*/
+	}*/
 
 
 
-	let vm = new Vue({
+
+	let v = new Vue({
 
 		el: '#div_shop',
 		data: {
@@ -333,31 +343,6 @@
 		},
 		methods: {
 
-			del:function(index){
-				if(confirm("您确定要删除吗？")){
-					this.commodityShop.splice(index,1);
-				}
-			},
-// 增加
-			add:function(index){
-				if(this.commodityShop[index].cartNum<100){
-					this.commodityShop[index].cartNum++;
-				}
-			},
-// 减少
-			jian:function(index){
-				if(this.commodityShop[index].cartNum>1){
-					this.commodityShop[index].cartNum--;
-				}
-			},
-// 修改
-			change:function(index){
-				if(this.commodityShop[index].cartNum>100){
-					this.commodityShop[index].cartNum=100;
-				}else if(this.commodityShop[index].cartNum<1){
-					this.commodityShop[index].cartNum=1;
-				}
-			},
 
 			refreshSellerList: function () {
 
@@ -368,7 +353,6 @@
 				let thisObj = this;
 				get(url, function (data) {
 					thisObj.commodityShop = data;
-					console.log(thisObj.commodityShop)
 				})
 
 			}

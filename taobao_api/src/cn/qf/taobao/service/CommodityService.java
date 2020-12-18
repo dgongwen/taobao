@@ -1,7 +1,9 @@
 package cn.qf.taobao.service;
 
+import cn.qf.taobao.pojo.entity.Address;
 import cn.qf.taobao.pojo.entity.Classify;
 import cn.qf.taobao.pojo.entity.Commodity;
+import cn.qf.taobao.pojo.entity.Pages;
 
 import java.util.List;
 
@@ -76,6 +78,15 @@ public interface CommodityService {
     boolean addShopCatService(Long commodityId,Long userId,Long num);
 
     /**
+     * 修改购物车
+     * @param commodityId
+     * @param userId
+     * @param num
+     * @return
+     */
+    List<Commodity>  alterShopCatService(Long commodityId,Long userId,Long num);
+
+    /**
      * 查询购物车
      * @param userId
      * @return
@@ -83,11 +94,30 @@ public interface CommodityService {
     List<Commodity> selectShopCatService(Long userId);
 
     /**
+     * 删除购物车
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    List<Commodity> deleteShopCat(Long commodityId,Long userId);
+
+    /**
      * 分类上商品查询
      * @param classifyId
      * @return
      */
-    List<Commodity> selectClassifyCommodityIdService(Long classifyId);
+    List<Commodity> selectClassifyCommodityIdService(Long classifyId,Long pages);
+
+    /**
+     * 查询分类数量
+     * @param classifyId
+     * @return
+     */
+    Pages selectClassifyNumService(Long classifyId);
+
+
+
+
 
 
 }

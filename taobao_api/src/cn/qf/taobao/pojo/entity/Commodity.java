@@ -14,6 +14,39 @@ public class Commodity {
     private Long cartNum;//商品数量
     private String commodityState;//商品上下架 1 上架 0 下架
     private String creationTime;//时间
+    private String commodityTotalPrice;//单个商品价格X数量
+
+    public String getCommodityTotalPrice() {
+        return commodityTotalPrice;
+    }
+
+    public void setCommodityTotalPrice(String commodityTotalPrice) {
+        this.commodityTotalPrice = commodityTotalPrice;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Commodity{" +
+                "id=" + id +
+                ", commodityName='" + commodityName + '\'' +
+                ", commodityPrice='" + commodityPrice + '\'' +
+                ", commodityImgUrl='" + commodityImgUrl + '\'' +
+                ", classificationId=" + classificationId +
+                ", commoditySales=" + commoditySales +
+                ", cartNum=" + cartNum +
+                ", commodityState='" + commodityState + '\'' +
+                ", creationTime='" + creationTime + '\'' +
+                ", commodityTotalPrice='" + commodityTotalPrice + '\'' +
+                '}';
+    }
 
     public Long getCartNum() {
         return cartNum;
@@ -31,13 +64,7 @@ public class Commodity {
         this.creationTime = creationTime;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getCommodityName() {
         return commodityName;
@@ -88,18 +115,5 @@ public class Commodity {
         this.commodityState = commodityState;
     }
 
-    @Override
-    public String toString() {
-        return "Commodity{" +
-                "id=" + id +
-                ", commodityName='" + commodityName + '\'' +
-                ", commodityPrice='" + commodityPrice + '\'' +
-                ", commodityImgUrl='" + commodityImgUrl + '\'' +
-                ", classificationId=" + classificationId +
-                ", commoditySales=" + commoditySales +
-                ", cartNum=" + cartNum +
-                ", commodityState='" + commodityState + '\'' +
-                ", creationTime='" + creationTime + '\'' +
-                '}';
-    }
+
 }

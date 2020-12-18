@@ -1,8 +1,8 @@
 package cn.qf.taobao.controller;
 
-import cn.qf.taobao.pojo.entity.Commodity;
-import cn.qf.taobao.service.CommodityService;
-import cn.qf.taobao.service.impl.CommodityServiceImpl;
+import cn.qf.taobao.pojo.entity.Address;
+import cn.qf.taobao.service.UserService;
+import cn.qf.taobao.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +12,19 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 分类商品查询
+ * 删除收货地址
  */
-@WebServlet("/classifyCommodity.t")
-public class selectClassifyCommodityIdController extends BaseController{
-    private CommodityService commodityService = new CommodityServiceImpl();
+@WebServlet("/deleteAddress.t")
+public class deleteAddressController extends BaseController{
+    private UserService userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String num = req.getParameter("num");
-        String pages = req.getParameter("pages");
-
+        String userId1 = req.getParameter("userId");
+        String addressId = req.getParameter("addressId");
         try {
-            List<Commodity> commodities = commodityService.selectClassifyCommodityIdService(Long.valueOf(num),Long.valueOf(pages));
-            writerSuccessResult(commodities,resp);
+            List<Address> addresses = userService.deleteAddress(Long.valueOf(userId1), Long.valueOf(addressId));
+            writerSuccessResult(addresses,resp);
+
         }catch (RuntimeException e){
             String message = e.getMessage();
             writerErrorResult(message,resp);

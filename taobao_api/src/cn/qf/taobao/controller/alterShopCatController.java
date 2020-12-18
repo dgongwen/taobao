@@ -12,23 +12,26 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 分类商品查询
+ * 修改购物车
  */
-@WebServlet("/classifyCommodity.t")
-public class selectClassifyCommodityIdController extends BaseController{
+@WebServlet("/alterShopCat.t")
+public class alterShopCatController extends BaseController{
     private CommodityService commodityService = new CommodityServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String commodityId1 = req.getParameter("commodityId");
+        String userId = req.getParameter("userId");
         String num = req.getParameter("num");
-        String pages = req.getParameter("pages");
-
         try {
-            List<Commodity> commodities = commodityService.selectClassifyCommodityIdService(Long.valueOf(num),Long.valueOf(pages));
+
+            List<Commodity> commodities = commodityService.alterShopCatService(Long.valueOf(commodityId1), Long.valueOf(userId), Long.valueOf(num));
             writerSuccessResult(commodities,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();
             writerErrorResult(message,resp);
         }
+
+
 
     }
 

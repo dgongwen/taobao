@@ -2,11 +2,10 @@ package cn.qf.taobao.service.impl;
 
 import cn.qf.taobao.dao.CommodityDao;
 import cn.qf.taobao.dao.impl.CommodityDaoImpl;
-import cn.qf.taobao.pojo.entity.Classify;
-import cn.qf.taobao.pojo.entity.Commodity;
-import cn.qf.taobao.pojo.entity.Favorite;
+import cn.qf.taobao.pojo.entity.*;
 import cn.qf.taobao.service.CommodityService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommodityServiceImpl  implements CommodityService {
@@ -148,6 +147,29 @@ public class CommodityServiceImpl  implements CommodityService {
     }
 
     @Override
+    public List<Commodity> alterShopCatService(Long commodityId, Long userId, Long num) {
+
+        int i = commodityDao.deleteShopCat(commodityId, userId);
+        if (i==0){
+            throw new RuntimeException("删除购物车失败！");
+        }
+        Commodity commodity = commodityDao.oneCommodity(commodityId);
+        String commodityPrice = commodity.getCommodityPrice();
+        Double totalPrices = Double.valueOf(commodityPrice)*num;
+        String Prices = totalPrices.toString();
+        int i1 = commodityDao.addShopCat(commodityId, userId, num, Prices);
+        if (i1==0){
+            throw new RuntimeException("修改添加购物车失败！");
+        }
+        List<Commodity> commodities = selectShopCatService(userId);
+        if (commodities==null){
+            throw new RuntimeException("购物车里没有商品哦");
+        }
+        return commodities;
+
+    }
+
+    @Override
     public List<Commodity> selectShopCatService(Long userId) {
 
         List<Commodity> commodities = commodityDao.selectShopCat(userId);
@@ -158,13 +180,56 @@ public class CommodityServiceImpl  implements CommodityService {
     }
 
     @Override
-    public List<Commodity> selectClassifyCommodityIdService(Long classifyId) {
+    public List<Commodity> deleteShopCat(Long commodityId, Long userId) {
 
-        List<Commodity> commodities = commodityDao.selectClassifyCommodityId(classifyId);
+
+        int i = commodityDao.deleteShopCat(commodityId, userId);
+        if (i==0){
+            throw new RuntimeException("删除购物车失败");
+        }
+        List<Commodity> commodities = commodityDao.selectShopCat(userId);
+        if (commodities==null){
+            throw new RuntimeException("查询购物车失败");
+        }
+        return commodities;
+    }
+
+    @Override
+    public List<Commodity> selectClassifyCommodityIdService(Long classifyId,Long pages) {
+
+        List<Commodity> commodities = commodityDao.selectClassifyCommodityId(classifyId,pages);
         if (commodities==null){
             throw new RuntimeException("查询分类商品失败!");
         }
 
         return commodities;
     }
+
+    @Override
+    public Pages selectClassifyNumService(Long classifyId) {
+
+        Long num = (Long)commodityDao.selectClassifyNum(classifyId);
+
+        if (num==0){
+
+        throw new RuntimeException("没有此分类商品啦");
+
+        }
+        Pages pages = new Pages();
+        pages.setNum(num);
+
+        ArrayList<Integer> integers = new ArrayList<>();
+        if (num%12==0){
+            num=num/12;
+        }else {
+            num=num/12+1;
+        }
+        for (int i=1;i<=num;i++){
+            integers.add(i);
+        }
+        pages.setPagesNum(integers);
+        return pages;
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package cn.qf.taobao.dao;
 
+import cn.qf.taobao.pojo.entity.Address;
 import cn.qf.taobao.pojo.entity.Classify;
 import cn.qf.taobao.pojo.entity.Commodity;
 import cn.qf.taobao.pojo.entity.Favorite;
@@ -115,13 +116,36 @@ public interface CommodityDao {
      */
     Favorite existShopCat(Long commodityId, Long userId);
 
+    /**
+     * 删除购物车
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    int deleteShopCat(Long commodityId, Long userId);
+
 
     /**
      * 查询分类商品
      * @param classifyId
      * @return
      */
-    List<Commodity> selectClassifyCommodityId(Long classifyId);
+    List<Commodity> selectClassifyCommodityId(Long classifyId,Long pages);
+
+    /**
+     * 查询分类数量
+     * @param classifyId
+     * @return
+     */
+    Object selectClassifyNum(Long classifyId);
+
+
+
+
+
+
+
+
 
 
 

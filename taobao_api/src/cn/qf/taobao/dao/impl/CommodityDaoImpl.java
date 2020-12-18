@@ -1,13 +1,12 @@
 package cn.qf.taobao.dao.impl;
 
 import cn.qf.taobao.dao.CommodityDao;
-import cn.qf.taobao.pojo.entity.Classify;
-import cn.qf.taobao.pojo.entity.Commodity;
-import cn.qf.taobao.pojo.entity.Favorite;
+import cn.qf.taobao.pojo.entity.*;
 import cn.qf.taobao.util.DruidUtil;
 import org.apache.commons.dbutils.*;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +24,7 @@ public class CommodityDaoImpl implements CommodityDao {
         RowProcessor processor = new BasicRowProcessor(bean);
         BeanHandler<Commodity> commodityBean = new BeanHandler<>(Commodity.class,processor);
         try {
-           return queryRunner.query(sql,commodityBean,classifyName);
+          return queryRunner.query(sql, commodityBean, classifyName);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,10 +61,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
         try {
 
-
-            return queryRunner.query(sql, commodityList,i);
-
-
+            return queryRunner.query(sql, commodityList, i);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -254,19 +250,52 @@ public class CommodityDaoImpl implements CommodityDao {
     }
 
     @Override
-    public List<Commodity> selectClassifyCommodityId(Long classifyId) {
+    public int deleteShopCat(Long commodityId, Long userId) {
+        String sql="DELETE FROM t_shop_cart WHERE user_id=? AND commodity_id=?";
 
-        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架'";
+        try {
+           return queryRunner.update(sql,userId,commodityId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Commodity> selectClassifyCommodityId(Long classifyId,Long pages) {
+
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架' LIMIT ?,12";
+        if (pages==null||pages<0){
+
+            pages=1L;
+
+        }
+        pages=((pages-1)*12);
         //开启下划线->驼峰转换所用
         BeanProcessor bean = new GenerousBeanProcessor();
         RowProcessor processor = new BasicRowProcessor(bean);
         BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class, processor);
 
         try {
-           return queryRunner.query(sql,commodityBeanListHandler,classifyId);
+           return queryRunner.query(sql,commodityBeanListHandler,classifyId,pages);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    //@Override
+    public Object selectClassifyNum(Long classifyId) {
+
+        String sql="SELECT COUNT(*) FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架'";
+        ScalarHandler<Object> ScalarHandler = new ScalarHandler<>();
+        try {
+          return queryRunner.query(sql,ScalarHandler,classifyId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

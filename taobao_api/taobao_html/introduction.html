@@ -250,7 +250,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+									<a id="LikBuy" onclick="buyShop()" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
 								</div>
 							</li>
 							<li>
@@ -1230,6 +1230,20 @@
 
 
 	<script>
+
+	function buyShop(){
+
+		var fromLocalStorage = getFromLocalStorage("seller");
+		if (fromLocalStorage==null){
+			alert("未登录哦！");
+			location.href="http://localhost:8080//taobao_html/登录.html";
+			return;
+		}
+		var num = $("#num").val();
+		var jQuery = $("#shop").attr("name");
+		location.href="pay.html?commodityId="+jQuery+"&num="+num;
+
+	}
 		function shopCart() {
 
 

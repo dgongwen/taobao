@@ -2,11 +2,13 @@ package cn.qf.taobao.service.impl;
 
 import cn.qf.taobao.dao.UserDao;
 import cn.qf.taobao.dao.impl.UserDaoImpl;
+import cn.qf.taobao.pojo.entity.Address;
 import cn.qf.taobao.pojo.entity.User;
 import cn.qf.taobao.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -56,5 +58,38 @@ public class UserServiceImpl implements UserService {
         user = userDao.userSelect(userName);
         System.out.println("service   "+user);
         return user;
+    }
+
+    @Override
+    public List<Address> selectUserAddressService(Long userId) {
+
+        List<Address> addresses = userDao.selectUserAddress(userId);
+        if (addresses==null){
+            throw new RuntimeException("查询收货地址失败");
+        }
+        return addresses;
+    }
+
+    @Override
+    public List<Address> addAddress(Address address) {
+
+        int i = userDao.addAddress(address);
+        if (i==0){
+            throw new RuntimeException("添加用户收获地址失败");
+        }
+
+        return  selectUserAddressService(address.getUserId());
+
+    }
+
+    @Override
+    public List<Address> deleteAddress(Long userId, Long addressId) {
+
+        int i = userDao.deleteAddress(userId, addressId);
+        if (i==0){
+            throw new RuntimeException("删除用户地址失败");
+        }
+       return selectUserAddressService(userId);
+
     }
 }

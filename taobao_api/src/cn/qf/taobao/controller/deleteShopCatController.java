@@ -12,18 +12,18 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 分类商品查询
+ * 删除购物车
  */
-@WebServlet("/classifyCommodity.t")
-public class selectClassifyCommodityIdController extends BaseController{
+@WebServlet("/deleteShopCat.t")
+public class deleteShopCatController extends BaseController{
     private CommodityService commodityService = new CommodityServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String num = req.getParameter("num");
-        String pages = req.getParameter("pages");
+        String commodityId1 = req.getParameter("commodityId");
+        String userId = req.getParameter("userId");
 
         try {
-            List<Commodity> commodities = commodityService.selectClassifyCommodityIdService(Long.valueOf(num),Long.valueOf(pages));
+            List<Commodity> commodities = commodityService.deleteShopCat(Long.valueOf(commodityId1), Long.valueOf(userId));
             writerSuccessResult(commodities,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

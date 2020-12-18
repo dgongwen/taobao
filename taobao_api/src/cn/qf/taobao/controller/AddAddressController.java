@@ -1,8 +1,8 @@
 package cn.qf.taobao.controller;
 
-import cn.qf.taobao.pojo.entity.Commodity;
-import cn.qf.taobao.service.CommodityService;
-import cn.qf.taobao.service.impl.CommodityServiceImpl;
+import cn.qf.taobao.pojo.entity.Address;
+import cn.qf.taobao.service.UserService;
+import cn.qf.taobao.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +12,20 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 分类商品查询
+ * 添加用户收货地址
  */
-@WebServlet("/classifyCommodity.t")
-public class selectClassifyCommodityIdController extends BaseController{
-    private CommodityService commodityService = new CommodityServiceImpl();
+@WebServlet("/addAddress.t")
+public class AddAddressController extends BaseController {
+    private UserService userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String num = req.getParameter("num");
-        String pages = req.getParameter("pages");
+
+
+        Address address = convertParamsToEntity(req, Address.class);
 
         try {
-            List<Commodity> commodities = commodityService.selectClassifyCommodityIdService(Long.valueOf(num),Long.valueOf(pages));
-            writerSuccessResult(commodities,resp);
+            List<Address> addresses = userService.addAddress(address);
+            writerSuccessResult(addresses,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();
             writerErrorResult(message,resp);

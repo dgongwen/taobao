@@ -23,7 +23,6 @@ public class UserLoginController extends BaseController{
         try {
             // 将对象返回前端
             User user = userService.userSelectService(use.getUserName(), use.getPassword(),use.getVerification(),req);
-            System.out.println("controller"+user);
             HttpSession session = req.getSession();
             session.setAttribute("seller",user);
             writerSuccessResult(user,resp);
