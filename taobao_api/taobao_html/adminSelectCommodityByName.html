@@ -57,6 +57,7 @@
             </div>
 
             <!--悬浮搜索框-->
+
             <div class="nav white">
                 <div class="logo"><img src="images/logo.png" /></div>
                 <div class="logoBig">
@@ -83,7 +84,7 @@
     <div class="nav-cont">
 
         <div class="nav-extra">
-            <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>回收站
+            <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>全部商品
             <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
         </div>
     </div>
@@ -101,7 +102,7 @@
                 </li>
                 </ul>
                 <div class="clear"></div>
-                <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}"></a>
+                <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
                 <!--例子-->
                 <div class="am-modal am-modal-no-btn" id="doc-modal-1">
 
@@ -109,13 +110,12 @@
 
                         <!--标题 -->
                         <div class="am-cf am-padding">
-                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">已删除商品</strong> / <small>recycle
-                                bin
-                            </small></div>
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">全部商品</strong> / <small>Add&nbsp;the
+                                goods</small></div>
                         </div>
                         <hr/>
 
-                        <div class="am-u-md-12 am-u-lg-11" style="margin-top: 20px;">
+                        <div class="am-u-md-12 am-u-lg-10" style="margin-top: 20px;">
                             <div id="div_vue" class="container-fluid">
                                 <div class="row">
                                     <div class="table-responsive">
@@ -138,7 +138,6 @@
                                             </thead>
                                             <tbody>
                                             <tr v-for="seller in sellerList">
-                                                <!-- <td><input type="checkbox" value="{{seller.id}}"></td>-->
                                                 <td>{{seller.id}}</td>
                                                 <td><img :src="seller.commodityImgUrl" width="150" height="150"></td>
                                                 <td>{{seller.commodityName}}</td>
@@ -146,40 +145,41 @@
                                                 <td>{{seller.commodityPrice}}</td>
                                                 <td>{{seller.commodityNum}}</td>
                                                 <td>{{seller.commoditySales}}</td>
-                                                <td style="color: red">已删除</td>
+                                                <td>{{seller.commodityState}}</td>
                                                 <td>
-
-                                                    <button type="button" value="撤销删除" :test="seller.id" id="del"
-                                                            onclick="formDel(this)">撤销删除
+                                                    <button type="button" value="修改" :text="seller.id" :text1="seller.commodityState" id="update" onclick="formUpdate(this)" >
+                                                        修改
                                                     </button>
-
+                                                    <button type="button" value="删除" :test="seller.id" id="del"
+                                                            onclick="formDel(this)" :test1="seller.commodityState">删除
+                                                    </button>
+                                                    <button type="button" value="上架" :test1="seller.id" id="up"
+                                                            onclick="formUpdateStateUp(this)">上架
+                                                    </button>
+                                                    <button type="button" value="下架" :test1="seller.id" id="sold"
+                                                            onclick="formUpdateStateSold(this)">下架
+                                                    </button>
                                                 </td>
                                             </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
             <script type="text/javascript">
                 $(document).ready(function () {
                     $(".new-option-r").click(function () {
                         $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
                     });
-
                     var $ww = $(window).width();
                     if ($ww > 640) {
                         $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
                     }
-
                 })
             </script>
 
@@ -201,7 +201,6 @@
                     <a href="#">物流</a>
                 </div>
                 </p>
-
             </div>
             <div class="footer-bd" style="margin-left: 32%">
                 <p>
@@ -215,7 +214,6 @@
         </div>
 
     </div>
-
     <aside class="menu">
         <ul>
             <li class="person active">
@@ -237,15 +235,10 @@
                     <li><a href="adminRecycle.html" style="color: darkorange">回收站</a></li>
                 </ul>
             </li>
-
         </ul>
-
     </aside>
 </div>
-
-
 </body>
-
 </html>
 <script>
     var sessionAdmin = getFromLocalStorage("adminSession");
@@ -253,6 +246,11 @@
         //管理员未登录
         location.href = "adminLogin.html";
     }
+
+    var category=window.location.search;
+    var commodtiyName=category.substring(category.lastIndexOf('=')+1,category.length);
+    console.log(commodtiyName)
+
     var vm = new Vue({
         el: '#div_vue',
         data: {
@@ -260,9 +258,9 @@
         },
         methods: {
             refreshSellerList: function () {
-                console.log("已删除商品展示")
+                console.log("fdsf")
                 //发起http请求后台获取商家列表数据
-                let url = "/selectDelCommodity.t";
+                let url = "/selectByName.t?commodityName="+commodtiyName;
                 let thisObj = this;
                 get(url, function (data) {
                     thisObj.sellerList = data;
@@ -279,15 +277,38 @@
         }
     });
 
+    function formUpdate(obj) {
+
+        if ($(obj).attr("text1") != '下架') {
+            alert("仅下架商品才可修改，如仍需修改该商品信息，请先下架！")
+            return false;
+        }
+
+            top.location='adminUpdate.html?id='+$(obj).attr("text");
+
+    }
+
+    function formSelectByName() {
+        let commodityName= $("#commodityName").val();
+        console.log(commodityName)
+        top.location='adminSelectCommodityByName.html?commodityName='+commodityName;
+    }
+
+
+
 
     function formDel(obj) {
+        if ($(obj).attr("test1") != '下架') {
+            alert("仅下架商品才可删除，如仍需删除该商品，请先下架！")
+            return false;
+        }
 
-        if (window.confirm('确定找回：编号' + $(obj).attr("test") + '的商品？')) {
+        if (window.confirm('确定删除：编号' + $(obj).attr("test") + '的商品？')) {
             //alert("确定");
-            let url = "//updateCancel.t?id=" + $(obj).attr("test");
+            let url = "/delCommodity.t?id=" + $(obj).attr("test");
             console.log(url)
             get(url, function (resp) {
-                alert("找回成功!")
+                alert("删除成功!")
             });
             location.reload();
             return true;
@@ -298,9 +319,39 @@
         }
     }
 
-    function formSelectByName() {
-        let commodityName= $("#commodityName").val();
-        console.log(commodityName)
-        top.location='adminSelectCommodityByName.html?commodityName='+commodityName;
+    function formUpdateStateUp(obj) {
+
+        if (window.confirm('确定上架：编号' + $(obj).attr("test1") + '的商品？')) {
+            //alert("确定");
+            let url = "/updateState.t?commodityState=上架&id=" + $(obj).attr("test1");
+            console.log(url)
+            get(url, function (resp) {
+                alert("上架成功!")
+            });
+            location.reload();
+            return true;
+        } else {
+            //alert("取消");
+            return false;
+
+        }
+    }
+
+    function formUpdateStateSold(obj) {
+
+        if (window.confirm('确定下架：编号' + $(obj).attr("test1") + '的商品？')) {
+            //alert("确定");
+            let url = "/updateState.t?commodityState=下架&id=" + $(obj).attr("test1");
+            console.log(url)
+            get(url, function (resp) {
+                alert("下架成功!")
+            });
+            location.reload();
+            return true;
+        } else {
+            //alert("取消");
+            return false;
+
+        }
     }
 </script>

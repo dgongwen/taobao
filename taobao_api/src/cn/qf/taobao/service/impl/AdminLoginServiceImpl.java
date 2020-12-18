@@ -13,11 +13,11 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
     //判断管理员用户名和密码是否正确
     @Override
-    public int selectAdmin(String adminUserName, String adminUserPassword) {
-        AdminLoginQO adminLoginQO = adminDao.selectAdmin(adminUserName, adminUserPassword);
-        if(adminLoginQO!=null){
-            return 1;
+    public AdminLoginQO selectAdmin(String adminUserName, String adminUserPassword) {
+        AdminLoginQO adminService= adminDao.selectAdmin(adminUserName, adminUserPassword);
+        if(adminService.equals(null)){
+            throw new RuntimeException("用户名或密码错误");
         }
-        return 0;
+        return adminService;
     }
 }

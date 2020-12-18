@@ -23,6 +23,7 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<!--自定义工具-->
 		<script src="tao_js/HttpUtil.js"></script>
+		<script src="js/Data.js"></script>
 		<!--参数校验工具-->
 		<script src="tao_js/jquery.validate.min.js"></script>
 		<script src="tao_js/messages_zh.min.js"></script>
@@ -167,7 +168,8 @@
 		let url = "/adminLogin";
 		let params = {adminUserName:adminUserName, adminUserPassword: adminUserPassword};
 
-		postWithJson(url,params,function (json) {
+		postWithJson(url,params,function (data) {
+			    saveToLocalStorage("adminSession", data);
 				window.location.href="http://localhost:8080//taobao_html/adminCenter.html";
 
 		})

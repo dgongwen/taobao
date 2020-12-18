@@ -26,6 +26,7 @@
     <!--自定义工具-->
     <script src="tao_js/HttpUtil.js"></script>
     <script src="tao_js/vue.min.js"></script>
+    <script src="js/Data.js"></script>
     <!--参数校验工具-->
     <script src="tao_js/jquery.validate.min.js"></script>
     <script src="tao_js/messages_zh.min.js"></script>
@@ -44,7 +45,7 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="#" target="_top" class="h">亲，请登录</a>
+                            <a href="#" target="_top" class="h">欢迎：<Strong style="color: red">admin</Strong></a>
                         </div>
                     </div>
                 </ul>
@@ -61,7 +62,20 @@
             </div>
 
             <!--悬浮搜索框-->
+            <div class="nav white">
+                <div class="logo"><img src="images/logo.png" /></div>
+                <div class="logoBig">
+                    <li><img src="images/logobig.png" /></li>
+                </div>
 
+                <div class="search-bar pr">
+                    <a name="index_none_header_sysc" href="#"></a>
+                    <form>
+                        <input id="commodityName" name="index_none_header_sysc" type="text" placeholder="商品名称" autocomplete="off">
+                        <input type="button" id="ai-topsearch" class="submit am-btn" value="搜索" index="1" onclick="formSelectByName()">
+                    </form>
+                </div>
+            </div>
 
 
             <div class="clear"></div>
@@ -121,13 +135,13 @@
                                             <div class="form-group">
                                                 <label for="commodityImgUrl" class="col-sm-2 control-label">商品图片链接</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="commodityImgUrl" placeholder="商品图片链接" onchange="a()">
+                                                    <input type="text" class="form-control" id="commodityImgUrl" name="" placeholder="商品图片链接" >
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="commodityImgUrl" class="col-sm-2 control-label">商品展示图</label>
                                                 <div class="col-sm-9">
-                                                    <img src="" width="150px" height="150px" id="showImage" onkeyup="a(this.id)">
+                                                    <img src="" alt="" width="150px" height="150px" id="showImage" >
                                                 </div>
                                             </div>
 
@@ -194,6 +208,7 @@
                 </div>
 
             </div>
+
 
             <script type="text/javascript">
                 $(document).ready(function () {
@@ -274,6 +289,20 @@
 
 </html>
 <script>
+    var sessionAdmin = getFromLocalStorage("adminSession");
+    if (null == sessionAdmin) {
+        //管理员未登录
+        location.href = "adminLogin.html";
+    }
+
+    let commodityImgUrl = document.getElementById("commodityImgUrl")
+    let showImage=document.getElementById("showImage")
+        commodityImgUrl.oninput=()=>{
+            console.log("====")
+        showImage.setAttribute("src",commodityImgUrl.value)
+    }
+
+
 function a(){
     let commodityImgUrl= $("#commodityImgUrl").val();
 }
@@ -335,5 +364,9 @@ function a(){
         });
     }
 
-
+    function formSelectByName() {
+        let commodityName= $("#commodityName").val();
+        console.log(commodityName)
+        top.location='adminSelectCommodityByName.html?commodityName='+commodityName;
+    }
 </script>

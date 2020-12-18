@@ -9,16 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
 @WebServlet("/selectByName.t")
 public class AdminSelectCommodityByNameController extends BaseController{
     private AdminCommodityService adminCommodityService = new AdminCommodityServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AdminCommodityQO adminCommodityQO = convertParamsToEntity(req,AdminCommodityQO.class);
-        System.out.println(adminCommodityQO);
+        String commodityName = req.getParameter("commodityName");
+        System.out.println(commodityName);
         try{
-            AdminCommodityQO ad = adminCommodityService.selectAdminCommodityByNameService(adminCommodityQO.getCommodityName());
+            List<AdminCommodityQO> ad = adminCommodityService.selectAdminCommodityByNameService(commodityName);
             System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){

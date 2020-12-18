@@ -11,6 +11,7 @@
     <link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
     <link href="css/personal.css" rel="stylesheet" type="text/css">
     <link href="css/systyle.css" rel="stylesheet" type="text/css">
+    <script src="js/Data.js"></script>
 
 </head>
 
@@ -24,7 +25,7 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="adminLogin.html" target="_top" class="h">亲，请登录</a>
+                            <a href="#" target="_top" class="h">欢迎：<Strong style="color: red">admin</Strong></a>
                         </div>
                     </div>
                 </ul>
@@ -40,7 +41,20 @@
             </div>
 
             <!--悬浮搜索框-->
+            <div class="nav white">
+                <div class="logo"><img src="images/logo.png" /></div>
+                <div class="logoBig">
+                    <li><img src="images/logobig.png" /></li>
+                </div>
 
+                <div class="search-bar pr">
+                    <a name="index_none_header_sysc" href="#"></a>
+                    <form>
+                        <input id="commodityName" name="index_none_header_sysc" type="text" placeholder="商品名称" autocomplete="off">
+                        <input type="button" id="ai-topsearch" class="submit am-btn" value="搜索" index="1" onclick="formSelectByName()">
+                    </form>
+                </div>
+            </div>
 
             <div class="clear"></div>
         </div>
@@ -385,3 +399,16 @@
 </body>
 
 </html>
+<script>
+    var sessionAdmin = getFromLocalStorage("adminSession");
+    if (null == sessionAdmin) {
+        //管理员未登录
+        location.href = "adminLogin.html";
+    }
+
+    function formSelectByName() {
+        let commodityName= $("#commodityName").val();
+        console.log(commodityName)
+        top.location='adminSelectCommodityByName.html?commodityName='+commodityName;
+    }
+</script>

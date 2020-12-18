@@ -30,8 +30,8 @@ public class AdminCommodityServiceImpl implements AdminCommodityService {
     }
 
     @Override
-    public AdminCommodityQO selectAdminCommodityByNameService(String commodityName) {
-        AdminCommodityQO adminByName = adminDao.selectAdminCommodityByName(commodityName);
+    public List<AdminCommodityQO> selectAdminCommodityByNameService(String commodityName) {
+        List<AdminCommodityQO> adminByName = adminDao.selectAdminCommodityByName(commodityName);
         System.out.println("selectAdminByName"+adminByName);
         return adminByName;
     }
@@ -58,8 +58,8 @@ public class AdminCommodityServiceImpl implements AdminCommodityService {
     }
 
     @Override
-    public int updateAdminCommodityById(int id, String commodityNum, String commodityName, Double commodityPrice, String commodityImgUrl, int classificationId,String commodityState) {
-        int i = adminDao.updateAdminCommodityById(id,commodityNum,commodityName,commodityPrice,commodityImgUrl,classificationId,commodityState);
+    public int updateAdminCommodityById(AdminCommodityQO adminCommodityQO) {
+        int i = adminDao.updateAdminCommodityById(adminCommodityQO);
         return i;
     }
 

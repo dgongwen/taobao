@@ -21,7 +21,8 @@ public class AdminLoginController extends BaseController {
         AdminLoginQO adminLoginQO = convertParamsToEntity(req,AdminLoginQO.class);
         System.out.println(adminLoginQO.getAdminUserName()+"    "+adminLoginQO.getAdminUserPassword());
         try{
-            int admin = adminLoginService.selectAdmin(adminLoginQO.getAdminUserName(),adminLoginQO.getAdminUserPassword());
+            AdminLoginQO admin = adminLoginService.selectAdmin(adminLoginQO.getAdminUserName(),adminLoginQO.getAdminUserPassword());
+            req.getSession().setAttribute("adminSession",admin);
             System.out.println(admin);
             writerSuccessResult(admin,resp);
         }catch (RuntimeException e){

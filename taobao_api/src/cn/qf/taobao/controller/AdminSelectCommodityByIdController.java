@@ -15,10 +15,10 @@ public class AdminSelectCommodityByIdController extends BaseController{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AdminCommodityQO adminCommodityQO = convertParamsToEntity(req,AdminCommodityQO.class);
-        System.out.println(adminCommodityQO);
+        String id = req.getParameter("id");
+        System.out.println(id);
         try{
-            AdminCommodityQO ad = adminCommodityService.selectAdminCommodityByIDService(adminCommodityQO.getId());
+            AdminCommodityQO ad = adminCommodityService.selectAdminCommodityByIDService(Integer.parseInt(id));
             System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){

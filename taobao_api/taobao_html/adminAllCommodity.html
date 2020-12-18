@@ -26,6 +26,7 @@
     <!--自定义工具-->
     <script src="tao_js/HttpUtil.js"></script>
     <script src="tao_js/vue.min.js"></script>
+    <script src="js/Data.js"></script>
 
 </head>
 
@@ -39,7 +40,7 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="#" target="_top" class="h">亲，请登录</a>
+                            <a href="#" target="_top" class="h">欢迎：<Strong style="color: red">admin</Strong></a>
                         </div>
                     </div>
                 </ul>
@@ -58,16 +59,16 @@
             <!--悬浮搜索框-->
 
             <div class="nav white">
+                <div class="logo"><img src="images/logo.png" /></div>
                 <div class="logoBig">
-                    <li><img src="images/logobig.png"/></li>
+                    <li><img src="images/logobig.png" /></li>
                 </div>
 
                 <div class="search-bar pr">
                     <a name="index_none_header_sysc" href="#"></a>
                     <form>
-                        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="商品名称"
-                               autocomplete="off">
-                        <input id="ai-topsearch" class="submit am-btn" value="名称搜索" index="1" type="submit">
+                        <input id="commodityName" name="index_none_header_sysc" type="text" placeholder="商品名称" autocomplete="off">
+                        <input type="button" id="ai-topsearch" class="submit am-btn" value="搜索" index="1" onclick="formSelectByName()">
                     </form>
                 </div>
             </div>
@@ -146,7 +147,7 @@
                                                 <td>{{seller.commoditySales}}</td>
                                                 <td>{{seller.commodityState}}</td>
                                                 <td>
-                                                    <button type="button" value="修改" name="{{seller.id}}" id="update">
+                                                    <button type="button" value="修改" :text="seller.id" :text1="seller.commodityState" id="update" onclick="formUpdate(this)" >
                                                         修改
                                                     </button>
                                                     <button type="button" value="删除" :test="seller.id" id="del"
@@ -160,6 +161,7 @@
                                                     </button>
                                                 </td>
                                             </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -239,6 +241,12 @@
 </body>
 </html>
 <script>
+    var sessionAdmin = getFromLocalStorage("adminSession");
+    if (null == sessionAdmin) {
+        //管理员未登录
+        location.href = "adminLogin.html";
+    }
+
     var vm = new Vue({
         el: '#div_vue',
         data: {
@@ -264,6 +272,25 @@
             console.log("created");
         }
     });
+
+    function formUpdate(obj) {
+
+        if ($(obj).attr("text1") != '下架') {
+            alert("仅下架商品才可修改，如仍需修改该商品信息，请先下架！")
+            return false;
+        }
+
+            top.location='adminUpdate.html?id='+$(obj).attr("text");
+
+    }
+
+    function formSelectByName() {
+        let commodityName= $("#commodityName").val();
+        console.log(commodityName)
+        top.location='adminSelectCommodityByName.html?commodityName='+commodityName;
+    }
+
+
 
 
     function formDel(obj) {
@@ -323,4 +350,7 @@
 
         }
     }
+
+
+
 </script>

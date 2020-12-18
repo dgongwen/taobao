@@ -12,7 +12,7 @@ public interface AdminLoginService {
      * @param adminUserPassword   管理员密码
      * @return
      */
-    int selectAdmin(String adminUserName, String adminUserPassword);
+    AdminLoginQO selectAdmin(String adminUserName, String adminUserPassword);
 
 
 

@@ -16,7 +16,7 @@ public interface AdminDao {
     AdminCommodityQO selectAdminCommodityByID(int id);
 
     //根据商品名称查询商品
-    AdminCommodityQO selectAdminCommodityByName(String commodityName);
+    List<AdminCommodityQO> selectAdminCommodityByName(String commodityName);
 
     //根据商品名称和商品是否上架查询商品
     AdminCommodityQO selectAdminCommodityByNameStatus(String commodityName,String commodityState);
@@ -28,7 +28,7 @@ public interface AdminDao {
     List<AdminCommodityQO> selectAdminCommodityByState(String commodityState);
 
     //根据商品ID修改商品信息
-    int updateAdminCommodityById(int id, String commodityNum, String commodityName, Double commodityPrice, String commodityImgUrl, int classificationId,String commodityState);
+    int updateAdminCommodityById(AdminCommodityQO adminCommodityQO);
 
     //增加商品
     int insertAdminCommodity(String commodityNum, String commodityName, Double commodityPrice, String commodityImgUrl, int classificationId,String commodityState);

@@ -38,7 +38,7 @@ public class AdminDaoImpl implements AdminDao {
     //根据商品ID查询商品
     @Override
     public AdminCommodityQO selectAdminCommodityByID(int id) {
-        String SelectAdminCommodityByIdSql="SELECT a.classification_id,a.commodity_name,a.commodity_Price,a.commodity_img_url,a.commodity_num,a.commodity_sales,b.classification_name,a.commodity_state FROM t_commodity a,t_commodity_classification b WHERE  a.commodity_status = 1 AND a.classification_id=b.classification_id AND a.commodity_state='上架' AND a.id=?";
+        String SelectAdminCommodityByIdSql="SELECT a.id,a.classification_id,a.commodity_name,a.commodity_Price,a.commodity_img_url,a.commodity_num,a.commodity_sales,a.classification_id,b.classification_name,a.commodity_state FROM t_commodity a,t_commodity_classification b WHERE  a.commodity_status = 1 AND a.classification_id=b.classification_id AND a.commodity_state='下架' AND a.id=?";
         try {
             GenerousBeanProcessor beanProcessor = new GenerousBeanProcessor();
             BasicRowProcessor row = new BasicRowProcessor(beanProcessor);
@@ -51,13 +51,13 @@ public class AdminDaoImpl implements AdminDao {
 
     //根据商品名称查询商品（模糊查询）
     @Override
-    public AdminCommodityQO selectAdminCommodityByName(String commodityName) {
-        String SelectAdminCommodityByName="SELECT a.classification_id,a.commodity_name,a.commodity_Price,a.commodity_img_url,a.commodity_num,a.commodity_sales,b.classification_name,a.commodity_state FROM t_commodity a,t_commodity_classification b WHERE  a.commodity_status = 1 AND a.classification_id=b.classification_id AND a.commodity_state='上架'  AND a.commodity_name LIKE ? ";
+    public List<AdminCommodityQO> selectAdminCommodityByName(String commodityName) {
+        String SelectAdminCommodityByName="SELECT a.id,a.classification_id,a.commodity_name,a.commodity_Price,a.commodity_img_url,a.commodity_num,a.commodity_sales,b.classification_name,a.commodity_state FROM t_commodity a,t_commodity_classification b WHERE  a.commodity_status = 1 AND a.classification_id=b.classification_id  AND a.commodity_name LIKE ? ";
         String commodityNames="%"+commodityName+"%";
         try {
             GenerousBeanProcessor beanProcessor = new GenerousBeanProcessor();
             BasicRowProcessor row = new BasicRowProcessor(beanProcessor);
-            return queryRunner.query(SelectAdminCommodityByName,new BeanHandler<AdminCommodityQO>(AdminCommodityQO.class,row),commodityNames);
+            return queryRunner.query(SelectAdminCommodityByName,new BeanListHandler<AdminCommodityQO>(AdminCommodityQO.class,row),commodityNames);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -108,10 +108,14 @@ public class AdminDaoImpl implements AdminDao {
     }
     //根据ID修改商品
     @Override
-    public int updateAdminCommodityById(int id, String commodityNum, String commodityName, Double commodityPrice, String commodityImgUrl, int classificationId,String commodityState) {
+    public int updateAdminCommodityById(AdminCommodityQO adminCommodityQO) {
         String updateAdminCommodityByIdSql = "UPDATE t_commodity SET commodity_name=?,commodity_Price=?,commodity_img_url=?,commodity_num=?,classification_id=?,commodity_state=? where commodity_state='下架' AND id=?";
-        Object[] params={commodityName,commodityPrice,commodityImgUrl,classificationId,commodityState,id};
+        Object[] params={adminCommodityQO.getCommodityName(),adminCommodityQO.getCommodityPrice()
+                ,adminCommodityQO.getCommodityImgUrl()
+                ,adminCommodityQO.getCommodityNum(),adminCommodityQO.getClassificationId(),adminCommodityQO.getCommodityState()
+                ,adminCommodityQO.getId()};
         try {
+
             return queryRunner.update(updateAdminCommodityByIdSql,params);
         } catch (SQLException e) {
             e.printStackTrace();

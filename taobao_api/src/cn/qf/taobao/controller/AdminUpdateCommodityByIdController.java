@@ -16,10 +16,24 @@ public class AdminUpdateCommodityByIdController extends BaseController{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AdminCommodityQO adminCommodityQO = convertParamsToEntity(req,AdminCommodityQO.class);
-        System.out.println(adminCommodityQO);
+        String commodityNum = req.getParameter("commodityNum");
+        String commodityName = req.getParameter("commodityName");
+        String commodityPrice = req.getParameter("commodityPrice");
+        String commodityImgUrl = req.getParameter("commodityImgUrl");
+        String classificationId = req.getParameter("classificationId");
+        String commodityState = req.getParameter("commodityState");
+        String id = req.getParameter("id");
+        System.out.println(id+" "+commodityNum+" "+commodityName+" "+commodityPrice+" "+commodityImgUrl+" "+classificationId+" "+commodityState);
+        AdminCommodityQO a = new AdminCommodityQO();
+        a.setCommodityNum(commodityNum);
+        a.setCommodityName(commodityName);
+        a.setCommodityPrice(Double.parseDouble(commodityPrice));
+        a.setCommodityImgUrl(commodityImgUrl);
+        a.setClassificationId(Integer.parseInt(classificationId));
+        a.setCommodityState(commodityState);
+        a.setId(Integer.parseInt(id));
         try{
-            int ad = adminCommodityService.updateAdminCommodityById(adminCommodityQO.getId(),adminCommodityQO.getCommodityNum(),adminCommodityQO.getCommodityName(),adminCommodityQO.getCommodityPrice(),adminCommodityQO.getCommodityImgUrl(),adminCommodityQO.getClassificationId(),adminCommodityQO.getCommodityState());
+            int ad = adminCommodityService.updateAdminCommodityById(a);
             System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){

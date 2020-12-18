@@ -30,6 +30,7 @@
     <script src="tao_js/jquery.validate.min.js"></script>
     <script src="tao_js/messages_zh.min.js"></script>
     <script src="tao_js/vue.min.js"></script>
+    <script src="js/Data.js"></script>
     <link href="tao_css/login.css" type="text/css" rel="stylesheet">
 
 </head>
@@ -44,7 +45,7 @@
                 <ul class="message-l">
                     <div class="topMessage">
                         <div class="menu-hd">
-                            <a href="#" target="_top" class="h">亲，请登录</a>
+                            <a href="#" target="_top" class="h">欢迎：<Strong style="color: red">admin</Strong></a>
                         </div>
                     </div>
                 </ul>
@@ -61,7 +62,22 @@
             </div>
 
             <!--悬浮搜索框-->
+            <div class="nav white">
+                <div class="logo"><img src="images/logo.png"/></div>
+                <div class="logoBig">
+                    <li><img src="images/logobig.png"/></li>
+                </div>
 
+                <div class="search-bar pr">
+                    <a name="index_none_header_sysc" href="#"></a>
+                    <form>
+                        <input id="commodityNames" name="index_none_header_sysc" type="text" placeholder="商品名称"
+                               autocomplete="off">
+                        <input type="button" id="ai-topsearch" class="submit am-btn" value="搜索" index="1"
+                               onclick="formSelectByName()">
+                    </form>
+                </div>
+            </div>
 
 
             <div class="clear"></div>
@@ -101,74 +117,88 @@
 
                         <!--标题 -->
                         <div class="am-cf am-padding">
-                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改商品资料</strong> / <small>Modification of commodity information
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改商品资料</strong> / <small>Modification
+                                of commodity information
                             </small></div>
                         </div>
                         <hr/>
 
                         <div class="am-u-md-12 am-u-lg-12" style="margin-top: 20px;">
-                            <div id="div_vue" class="container-fluid">
+                            <div class="container-fluid" id="div_vue">
                                 <div class="row">
                                     <div class="table-responsive">
                                         <form class="form-horizontal" id="insertCommodity">
                                             <div class="form-group">
                                                 <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="commodityName" placeholder="{{seller.commodityName}}">
+                                                    <input type="text" name="" class="form-control" id="commodityName"
+                                                           :value="sellerList.commodityName">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="commodityImgUrl" class="col-sm-2 control-label">商品图片链接</label>
+                                                <label for="commodityImgUrl"
+                                                       class="col-sm-2 control-label">商品图片链接</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="commodityImgUrl" placeholder="{{seller.commodityImgUrl}}" onchange="a()">
+                                                    <input type="text" class="form-control" name="" id="commodityImgUrl"
+                                                           v-model="sellerList.commodityImgUrl"
+                                                           >
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="commodityImgUrl" class="col-sm-2 control-label">商品展示图</label>
+                                                <label for="showImage" class="col-sm-2 control-label">商品展示图</label>
                                                 <div class="col-sm-9">
-                                                    <img src="{{seller.commodityImgUrl}}" width="150px" height="150px" id="showImage" >
+                                                    <img v-bind:src="sellerList.commodityImgUrl" alt="" width="150px" height="150px"
+                                                         id="showImage">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="commodityPrice" class="col-sm-2 control-label">商品价格</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="commodityPrice" placeholder="{{commodityPrice}}">
+                                                    <input type="text" class="form-control" id="commodityPrice"
+                                                           :value="sellerList.commodityPrice">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="commodityNum" class="col-sm-2 control-label">商品库存</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="commodityNum" placeholder="{{commodityNum}}">
+                                                    <input type="text" class="form-control" id="commodityNum"
+                                                           :value="sellerList.commodityNum">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <form class="form-horizontal">
-                                                        <label for="commodityState" class="col-sm-2 control-label">&nbsp;&nbsp;&nbsp;商品状态</label>
-                                                        <div class="col-sm-9">
-                                                            <p class="form-control-static" id="commodityState" value="下架">&nbsp;&nbsp;&nbsp;下架</p>
+                                                    <label for="commodityState" class="col-sm-2 control-label">&nbsp;&nbsp;&nbsp;商品状态</label>
+                                                    <div class="col-sm-9">
+                                                        <p class="form-control-static" id="commodityState" value="下架">
+                                                            &nbsp;&nbsp;&nbsp;下架</p>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="form-group">
                                                 <form class="form-horizontal">
-                                                <label for="classificationId" class="col-sm-2 control-label">商品类别&nbsp;&nbsp;</label>
-                                                <div class="col-sm-9">
-                                                    <form>
-                                                        <select class="form-control" id="classificationId" >
-                                                            <option value="1">服饰</option>
-                                                            <option value="2">配饰</option>
-                                                            <option value="3">家居</option>
-                                                            <option value="4">母婴</option>
-                                                            <option value="5">零食</option>
-                                                            <option value="6">美容</option>
-                                                            <option value="7">数码</option>
-                                                            <option value="8">文体</option>
-                                                            <option value="9">医药</option>
-                                                            <option value="10">汽车</option>
-                                                        </select>
-                                                    </form>
-                                                </div>
+                                                    <label for="classificationId" class="col-sm-2 control-label">商品类别:&nbsp;&nbsp;<strong
+                                                            style="color:red;"></strong></label>
+                                                    <div class="col-sm-9">
+                                                        <form>
+                                                            <select class="form-control" id="classificationId">
+                                                                <option :value="sellerList.classificationId"
+                                                                        style="color: red">
+                                                                    {{sellerList.classificationName}}
+                                                                </option>
+                                                                <option value="1">服饰</option>
+                                                                <option value="2">配饰</option>
+                                                                <option value="3">家居</option>
+                                                                <option value="4">母婴</option>
+                                                                <option value="5">零食</option>
+                                                                <option value="6">美容</option>
+                                                                <option value="7">数码</option>
+                                                                <option value="8">文体</option>
+                                                                <option value="9">医药</option>
+                                                                <option value="10">汽车</option>
+                                                            </select>
+                                                        </form>
+                                                    </div>
                                                 </form>
                                             </div>
                                             <div class="form-group">
@@ -178,7 +208,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-default" onclick="formInsert()">添加</button>
+                                                    <button type="submit" class="btn btn-default"
+                                                            onclick="formInsert()">确认修改
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -273,66 +305,78 @@
 
 </html>
 <script>
-function a(){
-    let commodityImgUrl= $("#commodityImgUrl").val();
-}
-    $(function () {
-        from();
-    })
 
-    function from(){
-        $("#insertCommodity").validate(
-            {
-                rules:{
-                    commodityName:{
-                        required:true
-                    },
-                    commodityPrice:{
-                        required:true
-                    },
-                    commodityImgUrl:{
-                        required:true
-                    },
-                    commodityNum:{
-                        required:true
-                    },
-                    classificationName:{
-                        required:true
-                    }
-                },
-                messages:{}
-            }
-        );
+
+    var sessionAdmin = getFromLocalStorage("adminSession");
+    if (null == sessionAdmin) {
+        //管理员未登录
+        location.href = "adminLogin.html";
     }
 
 
     function formInsert() {
 
-        let validateResult = $("#insertCommodity").valid();
-        if (!validateResult) {
-            //校验不通过
-            alert("数据不能为空");
-            return;
-        }
-
-        let commodityName= $("#commodityName").val();
-        let commodityPrice= $("#commodityPrice").val();
-        let commodityImgUrl= $("#commodityImgUrl").val();
-        let commodityNum= $("#commodityNum").val();
-        let commodityState='下架'
-        let classificationId= $("#classificationId").val();
+        let commodityName = $("#commodityName").val();
+        let commodityPrice = $("#commodityPrice").val();
+        let commodityImgUrl = $("#commodityImgUrl").val();
+        let commodityNum = $("#commodityNum").val();
+        let commodityState = '下架'
+        let classificationId = $("#classificationId").val();
         console.log(commodityName)
         console.log(commodityPrice)
         console.log(commodityImgUrl)
         console.log(commodityNum)
         console.log(commodityState)
         console.log(classificationId)
-        let url="/insertCommodity.t?commodityName="+commodityName+"&commodityPrice="+commodityPrice+"&commodityImgUrl="+commodityImgUrl+"&commodityNum="+commodityNum+"&commodityState="+commodityState+"&classificationId="+classificationId;
+        let url = "/updateById.t?id=" + id + "&commodityName=" + commodityName + "&commodityPrice=" + commodityPrice + "&commodityImgUrl=" + commodityImgUrl + "&commodityNum=" + commodityNum + "&commodityState=" + commodityState + "&classificationId=" + classificationId;
         console.log(url)
         get(url, function (resp) {
-            alert("添加成功!")
+            alert("修改成功!")
+            location.reload();
+            return true;
         });
     }
 
+    /*获取超链接中的数据*/
 
+    var category = window.location.search;
+    var id = category.substring(category.lastIndexOf('=') + 1, category.length);
+    console.log(id)
+    /*获取后端数据*/
+    var vm = new Vue({
+        el: '#div_vue',
+        data: {
+            sellerList: {}
+        },
+        methods: {
+            refreshSellerList: function () {
+                //发起http请求后台获取商家列表数据
+                let url = "/selectById.t?id=" + id;
+                console.log(url)
+                let thisObj = this;
+                get(url, function (data) {
+                    vm.sellerList = data;
+                    console.log(thisObj.sellerList)
+                })
+            }
+        },
+        mounted: function () {
+            //页面加载完成，并且vue对象加载完成之后调用
+            this.refreshSellerList();
+        },
+        created: function () {
+            console.log("created");
+        }, watch: {
+            'sellerList.commodityImgUrl': function (val, oldVal) {
+                console.log('new: %s, old: %s', val, oldVal)
+            }
+        },
+    });
+
+
+    function formSelectByName() {
+        let commodityNames = $("#commodityNames").val();
+        console.log(commodityNames)
+        top.location = 'adminSelectCommodityByName.html?commodityName=' + commodityNames;
+    }
 </script>
