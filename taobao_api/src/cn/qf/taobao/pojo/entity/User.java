@@ -13,16 +13,15 @@ public class User {
     private String sex;//性别
     private String birthData;//出生日期
     private String imgUrl;//用户头像
-    private double blance;//账户余额
     private String email;//用户邮箱
-    private Long paymentPassword;//用户支付密码
+    private String verification;//验证码
 
-    public double getBlance() {
-        return blance;
+    public String getVerification() {
+        return verification;
     }
 
-    public void setBlance(double blance) {
-        this.blance = blance;
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 
     @Override
@@ -36,9 +35,8 @@ public class User {
                 ", sex='" + sex + '\'' +
                 ", birthData='" + birthData + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", blance=" + blance +
                 ", email='" + email + '\'' +
-                ", paymentPassword=" + paymentPassword +
+                ", verification='" + verification + '\'' +
                 '}';
     }
 
@@ -116,11 +114,5 @@ public class User {
         this.email = email;
     }
 
-    public Long getPaymentPassword() {
-        return paymentPassword;
-    }
 
-    public void setPaymentPassword(Long paymentPassword) {
-        this.paymentPassword = paymentPassword;
-    }
 }

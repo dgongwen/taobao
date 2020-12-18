@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Verification extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ValidateCode vc = new ValidateCode(180,30,4,10);
+        ValidateCode vc = new ValidateCode(180,30,4,5);
         String code=vc.getCode();
         //使用Session存储生成的验证码
         HttpSession session=req.getSession();

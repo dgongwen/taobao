@@ -12,7 +12,7 @@ public class BaseRespVO<T> {
     private T data;
 
     public enum CodeType {
-        SUCCESS(100), FAILED(101);
+        SUCCESS(100), FAILED(101),UN_LOGIN(200);
         private int value;
 
         CodeType(int value) {

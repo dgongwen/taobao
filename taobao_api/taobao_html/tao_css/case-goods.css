@@ -1,0 +1,100 @@
+.div-header {
+    background-color: aliceblue;
+    height: 30px;
+    padding: 10px 20px 6px 20px
+}
+
+.div-header b {
+    color: red;
+}
+
+.div-header-left {
+    float: left;
+}
+
+.div-header-right {
+    float: right;
+}
+
+.div-search-logo {
+    margin-top: 10px;
+    padding-left: 20px;
+    height: 80px;
+}
+
+.div-search-logo img {
+    float: left;
+}
+
+.div-search-all {
+    float: left;
+    margin-left: 100px;
+    padding-top: 10px;
+}
+
+.div-search input[type='text'] {
+    width: 600px;
+}
+
+.div-screen-navigator {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: aliceblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 4px;
+}
+
+.div-screen {
+    margin-top: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 20px;
+}
+
+.div-screen-left {
+    float: left;
+}
+
+.div-screen-right {
+    float: right;
+}
+
+.div-goods-list {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.div-goods-list table {
+    width: 100%;
+}
+
+.div-goods-list table td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgrey;
+    padding: 10px 10px 10px 10px;
+}
+
+.div-goods-list img {
+    width: 260px;
+    height: 300px;
+}
+
+.div-goods-remark {
+    text-align: center;
+}
+
+.div-goods-remark b {
+    color: red;
+}
+
+.div-goods-remark small {
+    color: darkgrey;
+    font-size: 10px;
+}
+
+.div-goods-score {
+    text-align: right;
+}

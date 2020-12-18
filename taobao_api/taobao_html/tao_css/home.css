@@ -1,0 +1,16 @@
+.list_img{
+    width: 240px;
+
+}
+.list_img img{
+   padding-left: 24px;
+}
+.list_div{
+    width: 240px;
+    height: 300px;
+    float: left;
+}
+.list_div img{
+    width: 80%;
+}
+

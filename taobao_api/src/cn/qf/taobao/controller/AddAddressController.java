@@ -1,6 +1,6 @@
 package cn.qf.taobao.controller;
 
-import cn.qf.taobao.pojo.entity.User;
+import cn.qf.taobao.pojo.entity.Address;
 import cn.qf.taobao.service.UserService;
 import cn.qf.taobao.service.impl.UserServiceImpl;
 
@@ -9,28 +9,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
-//登录
-@WebServlet("/login.t")
-public class UserQuery extends BaseController{
-    private   UserService userService = new UserServiceImpl();
+/**
+ * 添加用户收货地址
+ */
+@WebServlet("/addAddress.t")
+public class AddAddressController extends BaseController {
+    private UserService userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        User use = convertParamsToEntity(req, User.class);
-        System.out.println(use);
+
+        Address address = convertParamsToEntity(req, Address.class);
+
         try {
-            User user = userService.userSelectService(use.getUserName(), use.getPassword());
-            System.out.println(user);
-            writerSuccessResult(user,resp);
-           // resp.sendRedirect("home.html");
-           // req.getRequestDispatcher("home.html").forward(req,resp);
+            List<Address> addresses = userService.addAddress(address);
+            writerSuccessResult(addresses,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();
-            System.out.println(message);
-           writerErrorResult(message,resp);
+            writerErrorResult(message,resp);
         }
+
     }
 
     @Override
