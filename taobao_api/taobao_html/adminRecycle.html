@@ -262,7 +262,7 @@
             refreshSellerList: function () {
                 console.log("已删除商品展示")
                 //发起http请求后台获取商家列表数据
-                let url = "/selectDelCommodity.t";
+                let url = "/selectDelCommodity.d";
                 let thisObj = this;
                 get(url, function (data) {
                     thisObj.sellerList = data;
@@ -284,7 +284,7 @@
 
         if (window.confirm('确定找回：编号' + $(obj).attr("test") + '的商品？')) {
             //alert("确定");
-            let url = "//updateCancel.t?id=" + $(obj).attr("test");
+            let url = "//updateCancel.d?id=" + $(obj).attr("test");
             console.log(url)
             get(url, function (resp) {
                 alert("找回成功!")

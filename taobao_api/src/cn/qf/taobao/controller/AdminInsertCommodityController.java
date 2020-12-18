@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/insertCommodity.t")
+@WebServlet("/insertCommodity.d")
 public class AdminInsertCommodityController extends BaseController{
     private AdminCommodityService adminCommodityService = new AdminCommodityServiceImpl();
 

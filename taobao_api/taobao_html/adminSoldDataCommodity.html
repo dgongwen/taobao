@@ -267,7 +267,7 @@
             refreshSellerList: function () {
                 console.log("下架商品展示")
                 //发起http请求后台获取商家列表数据
-                let url = "/selectAllByState.t?commodityState=下架";
+                let url = "/selectAllByState.d?commodityState=下架";
                 let thisObj = this;
                 get(url, function (data) {
                     thisObj.sellerList = data;
@@ -299,7 +299,7 @@
 
         if (window.confirm('确定删除：编号' + $(obj).attr("test") + '的商品？')) {
             //alert("确定");
-            let url = "/delCommodity.t?id=" + $(obj).attr("test");
+            let url = "/delCommodity.d?id=" + $(obj).attr("test");
             console.log(url)
             get(url, function (resp) {
                 alert("删除成功!")
@@ -318,7 +318,7 @@
 
         if (window.confirm('确定上架：编号' + $(obj).attr("test1") + '的商品？')) {
             //alert("确定");
-            let url = "/updateState.t?commodityState=上架&id=" + $(obj).attr("test1");
+            let url = "/updateState.d?commodityState=上架&id=" + $(obj).attr("test1");
             console.log(url)
             get(url, function (resp) {
                 alert("上架成功!")

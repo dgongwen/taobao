@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/updateCancel.t")
+@WebServlet("/updateCancel.d")
 public class AdminUpdateCancelCommodityController extends BaseController {
     private AdminCommodityService adminCommodityService = new AdminCommodityServiceImpl();
 

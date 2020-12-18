@@ -328,7 +328,7 @@
         console.log(commodityNum)
         console.log(commodityState)
         console.log(classificationId)
-        let url = "/updateById.t?id=" + id + "&commodityName=" + commodityName + "&commodityPrice=" + commodityPrice + "&commodityImgUrl=" + commodityImgUrl + "&commodityNum=" + commodityNum + "&commodityState=" + commodityState + "&classificationId=" + classificationId;
+        let url = "/updateById.d?id=" + id + "&commodityName=" + commodityName + "&commodityPrice=" + commodityPrice + "&commodityImgUrl=" + commodityImgUrl + "&commodityNum=" + commodityNum + "&commodityState=" + commodityState + "&classificationId=" + classificationId;
         console.log(url)
         get(url, function (resp) {
             alert("修改成功!")
@@ -351,7 +351,7 @@
         methods: {
             refreshSellerList: function () {
                 //发起http请求后台获取商家列表数据
-                let url = "/selectById.t?id=" + id;
+                let url = "/selectById.d?id=" + id;
                 console.log(url)
                 let thisObj = this;
                 get(url, function (data) {

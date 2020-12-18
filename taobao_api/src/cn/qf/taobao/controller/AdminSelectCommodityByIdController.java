@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet("/selectById.t")
+@WebServlet("/selectById.d")
 public class AdminSelectCommodityByIdController extends BaseController{
     private AdminCommodityService adminCommodityService = new AdminCommodityServiceImpl();
 

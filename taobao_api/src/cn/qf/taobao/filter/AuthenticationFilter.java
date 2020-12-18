@@ -41,6 +41,17 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("alterShopCat.t");
         whiteList.add("selectAddress.t");
         whiteList.add("addAddress.t");
+        whiteList.add("delCommodity.t");
+        whiteList.add("insertCommodity.t");
+        whiteList.add("selectAllByState.t");
+        whiteList.add("selectAll.t");
+        whiteList.add("selectDelCommodity.t");
+        whiteList.add("selectByNameState.t");
+        whiteList.add("selectById.t");
+        whiteList.add("selectByName.t");
+        whiteList.add("updateCancel.t");
+        whiteList.add("updateById.t");
+        whiteList.add("updateState.t");
 
 
 

@@ -357,7 +357,7 @@ function a(){
         console.log(commodityNum)
         console.log(commodityState)
         console.log(classificationId)
-        let url="/insertCommodity.t?commodityName="+commodityName+"&commodityPrice="+commodityPrice+"&commodityImgUrl="+commodityImgUrl+"&commodityNum="+commodityNum+"&commodityState="+commodityState+"&classificationId="+classificationId;
+        let url="/insertCommodity.d?commodityName="+commodityName+"&commodityPrice="+commodityPrice+"&commodityImgUrl="+commodityImgUrl+"&commodityNum="+commodityNum+"&commodityState="+commodityState+"&classificationId="+classificationId;
         console.log(url)
         get(url, function (resp) {
             alert("添加成功!")

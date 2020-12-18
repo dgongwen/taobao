@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/selectAllByState.t")
+@WebServlet("/selectAllByState.d")
 public class AdminSelectAllCommodityByStateController extends BaseController{
     private AdminCommodityService adminCommodityService = new AdminCommodityServiceImpl();
 

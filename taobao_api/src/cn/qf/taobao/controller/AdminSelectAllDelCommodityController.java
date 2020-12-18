@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/selectDelCommodity.t")
+@WebServlet("/selectDelCommodity.d")
 public class AdminSelectAllDelCommodityController extends BaseController{
     private AdminCommodityService adminCommodityService = new AdminCommodityServiceImpl();
 
