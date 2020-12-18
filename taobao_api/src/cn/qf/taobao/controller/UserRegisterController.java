@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @WebServlet("/register.t")
 public class UserRegisterController extends BaseController{
-
+    // 调用Service层传参过去进行逻辑判断跟操作执行
     private UserService userService = new UserServiceImpl();
 
     @Override
@@ -32,7 +32,7 @@ public class UserRegisterController extends BaseController{
             writerErrorResult(message,resp);
         }
     }
-
+    // 因为前端请求是POST所以在POST里面调用GET方法
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);

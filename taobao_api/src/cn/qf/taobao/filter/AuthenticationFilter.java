@@ -46,6 +46,7 @@ public class AuthenticationFilter implements Filter {
 
 
 
+        whiteList.add("logout.t");
 
     }
 

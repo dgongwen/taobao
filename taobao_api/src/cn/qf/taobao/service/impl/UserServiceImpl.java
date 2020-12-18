@@ -37,17 +37,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userRegisterService(String userName, String password, String Verification, HttpServletRequest req) {
+        /**
+         * 先判断注册时的用户名是否可用，如果不可用那就返回提示，
+         * 然后判断验证码是否正确，用户名跟验证码都没问题就插入数据库
+         */
         User user = userDao.userSelect(userName);
-        System.out.println("Service   "+user);
         Integer integer = userDao.userRegister(userName, password);
-        System.out.println(integer);
         if (user!=null){
             throw new RuntimeException("用户名不可用");
         }
 
         HttpSession session = req.getSession();
         String verificationVal = (String)session.getAttribute("verification");
-        // equalsIgnoreCase不区分大小写
+        // equalsIgnoreCase 不区分大小写
         if (!verificationVal.equalsIgnoreCase(Verification)){
             throw new RuntimeException("验证码错误");
 
@@ -56,7 +58,6 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("注册失败");
         }
         user = userDao.userSelect(userName);
-        System.out.println("service   "+user);
         return user;
     }
 
