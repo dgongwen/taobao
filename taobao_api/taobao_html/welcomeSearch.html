@@ -380,7 +380,8 @@
                 let thisObj = this;
                 //if(i!=null){thisObj.currentPage = i;}else {thisObj.currentPage = 1;}
                 /*thisObj.currentPage = i || thisObj.currentPage;*/
-                console.log("??"+thisObj.currentPage);
+                //console.log("??"+thisObj.currentPage);
+
                 $("#button1").click(function () {
                     if ($("#button2").val() != "") {
                         $("#delete1").remove();
@@ -389,15 +390,19 @@
                         $("#search1").css("display","block");
                         //发起http请求后台获取商家列表数据
                         let url = "commditySearchByKeyword.d";
-                        let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
+                        let params = {searchcontent: $("#button2").val(), currentPage: 1};
+                        console.log($("#button2").val()+"+1");
+                        console.log(thisObj.currentPage+"+11")
                         getWithParams(url, params, function (data) {
+                            thisObj.currentPage = 1;
                             thisObj.commodityList = data.list;
                             thisObj.totalCount = data.totalCount;
-                            thisObj.totalPage = data.totalPage;
-                            console.log(thisObj.totalPage);
+
+                            console.log(thisObj.totalPage+"+111");
                             SearchByPriceAsc(thisObj);
                             commditySearchByPriceDesc(thisObj);
                             commoditySearchBySaleCount(thisObj);
+                            thisObj.totalPage = data.totalPage;
                         })
                     } else {
                         $("#search1").css("display", "none")
@@ -409,23 +414,20 @@
                 //this.refreshSellerList(i);
                 let thisObj = this;
                 thisObj.currentPage = i;
-                console.log("44")
                 let url = "commditySearchByKeyword.d";
-                console.log("=="+thisObj.currentPage);
                 let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
-                    console.log($("#button2").val()+"===+++====");
+                    //console.log($("#button2").val()+"===+++====");
                 getWithParams(url, params, function (data) {
-                    console.log("===+++====");
-                    console.log(data);
+                    //console.log("===+++====");
+                    //console.log(data);
                     thisObj.commodityList = data.list;
                     thisObj.totalCount = data.totalCount;
                     thisObj.totalPage = data.totalPage;
-                    console.log(thisObj.commodityList);
+                    //console.log(thisObj.commodityList);
                     SearchByPriceAsc(thisObj);
                     commditySearchByPriceDesc(thisObj);
                     commoditySearchBySaleCount(thisObj);
                 })
-
             },
             /*上一页*/
             prePage:function () {
@@ -434,16 +436,14 @@
                     --thisObj.currentPage;
                 }
                 let url = "commditySearchByKeyword.d";
-                console.log("=="+thisObj.currentPage);
+                //console.log("=="+thisObj.currentPage);
                 let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
-                console.log($("#button2").val()+"===+++====");
+                //console.log($("#button2").val()+"===+++====");
                 getWithParams(url, params, function (data) {
-                    console.log("===+++====");
-                    console.log(data);
                     thisObj.commodityList = data.list;
                     thisObj.totalCount = data.totalCount;
                     thisObj.totalPage = data.totalPage;
-                    console.log(thisObj.commodityList);
+                    //console.log(thisObj.commodityList);
                     SearchByPriceAsc(thisObj);
                     commditySearchByPriceDesc(thisObj);
                     commoditySearchBySaleCount(thisObj);
@@ -456,16 +456,11 @@
                     ++thisObj.currentPage;
                 }
                 let url = "commditySearchByKeyword.d";
-                console.log("=="+thisObj.currentPage);
                 let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
-                console.log($("#button2").val()+"===+++====");
                 getWithParams(url, params, function (data) {
-                    console.log("===+++====");
-                    console.log(data);
                     thisObj.commodityList = data.list;
                     thisObj.totalCount = data.totalCount;
                     thisObj.totalPage = data.totalPage;
-                    console.log(thisObj.commodityList);
                     SearchByPriceAsc(thisObj);
                     commditySearchByPriceDesc(thisObj);
                     commoditySearchBySaleCount(thisObj);
@@ -511,6 +506,7 @@
                 console.log(vaList);
             })
         })
+
     }
 </script>
 

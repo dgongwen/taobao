@@ -26,7 +26,7 @@ public class CommoditySearchDaoImpl implements CommoditySearchDao {
     @Override
     public Long searchCount() {
         //sql语句
-        String sql = "SELECT COUNT(1) FROM t_commodity";
+        String sql = "SELECT COUNT(1) FROM t_commodity where commodity_status = 1 AND commodity_state = '上架'";
         //执行sql语句
         try {
             return queryRunner.query(sql,new ScalarHandler<>());
@@ -39,7 +39,7 @@ public class CommoditySearchDaoImpl implements CommoditySearchDao {
     @Override
     public List<Commodity> searchByPriceDesc(int page, int pageSize) {
         //sql语句
-        String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE \n" +
+        String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE commodity_status = 1 AND commodity_state = '上架' AND \n" +
                 "commodity_name IS NOT NULL AND \n" +
                 "commodity_Price IS NOT NULL AND \n" +
                 "commodity_img_url IS NOT NULL  ORDER BY commodity_Price DESC LIMIT ?,?";
@@ -50,7 +50,7 @@ public class CommoditySearchDaoImpl implements CommoditySearchDao {
     @Override
     public List<Commodity> searchByPriceAsc(int page,int pageSize) {
         //sql语句
-        String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE \n" +
+        String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE commodity_status = 1 AND commodity_state = '上架' AND \n" +
                 "commodity_name IS NOT NULL AND \n" +
                 "commodity_Price IS NOT NULL AND \n" +
                 "commodity_img_url IS NOT NULL  ORDER BY commodity_Price ASC LIMIT ?,?";
@@ -61,7 +61,7 @@ public class CommoditySearchDaoImpl implements CommoditySearchDao {
     @Override
     public List<Commodity> searchBySaleCount(int page,int pageSize) {
         //sql语句
-        String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE \n" +
+        String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE commodity_status = 1 AND commodity_state = '上架' AND \n" +
                 "commodity_name IS NOT NULL AND \n" +
                 "commodity_Price IS NOT NULL AND \n" +
                 "commodity_img_url IS NOT NULL  ORDER BY commodity_sales Desc LIMIT ?,?";
@@ -74,7 +74,7 @@ public class CommoditySearchDaoImpl implements CommoditySearchDao {
         //sql语句
         String sql = "SELECT commodity_name,commodity_Price,commodity_img_url,commodity_sales FROM t_commodity WHERE commodity_name IS NOT NULL AND \n" +
                 "commodity_Price IS NOT NULL AND \n" +
-                "commodity_img_url IS NOT NULL AND  commodity_name LIKE ? LIMIT ?,?";
+                "commodity_img_url IS NOT NULL AND commodity_status = 1 AND commodity_state = '上架' AND commodity_name LIKE ? LIMIT ?,?";
         //执行sql语句
         try {
             return queryRunner.query(sql,new BeanListHandler<Commodity>(Commodity.class,processor),"%"+searchContent+"%",page,pageSize);
@@ -87,7 +87,7 @@ public class CommoditySearchDaoImpl implements CommoditySearchDao {
     @Override
     public Long searchByWordCount(String searchContent) {
         //sql语句
-        String sql = "SELECT COUNT(1) FROM t_commodity WHERE commodity_name LIKE ? ";
+        String sql = "SELECT COUNT(1) FROM t_commodity WHERE commodity_status = 1 AND commodity_state = '上架' AND commodity_name LIKE ? ";
         //执行sql语句
         try {
             return queryRunner.query(sql,new ScalarHandler<>(),"%"+searchContent+"%");
