@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.js"></script>
+    <!--导入HttpUtil.js-->
+    <script src="tao_js/HttpUtil.js"></script>
+    <!--导入vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <style>
+        .container-fluid{
+            padding-left: 0px;
+            padding-right: 30px;
+        }
+        .navbar-nav > li > a {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .navbar {
+            min-height: 20px;
+        }
+        .hear0{
+            width: 100%;
+            background-color: #F95846;
+        }
+        .hear1{
+            background-color: black;
+        }
+
+        .middle2{
+            margin-left: 45px;
+            margin-bottom: -10px;
+            padding-top: 4px;
+        }
+        .middle3{
+            margin-left: 22px;
+            padding-top: 4px;
+        }
+        .img1{
+            margin-top: 20px;
+            width: 100%;
+        }
+        .middle8{
+            background-color: #FAFAFA;
+        }
+
+        .navbar {
+            margin-bottom: 0px;
+        }
+        .search1{
+            display: none;
+        }
+        .footer {
+            text-align:left; display:block;position: relative;
+            margin: 0px auto; padding: 20px 0px 9px;
+            border-top: 3px solid #FF5400;border-bottom: 3px solid #FF5400;
+            margin-top:20px;
+        }
+       .footer-hd{
+           margin-left: 20px;
+       }
+        .footer .footer-hd p {
+            white-space: nowrap;color: #10a0ea;
+        }
+        .footer .footer-hd b {
+            margin: 0px 5px;color: #DDD
+        }
+
+        .row .col-xs-3 img{
+            width: 100%;
+        }
+        .span1{
+            color: red;
+            font-size: large;
+        }
+        .span2{
+            margin-left: 3px;
+        }
+        /*超出高度隐藏*/
+        .span3{
+            height: 35px;
+            margin: 0;
+            overflow:hidden;
+            text-overflow:ellipsis;
+
+        }
+
+        .am-pagination {
+            padding-left: 0;
+            margin: 1.5rem 0;
+            list-style: none;
+            color: #999999;
+            text-align: left;
+        }
+        .am-pagination:before,
+        .am-pagination:after {
+            content: " ";
+            display: table;
+        }
+        .am-pagination:after {
+            clear: both;
+        }
+        .am-pagination > li {
+            display: inline-block;
+        }
+        .am-pagination > li > a,
+        .am-pagination > li > span {
+            position: relative;
+            display: block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            line-height: 1.2;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            margin-bottom: 5px;
+            margin-right: 5px;
+        }
+        .am-pagination > li:last-child > a,
+        .am-pagination > li:last-child > span {
+            margin-right: 0;
+        }
+        .am-pagination > li > a:hover,
+        .am-pagination > li > span:hover,
+        .am-pagination > li > a:focus,
+        .am-pagination > li > span:focus {
+            background-color: #eeeeee;
+        }
+        .am-pagination > .am-active > a,
+        .am-pagination > .am-active > span,
+        .am-pagination > .am-active > a:hover,
+        .am-pagination > .am-active > span:hover,
+        .am-pagination > .am-active > a:focus,
+        .am-pagination > .am-active > span:focus {
+            z-index: 2;
+            color: #fff;
+            background-color: #0e90d2;
+            border-color: #0e90d2;
+            cursor: default;
+        }
+        .am-pagination > .am-disabled > span,
+        .am-pagination > .am-disabled > span:hover,
+        .am-pagination > .am-disabled > span:focus,
+        .am-pagination > .am-disabled > a,
+        .am-pagination > .am-disabled > a:hover,
+        .am-pagination > .am-disabled > a:focus {
+            color: #999999;
+            background-color: #fff;
+            border-color: #ddd;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .am-pagination .am-pagination-prev a {
+            border-radius: 0;
+        }
+
+        .am-pagination .am-pagination-next a {
+            border-radius: 0;
+        }
+
+        .am-pagination-right {
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid hear0">
+    <div class="row">
+        <div class="col-xs-12 col-xs-offset-0">
+            <img src="img/10.png" class="hear0">
+        </div>
+    </div>
+</div>
+
+<div class="hear1">
+    <div class="container">
+        <nav class="navbar navbar-inverse hear1 ">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li><a href="welocmeSearch.html"><small>小米商城</small></a></li>
+                    <li><a href="#"><small>天星科技</small></a></li>
+                    <li><a href="#"><small>有品</small></a></li>
+                    <li><a href="#"><small>企业团购</small></a></li>
+                    <li><a href="#"><small>资质证明</small></a></li>
+                    <li><a href="#"><small>协议规则</small></a></li>
+                    <li><a href="#"><small>智能生活</small></a></li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><small>登录</small></a></li>
+                    <li><a href="#"><small>注册</small></a></li>
+                    <li><a href="#"><small>消息通知</small></a></li>
+                    <li>
+                        <a href="#shop"><span class="glyphicon glyphicon-shopping-cart"><small>购物车</small></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <ul class="nav nav-tabs  ">
+        <li role="presentation"><a href="#">小米手机</a></li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">
+                小米手机<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li role="presentation"><a href="#">小米手机</a></li>
+                <li role="presentation"><a href="#">红米手机</a></li>
+                <li role="presentation"><a href="#">电视</a></li>
+                <li role="presentation"><a href="#">笔记本</a></li>
+            </ul>
+        </li>
+        <li role="presentation"><a href="#">红米手机</a></li>
+        <li role="presentation"><a href="#">电视</a></li>
+        <li role="presentation"><a href="#">笔记本</a></li>
+        <li role="presentation"><a href="#">家电</a></li>
+        <li role="presentation"><a href="#">路由器</a></li>
+        <li role="presentation"><a href="#">智能硬件</a></li>
+        <li role="presentation"><a href="#">服务</a></li>
+        <li role="presentation"><a href="#">社区</a></li>
+        <li role="presentation" class="form-group middle2"><input type="text" class="form-control middle2"
+                                                                  name="searchcontent" placeholder="搜索" id="button2">
+        </li>
+        <li role="presentation" class="form-group middle3">
+            <button type="button" class="btn btn-default middle3" id="button1">o</button>
+        </li>
+    </ul>
+    <div id="other1"></div>
+</div>
+
+<div class="container" id="delete3">
+    <!--轮播图-->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="img/20201120_215755_000.jpg" alt="...">
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="img/20201120_215755_002.jpg" alt="...">
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="img/20201120_215755_003.jpg" alt="...">
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="img/20201120_215755_004.jpg" alt="...">
+                <div class="carousel-caption">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<div class="container " id="delete2">
+    <div class="row">
+        <div class="col-xs-3">
+            <a href="#"><img src="img/11.jpg" class="img1"/></a>
+        </div>
+        <div class="col-xs-3">
+            <a href="#"><img src="img/12.jpg" class="img1"/></a>
+        </div>
+        <div class="col-xs-3">
+            <a href="#"><img src="img/13.jpg" class="img1"/></a>
+        </div>
+        <div class="col-xs-3">
+            <a href="#"><img src="img/14.jpg" class="img1"/></a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="delete1">
+    <a href="#"><img src="img/15.webp" class="img1"/></a>
+</div>
+
+<div class="container search1" id="search1">
+    <div class="row footer" id="shopmain">
+        <!--搜索按钮-->
+        <div class="footer-hd">
+            <p>
+                价格排序<a href="# "><strong>&#129045</strong></a><a href="#"><strong>
+                &#129047</strong></a>
+                <b>|</b>
+                <a href="# ">销量排序</a>
+                <b>|</b>
+                <a href="# ">销量排序</a>
+                <b>|</b>
+                <a href="# ">综合排序</a>
+            </p>
+        </div>
+
+        <!--搜索商品展示页-->
+        <div class="row" >
+            <div class="col-xs-3" v-for="da in commodityList " >
+                <img :src="da.commodityImgUrl"/>
+                <span class="span2"><b>¥</b><strong class="span1">{{da.commodityPrice}}</strong></span>
+                <p class="span3"><small>{{da.commodityName}}</small></p>
+                <p class="span2"><small>销量</small><strong class="span1">{{da.commoditySales}}</strong></p>
+            </div>
+        </div>
+
+        <!--搜索分页功能-->
+
+        <div class="am-g am-g-fixed" style="height: 45px" id="search3">
+            <ul class="am-pagination am-pagination-right">
+                <li class="am-disabled" @click="prePage()"><a href="#">&laquo;</a></li>
+                <li  v-for="(v,i) in totalPage" :key="i"  @click = "curPage(v)" :class="currentPage == v ? 'am-active' : ''" ><a href="#">{{v}}</a></li>
+                <li @click="nextPage()"><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+
+        <div class="clear "></div>
+    </div>
+</div>
+<div class="container-fluid middle8 ">
+    <div class="container">
+        <a href="#"><img src="img/16.png" class="img1"/></a>
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#search1',
+        data: {
+            /*commodityList: [{commodityImgUrl: "//gw.alicdn.com/tps/i4/361068359/O1CN01xsX2pE2BcTKWQsMNO_!!361068359.jpg_Q75.jpg",
+                commodityName: "法式复古重工手工钩花针织开衫秋季慵懒风减龄显瘦毛衣宽松外套女",
+                commodityPrice: "199.00",
+                commoditySales: 0}]*/
+            commodityList: [],
+            totalCount:1,
+            totalPage:1,
+
+            currentPage:1,
+            pageSize:12
+
+        },
+        methods: {
+            refreshSellerList: function (i) {
+                let thisObj = this;
+                //if(i!=null){thisObj.currentPage = i;}else {thisObj.currentPage = 1;}
+                /*thisObj.currentPage = i || thisObj.currentPage;*/
+                console.log("??"+thisObj.currentPage);
+                $("#button1").click(function () {
+                    if ($("#button2").val() != "") {
+                        $("#delete1").remove();
+                        $("#delete2").remove();
+                        $("#delete3").remove();
+                        $("#search1").css("display","block");
+                        //发起http请求后台获取商家列表数据
+                        let url = "commditySearchByKeyword";
+                        let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
+                        getWithParams(url, params, function (data) {
+                            thisObj.commodityList = data.list;
+                            thisObj.totalCount = data.totalCount;
+                            thisObj.totalPage = data.totalPage;
+                            console.log(thisObj.totalPage);
+                            SearchByPriceAsc(thisObj);
+                            commditySearchByPriceDesc(thisObj);
+                            commoditySearchBySaleCount(thisObj);
+                        })
+                    } else {
+                        $("#search1").css("display", "none")
+                    };
+                })
+            },
+            /*当前页*/
+            curPage:function (i) {
+                //this.refreshSellerList(i);
+                let thisObj = this;
+                thisObj.currentPage = i;
+                console.log("44")
+                let url = "commditySearchByKeyword";
+                console.log("=="+thisObj.currentPage);
+                let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
+                    console.log($("#button2").val()+"===+++====");
+                getWithParams(url, params, function (data) {
+                    console.log("===+++====");
+                    console.log(data);
+                    thisObj.commodityList = data.list;
+                    thisObj.totalCount = data.totalCount;
+                    thisObj.totalPage = data.totalPage;
+                    console.log(thisObj.commodityList);
+                    SearchByPriceAsc(thisObj);
+                    commditySearchByPriceDesc(thisObj);
+                    commoditySearchBySaleCount(thisObj);
+                })
+
+            },
+            /*上一页*/
+            prePage:function () {
+                let thisObj = this;
+                if(thisObj.currentPage>1){
+                    --thisObj.currentPage;
+                }
+                let url = "commditySearchByKeyword";
+                console.log("=="+thisObj.currentPage);
+                let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
+                console.log($("#button2").val()+"===+++====");
+                getWithParams(url, params, function (data) {
+                    console.log("===+++====");
+                    console.log(data);
+                    thisObj.commodityList = data.list;
+                    thisObj.totalCount = data.totalCount;
+                    thisObj.totalPage = data.totalPage;
+                    console.log(thisObj.commodityList);
+                    SearchByPriceAsc(thisObj);
+                    commditySearchByPriceDesc(thisObj);
+                    commoditySearchBySaleCount(thisObj);
+                })
+            },
+            /*下一页*/
+            nextPage:function () {
+                let thisObj = this;
+                if(thisObj.currentPage<thisObj.totalPage){
+                    ++thisObj.currentPage;
+                }
+                let url = "commditySearchByKeyword";
+                console.log("=="+thisObj.currentPage);
+                let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
+                console.log($("#button2").val()+"===+++====");
+                getWithParams(url, params, function (data) {
+                    console.log("===+++====");
+                    console.log(data);
+                    thisObj.commodityList = data.list;
+                    thisObj.totalCount = data.totalCount;
+                    thisObj.totalPage = data.totalPage;
+                    console.log(thisObj.commodityList);
+                    SearchByPriceAsc(thisObj);
+                    commditySearchByPriceDesc(thisObj);
+                    commoditySearchBySaleCount(thisObj);
+                })
+            }
+        },
+        mounted: function () {
+            //页面加载完成，并且vue对象加载完成之后调用
+            this.refreshSellerList();
+        }
+    });
+
+    function SearchByPriceAsc(vlist) {
+        let vaList = vlist;
+        $("#search1 div div p a:eq(0)").click(function () {
+            let url = "commditySearchByPriceAsc";
+            let params = {currentPage: 1};
+            getWithParams(url,params,function (data) {
+                vaList.commodityList =data.list;
+                console.log(vaList);
+            })
+        })
+
+    };
+    function commditySearchByPriceDesc(vlist) {
+        let vaList = vlist;
+        $("#search1 div div p a:eq(1)").click(function () {
+            let url = "commditySearchByPriceDesc";
+            let params = {currentPage: 1};
+            getWithParams(url,params,function (data) {
+                vaList.commodityList =data.list;
+                console.log(vaList);
+            })
+        })
+    };
+    function commoditySearchBySaleCount(vlist) {
+        let vaList = vlist;
+        $("#search1 div div p a:eq(2)").click(function () {
+            let url = "commoditySearchBySaleCount";
+            let params = {currentPage: 1};
+            getWithParams(url,params,function (data) {
+                vaList.commodityList =data.list;
+                console.log(vaList);
+            })
+        })
+    }
+</script>
+
+</body>
+</html>

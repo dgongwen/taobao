@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author dian
@@ -30,11 +29,18 @@ public class CommoditySearchByKeywordController extends BaseController {
 
     private void searchByKeyword(HttpServletRequest req, HttpServletResponse resp) {
         String searchcontent = req.getParameter("searchcontent");
-        String currentpage = req.getParameter("currentpage");
-        int currentPage = Integer.parseInt(currentpage);
+        String currentPage = req.getParameter("currentPage");
+        int pageCount = 1;
+        System.out.println(currentPage);
+        if(currentPage != null){
+            pageCount = Integer.parseInt(currentPage);
+        }
+        System.out.println("=====");
+        System.out.println(pageCount);
         try {
-            List<Commodity> commodities = commoditySearchService.searchByKeyWord(searchcontent,currentPage);
-            writerSuccessResult(commodities,resp);
+            Page<Commodity> commodityPage = commoditySearchService.searchByKeyWord(searchcontent, pageCount);
+            System.out.println(commodityPage);
+            writerSuccessResult(commodityPage,resp);
         } catch (Exception e) {
             String message = e.getMessage();
             writerErrorResult(message,resp);
