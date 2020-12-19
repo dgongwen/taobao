@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * 编码过滤
  */
-@WebFilter("*.t")
+@WebFilter("*.d")
 public class CodeFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

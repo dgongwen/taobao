@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.*;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class  UserDaoImpl implements UserDao {
     //创建DBUtil工具
-    private  QueryRunner queryRunner = new QueryRunner(DruidUtil.getDataSource());
+    private QueryRunner queryRunner = new QueryRunner(DruidUtil.getDataSource());
     @Override
     public User userSelect(String userName) {
 

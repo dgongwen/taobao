@@ -25,6 +25,7 @@ function handlerResp(json, callback) {
     } else {
         //业务处理失败，统一提示错误信息
         alert(resp.msg);
+
     }
 }
 
@@ -40,6 +41,18 @@ function get(url, callback) {
         }
     });
 }
+//post 无参
+function post(url, callback) {
+    url = appendHost(url);
+    $.ajax({
+        type: "post",
+        url: url,
+        success: function (resp) {
+            handlerResp(resp, callback);
+        }
+    });
+}
+
 
 //get 有参
 function getWithParams(url, params, callback) {
