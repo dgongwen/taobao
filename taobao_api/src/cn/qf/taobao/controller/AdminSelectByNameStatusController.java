@@ -16,10 +16,8 @@ public class AdminSelectByNameStatusController extends BaseController{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AdminCommodityQO adminCommodityQO = convertParamsToEntity(req,AdminCommodityQO.class);
-        System.out.println(adminCommodityQO);
         try{
             AdminCommodityQO ad = adminCommodityService.selectAdminCommodityByNameStatusService(adminCommodityQO.getCommodityName(),adminCommodityQO.getCommodityState());
-            System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

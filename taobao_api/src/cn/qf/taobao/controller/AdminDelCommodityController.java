@@ -20,7 +20,6 @@ public class AdminDelCommodityController extends BaseController{
         System.out.println(id);
         try{
             int ad = adminCommodityService.delAdminCommodityById(Integer.parseInt(id));
-            System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

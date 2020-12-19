@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author dian
  * @date 2020/12/15
  */
-@WebServlet("/commditySearchByPriceAsc")
+@WebServlet("/commditySearchByPriceAsc.d")
 public class CommoditySearchByPriceAscController extends BaseController {
     private CommoditySearchService commoditySearchService = new CommoditySearchServiceImpl();
     @Override

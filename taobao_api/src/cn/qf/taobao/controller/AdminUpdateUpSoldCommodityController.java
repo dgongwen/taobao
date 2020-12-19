@@ -17,10 +17,10 @@ public class AdminUpdateUpSoldCommodityController extends BaseController{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         String commodityState = req.getParameter("commodityState");
-        System.out.println(id+" "+commodityState);
+        /*System.out.println(id+" "+commodityState);*/
         try{
             int ad = adminCommodityService.updateUpSoldCommodity(commodityState,Integer.parseInt(id));
-            System.out.println(ad);
+            /*System.out.println(ad);*/
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

@@ -23,7 +23,7 @@ public class AdminUpdateCommodityByIdController extends BaseController{
         String classificationId = req.getParameter("classificationId");
         String commodityState = req.getParameter("commodityState");
         String id = req.getParameter("id");
-        System.out.println(id+" "+commodityNum+" "+commodityName+" "+commodityPrice+" "+commodityImgUrl+" "+classificationId+" "+commodityState);
+        /*System.out.println(id+" "+commodityNum+" "+commodityName+" "+commodityPrice+" "+commodityImgUrl+" "+classificationId+" "+commodityState);*/
         AdminCommodityQO a = new AdminCommodityQO();
         a.setCommodityNum(commodityNum);
         a.setCommodityName(commodityName);

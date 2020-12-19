@@ -18,10 +18,8 @@ public class AdminSelectCommodityByNameController extends BaseController{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commodityName = req.getParameter("commodityName");
-        System.out.println(commodityName);
         try{
             List<AdminCommodityQO> ad = adminCommodityService.selectAdminCommodityByNameService(commodityName);
-            System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

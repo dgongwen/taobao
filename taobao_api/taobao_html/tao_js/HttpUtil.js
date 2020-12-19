@@ -9,10 +9,14 @@ function appendHost(url) {
  * 对返回结果进行统一处理
  */
 function handlerResp(json, callback) {
+    let resp = json;
+    if (typeof json!="object"){
+        resp = JSON.parse(json);
+    }
     // console.log("handlerResp");
     // console.log(json);
     //返回json结果装换成对象
-    let resp = JSON.parse(json);
+    //let resp = JSON.parse(json);
     //判断code状态
     if (resp.code == 100) {
         //成功，调用回调方法
@@ -25,7 +29,6 @@ function handlerResp(json, callback) {
     } else {
         //业务处理失败，统一提示错误信息
         alert(resp.msg);
-
     }
 }
 
@@ -41,18 +44,6 @@ function get(url, callback) {
         }
     });
 }
-//post 无参
-function post(url, callback) {
-    url = appendHost(url);
-    $.ajax({
-        type: "post",
-        url: url,
-        success: function (resp) {
-            handlerResp(resp, callback);
-        }
-    });
-}
-
 
 //get 有参
 function getWithParams(url, params, callback) {

@@ -18,10 +18,8 @@ public class AdminSelectAllCommodityByStateController extends BaseController{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commodityState = req.getParameter("commodityState");
-        System.out.println(commodityState);
         try{
             List<AdminCommodityQO> ad = adminCommodityService.selectAdminCommodityByStateService(commodityState);
-            System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

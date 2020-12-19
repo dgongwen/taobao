@@ -18,10 +18,8 @@ public class AdminUpdateCancelCommodityController extends BaseController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        System.out.println(id);
         try{
             int ad =  adminCommodityService.updateCancelDelCommodity(Integer.parseInt(id));
-            System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

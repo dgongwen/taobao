@@ -26,7 +26,6 @@ public class AdminInsertCommodityController extends BaseController{
 
         try{
             int ad = adminCommodityService.insertAdminCommodity(commodityNum,commodityName,Double.parseDouble(commodityPrice),commodityImgUrl,Integer.parseInt(classificationId),commodityState);
-            System.out.println(ad);
             writerSuccessResult(ad,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();

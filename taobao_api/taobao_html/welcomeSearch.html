@@ -189,7 +189,7 @@
         <nav class="navbar navbar-inverse hear1 ">
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
-                    <li><a href="welocmeSearch.html"><small>小米商城</small></a></li>
+                    <li><a href="welcomeSearch.html"><small>小米商城</small></a></li>
                     <li><a href="#"><small>天星科技</small></a></li>
                     <li><a href="#"><small>有品</small></a></li>
                     <li><a href="#"><small>企业团购</small></a></li>
@@ -388,7 +388,7 @@
                         $("#delete3").remove();
                         $("#search1").css("display","block");
                         //发起http请求后台获取商家列表数据
-                        let url = "commditySearchByKeyword";
+                        let url = "commditySearchByKeyword.d";
                         let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
                         getWithParams(url, params, function (data) {
                             thisObj.commodityList = data.list;
@@ -410,7 +410,7 @@
                 let thisObj = this;
                 thisObj.currentPage = i;
                 console.log("44")
-                let url = "commditySearchByKeyword";
+                let url = "commditySearchByKeyword.d";
                 console.log("=="+thisObj.currentPage);
                 let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
                     console.log($("#button2").val()+"===+++====");
@@ -433,7 +433,7 @@
                 if(thisObj.currentPage>1){
                     --thisObj.currentPage;
                 }
-                let url = "commditySearchByKeyword";
+                let url = "commditySearchByKeyword.d";
                 console.log("=="+thisObj.currentPage);
                 let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
                 console.log($("#button2").val()+"===+++====");
@@ -455,7 +455,7 @@
                 if(thisObj.currentPage<thisObj.totalPage){
                     ++thisObj.currentPage;
                 }
-                let url = "commditySearchByKeyword";
+                let url = "commditySearchByKeyword.d";
                 console.log("=="+thisObj.currentPage);
                 let params = {searchcontent: $("#button2").val(), currentPage: thisObj.currentPage};
                 console.log($("#button2").val()+"===+++====");
@@ -481,7 +481,7 @@
     function SearchByPriceAsc(vlist) {
         let vaList = vlist;
         $("#search1 div div p a:eq(0)").click(function () {
-            let url = "commditySearchByPriceAsc";
+            let url = "commditySearchByPriceAsc.d";
             let params = {currentPage: 1};
             getWithParams(url,params,function (data) {
                 vaList.commodityList =data.list;
@@ -493,7 +493,7 @@
     function commditySearchByPriceDesc(vlist) {
         let vaList = vlist;
         $("#search1 div div p a:eq(1)").click(function () {
-            let url = "commditySearchByPriceDesc";
+            let url = "commditySearchByPriceDesc.d";
             let params = {currentPage: 1};
             getWithParams(url,params,function (data) {
                 vaList.commodityList =data.list;
@@ -504,7 +504,7 @@
     function commoditySearchBySaleCount(vlist) {
         let vaList = vlist;
         $("#search1 div div p a:eq(2)").click(function () {
-            let url = "commoditySearchBySaleCount";
+            let url = "commoditySearchBySaleCount.d";
             let params = {currentPage: 1};
             getWithParams(url,params,function (data) {
                 vaList.commodityList =data.list;

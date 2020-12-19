@@ -23,7 +23,6 @@ public class AdminLoginController extends BaseController {
         try{
             AdminLoginQO admin = adminLoginService.selectAdmin(adminLoginQO.getAdminUserName(),adminLoginQO.getAdminUserPassword());
             req.getSession().setAttribute("adminSession",admin);
-            System.out.println(admin);
             writerSuccessResult(admin,resp);
         }catch (RuntimeException e){
             String message = e.getMessage();
