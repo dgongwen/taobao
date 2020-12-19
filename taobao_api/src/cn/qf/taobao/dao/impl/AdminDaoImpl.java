@@ -183,4 +183,29 @@ public class AdminDaoImpl implements AdminDao {
         }
         return 0;
     }
+    //随机展示12条数据
+    @Override
+    public List<AdminCommodityQO> randomCommodity() {
+        String randomCommoditySql="SELECT * FROM t_commodity  ORDER BY  RAND() LIMIT 12";
+        try {
+            GenerousBeanProcessor beanProcessor = new GenerousBeanProcessor();
+            BasicRowProcessor row = new BasicRowProcessor(beanProcessor);
+            return queryRunner.query(randomCommoditySql,new BeanListHandler<AdminCommodityQO>(AdminCommodityQO.class,row));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //根据ID删除商品
+    @Override
+    public int trueDelAdminCommodityById(int id) {
+        String trueDelAdminCommodityByIdSql = "DELETE FROM t_commodity WHERE  commodity_status= 0 AND id =?";
+        Object[] params = {id};
+        try {
+            return queryRunner.update(trueDelAdminCommodityByIdSql,params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

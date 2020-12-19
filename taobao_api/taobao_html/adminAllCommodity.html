@@ -125,37 +125,46 @@
                                             <thead>
                                             <tr>
                                                 <!--<th>选择</th>-->
-                                                <th>商品ID</th>
-                                                <th>商品图片</th>
-                                                <th>商品名</th>
-                                                <th>商品类别</th>
-                                                <th>商品价格</th>
-                                                <th>商品库存</th>
-                                                <th>商品销量</th>
-                                                <th>商品状态</th>
+                                                <th align="center">商品ID</th>
+                                                <th align="center">商品图片</th>
+                                                <th align="center">商品名</th>
+                                                <th align="center">商品类别</th>
+                                                <th align="center">商品价格</th>
+                                                <th align="center">商品库存</th>
+                                                <th align="center">商品销量</th>
+                                                <th align="center">商品状态</th>
                                                 <th style="color: red">操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr v-for="seller in sellerList">
-                                                <td>{{seller.id}}</td>
-                                                <td><img :src="seller.commodityImgUrl" width="150" height="150"></td>
-                                                <td>{{seller.commodityName}}</td>
-                                                <td>{{seller.classificationName}}</td>
-                                                <td>{{seller.commodityPrice}}</td>
-                                                <td>{{seller.commodityNum}}</td>
-                                                <td>{{seller.commoditySales}}</td>
-                                                <td>{{seller.commodityState}}</td>
+                                                <td align="center">{{seller.id}}</td>
+                                                <td align="center"><img :src="seller.commodityImgUrl" width="150" height="150"></td>
+                                                <td align="center">{{seller.commodityName}}</td>
+                                                <td align="center">{{seller.classificationName}}</td>
+                                                <td align="center">{{seller.commodityPrice}}</td>
+                                                <td align="center">{{seller.commodityNum}}</td>
+                                                <td align="center">{{seller.commoditySales}}</td>
+                                                <td align="center">{{seller.commodityState}}</td>
                                                 <td>
                                                     <button type="button" value="修改" :text="seller.id" :text1="seller.commodityState" id="update" onclick="formUpdate(this)" >
                                                         修改
                                                     </button>
+                                                    <div style="margin-bottom: 5px">
+
+                                                    </div>
                                                     <button type="button" value="删除" :test="seller.id" id="del"
                                                             onclick="formDel(this)" :test1="seller.commodityState">删除
                                                     </button>
+                                                    <div style="margin-bottom: 5px">
+
+                                                    </div>
                                                     <button type="button" value="上架" :test1="seller.id" id="up"
                                                             onclick="formUpdateStateUp(this)">上架
                                                     </button>
+                                                    <div style="margin-bottom: 5px">
+
+                                                    </div>
                                                     <button type="button" value="下架" :test1="seller.id" id="sold"
                                                             onclick="formUpdateStateSold(this)">下架
                                                     </button>

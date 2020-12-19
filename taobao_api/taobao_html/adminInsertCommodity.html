@@ -121,15 +121,15 @@
                         </div>
                         <hr/>
 
-                        <div class="am-u-md-12 am-u-lg-12" style="margin-top: 20px;">
+                        <div class="am-u-md-12 am-u-lg-12" style="margin-top: 20px;" id="insert">
                             <div id="div_vue" class="container-fluid">
-                                <div class="row">
+                                <div class="row" id="insertCommodity">
                                     <div class="table-responsive">
-                                        <form class="form-horizontal" id="insertCommodity">
+                                        <form class="form-horizontal" >
                                             <div class="form-group">
-                                                <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
+                                                <label for="commodityNames" class="col-sm-2 control-label">商品名称</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="commodityName" placeholder="商品名称">
+                                                    <input type="text" class="form-control" id="commodityNames" placeholder="商品名称">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -193,7 +193,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-default" onclick="formInsert()">添加</button>
+                                                    <button type="submit" class="btn btn-default" onclick="formInserts()">添加</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -302,13 +302,45 @@
         showImage.setAttribute("src",commodityImgUrl.value)
     }
 
-
-function a(){
-    let commodityImgUrl= $("#commodityImgUrl").val();
-}
     $(function () {
+
         from();
+
+
     })
+
+    function from(){
+
+
+        $("#insert").validate(
+
+            {
+                rules:{
+
+                    commodityName:{
+                        required:true
+                    },
+                    commodityPrice:{
+                        required:true
+                    },
+                    commodityImgUrl:{
+                        required:true
+                    },
+                    commodityNum:{
+                        required:true
+                    },
+                    classificationId:{
+                        required:true
+                    }
+                },
+                messages:{}
+            }
+        );
+
+
+    }
+
+
 
     function from(){
         $("#insertCommodity").validate(
@@ -326,7 +358,7 @@ function a(){
                     commodityNum:{
                         required:true
                     },
-                    classificationName:{
+                    classificationId:{
                         required:true
                     }
                 },
@@ -336,7 +368,7 @@ function a(){
     }
 
 
-    function formInsert() {
+    function formInserts() {
 
         let validateResult = $("#insertCommodity").valid();
         if (!validateResult) {
@@ -345,7 +377,7 @@ function a(){
             return;
         }
 
-        let commodityName= $("#commodityName").val();
+        let commodityName= $("#commodityNames").val();
         let commodityPrice= $("#commodityPrice").val();
         let commodityImgUrl= $("#commodityImgUrl").val();
         let commodityNum= $("#commodityNum").val();
@@ -368,5 +400,5 @@ function a(){
         let commodityName= $("#commodityName").val();
         console.log(commodityName)
         top.location='adminSelectCommodityByName.html?commodityName='+commodityName;
-    }
+    };
 </script>

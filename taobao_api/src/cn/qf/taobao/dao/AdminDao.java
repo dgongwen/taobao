@@ -45,4 +45,9 @@ public interface AdminDao {
     //根据ID修改商品上下架
     int updateUpSoldCommodity(String commodityState,int id);
 
+    //随机展示12条数据
+    List<AdminCommodityQO> randomCommodity();
+
+    //删除数据
+    int trueDelAdminCommodityById(int id);
 }

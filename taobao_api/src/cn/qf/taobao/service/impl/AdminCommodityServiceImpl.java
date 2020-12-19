@@ -87,4 +87,14 @@ public class AdminCommodityServiceImpl implements AdminCommodityService {
     public int updateUpSoldCommodity(String commodityState, int id) {
         return adminDao.updateUpSoldCommodity(commodityState,id);
     }
+
+    @Override
+    public List<AdminCommodityQO> randomCommodity() {
+        return adminDao.randomCommodity();
+    }
+
+    @Override
+    public int trueDelAdminCommodityById(int id) {
+        return adminDao.trueDelAdminCommodityById(id);
+    }
 }

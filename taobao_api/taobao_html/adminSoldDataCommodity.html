@@ -137,7 +137,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="seller in sellerList">
+                                            <tr v-for="seller in sellerList" >
                                                 <!--<td><input type="checkbox" value="{{seller.id}}"></td>-->
                                                 <td>{{seller.id}}</td>
                                                 <td><img :src="seller.commodityImgUrl" width="150" height="150"></td>
@@ -148,12 +148,21 @@
                                                 <td>{{seller.commoditySales}}</td>
                                                 <td>{{seller.commodityState}}</td>
                                                 <td>
+                                                    <div style="margin-bottom: 10px">
+
+                                                    </div>
                                                     <button type="button" value="修改" name="{{seller.id}}" id="update" :text="seller.id" :text1="seller.commodityState" onclick="formUpdate(this)">
                                                         修改
                                                     </button>
+                                                    <div style="margin-bottom: 10px">
+
+                                                    </div>
                                                     <button type="button" value="删除" :test="seller.id" id="del"
                                                             onclick="formDel(this)">删除
                                                     </button>
+                                                    <div style="margin-bottom: 10px">
+
+                                                    </div>
                                                     <button type="button" value="上架" :test1="seller.id" id="up"
                                                             onclick="formUpdateStateUp(this)">上架
                                                     </button>

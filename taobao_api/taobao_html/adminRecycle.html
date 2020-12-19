@@ -123,7 +123,7 @@
                                                style="text-align: center">
                                             <caption style="color: red">商品列表</caption>
                                             <thead>
-                                            <tr>
+                                            <tr align="center">
                                                 <!--<th>选择</th>-->
                                                 <th>商品ID</th>
                                                 <th>商品图片</th>
@@ -137,7 +137,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="seller in sellerList">
+                                            <tr v-for="seller in sellerList" align="center">
                                                 <!-- <td><input type="checkbox" value="{{seller.id}}"></td>-->
                                                 <td>{{seller.id}}</td>
                                                 <td><img :src="seller.commodityImgUrl" width="150" height="150"></td>
@@ -149,8 +149,14 @@
                                                 <td style="color: red">已删除</td>
                                                 <td>
 
-                                                    <button type="button" value="撤销删除" :test="seller.id" id="del"
-                                                            onclick="formDel(this)">撤销删除
+                                                    <button type="button" value="找回" :test="seller.id" id="del"
+                                                            onclick="formDel(this)">找回
+                                                    </button>
+                                                    <div style="margin-bottom: 20px">
+
+                                                    </div>
+                                                    <button type="button" value="删除" :test="seller.id" id="delTrue"
+                                                            onclick="formDelTrue(this)">删除
                                                     </button>
 
                                                 </td>
@@ -284,10 +290,28 @@
 
         if (window.confirm('确定找回：编号' + $(obj).attr("test") + '的商品？')) {
             //alert("确定");
-            let url = "//updateCancel.d?id=" + $(obj).attr("test");
+            let url = "/updateCancel.d?id=" + $(obj).attr("test");
             console.log(url)
             get(url, function (resp) {
                 alert("找回成功!")
+            });
+            location.reload();
+            return true;
+        } else {
+            //alert("取消");
+            return false;
+
+        }
+    }
+
+    function formDelTrue(obj) {
+
+        if (window.confirm('确定删除：编号' + $(obj).attr("test") + '的商品？删除后不能找回！')) {
+            //alert("确定");
+            let url = "/delCommodityTrue.d?id=" + $(obj).attr("test");
+            console.log(url)
+            get(url, function (resp) {
+                alert("删除成功!")
             });
             location.reload();
             return true;

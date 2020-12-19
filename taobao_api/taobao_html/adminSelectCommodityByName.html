@@ -123,7 +123,7 @@
                                                style="text-align: center">
                                             <caption style="color: red">商品列表</caption>
                                             <thead>
-                                            <tr>
+                                            <tr align="center">
                                                 <!--<th>选择</th>-->
                                                 <th>商品ID</th>
                                                 <th>商品图片</th>
@@ -137,7 +137,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="seller in sellerList">
+                                            <tr v-for="seller in sellerList" align="center">
                                                 <td>{{seller.id}}</td>
                                                 <td><img :src="seller.commodityImgUrl" width="150" height="150"></td>
                                                 <td>{{seller.commodityName}}</td>
@@ -150,12 +150,21 @@
                                                     <button type="button" value="修改" :text="seller.id" :text1="seller.commodityState" id="update" onclick="formUpdate(this)" >
                                                         修改
                                                     </button>
+                                                    <div style="margin-bottom: 5px">
+
+                                                    </div>
                                                     <button type="button" value="删除" :test="seller.id" id="del"
                                                             onclick="formDel(this)" :test1="seller.commodityState">删除
                                                     </button>
+                                                    <div style="margin-bottom: 5px">
+
+                                                    </div>
                                                     <button type="button" value="上架" :test1="seller.id" id="up"
                                                             onclick="formUpdateStateUp(this)">上架
                                                     </button>
+                                                    <div style="margin-bottom: 5px">
+
+                                                    </div>
                                                     <button type="button" value="下架" :test1="seller.id" id="sold"
                                                             onclick="formUpdateStateSold(this)">下架
                                                     </button>

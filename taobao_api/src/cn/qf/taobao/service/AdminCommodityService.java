@@ -44,4 +44,10 @@ public interface AdminCommodityService {
 
     //根据ID修改商品上下架
     int updateUpSoldCommodity(String commodityState,int id);
+
+    //随机展示12条数据
+    List<AdminCommodityQO> randomCommodity();
+
+    //根据ID删除商品
+    int trueDelAdminCommodityById(int id);
 }
