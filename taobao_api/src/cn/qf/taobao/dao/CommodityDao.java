@@ -24,6 +24,8 @@ public interface CommodityDao {
       */
      List<Classify> selectClassify();
 
+
+
      /**
       * 查询随机15个商品
       * @return
@@ -99,7 +101,7 @@ public interface CommodityDao {
      * 添加购物车
      * @return
      */
-    int addShopCat(Long commodityId, Long userId,Long num,String Prices);
+    int addShopCat(Long commodityId, Long userId,Long num,Double Prices);
 
     /**
      * 查询购物车
@@ -132,6 +134,28 @@ public interface CommodityDao {
      */
     List<Commodity> selectClassifyCommodityId(Long classifyId,Long pages);
 
+    /**
+     * 分类销量查询
+     * @param classifyId
+     * @return
+     */
+    List<Commodity>  salesClassifyCommodity(Long classifyId,Long pages);
+
+    /**
+     * 价格 降序
+     * @param classifyId
+     * @param pages
+     * @return
+     */
+    List<Commodity> priceBigClassifyCommodity(Long classifyId,Long pages);
+
+    /**
+     * 价格升序
+     * @param classifyId
+     * @param pages
+     * @return
+     */
+    List<Commodity> priceSmallClassifyCommodity(Long classifyId,Long pages);
     /**
      * 查询分类数量
      * @param classifyId

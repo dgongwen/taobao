@@ -108,9 +108,8 @@
 
 							<div class="goods">
 								<div class="goods-date" data-date="2015-12-21">
-									<span><i class="month-lite">{{commodity.creationTime}}</i>.<i class="day-lite">21</i><i class="date-desc"></i></span>
-									<del class="am-icon-trash"></del>
-									<s class="line"></s>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="month-lite">{{commodity.creationTime}}</i>.<i class="day-lite">21</i><i class="date-desc"></i></span>
+
 								</div>
 
 
@@ -121,8 +120,8 @@
 											<a class="goods-pic-link" target="_blank" href="#" title="意大利费列罗进口食品巧克力零食24粒  进口巧克力食品">
 												<img :src="commodity.commodityImgUrl" class="goods-img"></a>
 										</div>
-										<a class="goods-delete" href="javascript:void(0);"><i class="am-icon-trash"></i></a>
-										<div class="goods-status goods-status-show"><span class="desc">宝贝已下架</span></div>
+										<a class="goods-delete" :type="commodity.id" onclick="deleteFoot(this.type)" href="javascript:void(0);"><i class="am-icon-trash"></i></a>
+										<div class="goods-status goods-status-show"><span class="desc"></span></div>
 									</div>
 
 									<div class="goods-attr">
@@ -140,8 +139,7 @@
 										<div class="clear"></div>
 										<div class="goods-num">
 											<div class="match-recom">
-												<a href="#" class="match-recom-item">找相似</a>
-												<a href="#" class="match-recom-item">找搭配</a>
+
 												<i><em></em><span></span></i>
 											</div>
 										</div>
@@ -230,8 +228,9 @@
 		</div>
 
 <script>
+	let  fromLocalStorage = getFromLocalStorage("seller");
 	$(function () {
-		let  fromLocalStorage = getFromLocalStorage("seller");
+
 		if (fromLocalStorage==null){
 			alert("未登录哦！");
 			location.href="http://localhost:8080//taobao_html/登录.html";
@@ -249,10 +248,8 @@
 		methods: {
 			refreshSellerList: function () {
 
-				let  fromLocalStorage = getFromLocalStorage("seller");
-				let id = fromLocalStorage.id;
 				//发起http请求后台获取商家列表数据
-				var url="selectFootprint.t?userId="+id;
+				var url="selectFootprint.t?userId="+fromLocalStorage.id;
 				let thisObj = this;
 				get(url, function (data) {
 					thisObj.commodityFoot = data;
@@ -265,6 +262,16 @@
 			this.refreshSellerList();
 		}
 	});
+
+		function deleteFoot(id){
+
+
+			//发起http请求后台获取商家列表数据
+			var url="deleteFootprint.t?userId="+fromLocalStorage.id+"&commodityId="+id;
+			get(url, function (data) {
+				vm.commodityFoot = data;
+			})
+		}
 
 
 </script>

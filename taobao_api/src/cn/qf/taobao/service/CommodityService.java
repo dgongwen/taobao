@@ -72,6 +72,14 @@ public interface CommodityService {
    List<Commodity> selectFootprint(Long userId);
 
     /**
+     * 删除足迹
+     * @param commodityId
+     * @param userId
+     * @return
+     */
+    List<Commodity> deleteFootprintService(Long commodityId, Long userId);
+
+    /**
      *添加购物车
      * @return
      */
@@ -107,6 +115,30 @@ public interface CommodityService {
      * @return
      */
     List<Commodity> selectClassifyCommodityIdService(Long classifyId,Long pages);
+
+    /**
+     * 销量排序分类商品
+     * @param classifyId
+     * @param pages
+     * @return
+     */
+    List<Commodity> salesClassifyCommodityService(Long classifyId,Long pages);
+
+    /**
+     * 分类价格降序
+     * @param classifyId
+     * @param pages
+     * @return
+     */
+    List<Commodity> priceBigClassifyCommodityService(Long classifyId, Long pages);
+
+    /**
+     * 分类价格升序
+     * @param classifyId
+     * @param pages
+     * @return
+     */
+    List<Commodity> priceSmallClassifyCommodityService(Long classifyId, Long pages);
 
     /**
      * 查询分类数量

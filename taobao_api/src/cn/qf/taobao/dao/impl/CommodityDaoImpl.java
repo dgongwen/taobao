@@ -204,7 +204,7 @@ public class CommodityDaoImpl implements CommodityDao {
     }
 
     @Override
-    public int addShopCat(Long commodityId, Long userId,Long num,String Prices) {
+    public int addShopCat(Long commodityId, Long userId,Long num,Double Prices) {
 
         String sql="INSERT INTO t_shop_cart(`user_id`, `commodity_id`,cart_num,commodity_total_price) VALUES (?,?,?,?);";
         try {
@@ -278,6 +278,75 @@ public class CommodityDaoImpl implements CommodityDao {
 
         try {
            return queryRunner.query(sql,commodityBeanListHandler,classifyId,pages);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Commodity> salesClassifyCommodity(Long classifyId,Long pages) {
+
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架' ORDER BY commodity_sales DESC LIMIT ?,12";
+        if (pages==null||pages<0){
+
+            pages=1L;
+
+        }
+        pages=((pages-1)*12);
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class, processor);
+
+        try {
+            return queryRunner.query(sql,commodityBeanListHandler,classifyId,pages);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Commodity> priceBigClassifyCommodity(Long classifyId, Long pages) {
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架' ORDER BY commodity_Price DESC LIMIT ?,12";
+        if (pages==null||pages<0){
+
+            pages=1L;
+
+        }
+        pages=((pages-1)*12);
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class, processor);
+
+        try {
+            return queryRunner.query(sql,commodityBeanListHandler,classifyId,pages);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Commodity> priceSmallClassifyCommodity(Long classifyId, Long pages) {
+
+
+        String sql="SELECT * FROM t_commodity tc LEFT JOIN t_commodity_classification tcc ON tc.classification_id=tcc.classification_id WHERE tcc.classification_id=? AND tc.commodity_state='上架' ORDER BY commodity_Price ASC LIMIT ?,12";
+        if (pages==null||pages<0){
+
+            pages=1L;
+
+        }
+        pages=((pages-1)*12);
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanListHandler<Commodity> commodityBeanListHandler = new BeanListHandler<>(Commodity.class, processor);
+
+        try {
+            return queryRunner.query(sql,commodityBeanListHandler,classifyId,pages);
         } catch (SQLException e) {
             e.printStackTrace();
         }
