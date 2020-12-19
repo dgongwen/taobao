@@ -186,7 +186,7 @@ public class AdminDaoImpl implements AdminDao {
     //随机展示12条数据
     @Override
     public List<AdminCommodityQO> randomCommodity() {
-        String randomCommoditySql="SELECT * FROM t_commodity  ORDER BY  RAND() LIMIT 12";
+        String randomCommoditySql="SELECT * FROM t_commodity  WHERE commodity_status = 1 AND commodity_state='上架'  ORDER BY  RAND() LIMIT 12";
         try {
             GenerousBeanProcessor beanProcessor = new GenerousBeanProcessor();
             BasicRowProcessor row = new BasicRowProcessor(beanProcessor);
