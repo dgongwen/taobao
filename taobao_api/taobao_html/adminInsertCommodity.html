@@ -370,13 +370,6 @@
 
     function formInserts() {
 
-        let validateResult = $("#insertCommodity").valid();
-        if (!validateResult) {
-            //校验不通过
-            alert("数据不能为空");
-            return;
-        }
-
         let commodityName= $("#commodityNames").val();
         let commodityPrice= $("#commodityPrice").val();
         let commodityImgUrl= $("#commodityImgUrl").val();
