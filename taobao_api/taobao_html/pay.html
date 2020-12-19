@@ -74,37 +74,32 @@
 			<div class="clear"></div>
 			<div class="concent">
 				<!--地址 -->
-				<div id="commodity" class="paycont">
+				<div  class="paycont">
 					<div class="address">
 						<h3>确认收货地址 </h3>
-						<div class="control">
-							<div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
-						</div>
-						<div class="clear"></div>
-						<ul>
-							<div class="per-border"></div>
-							<li class="user-addresslist defaultAddr">
 
+						<div class="clear"></div>
+						<ul id="div_add">
+							<div class="per-border"></div>
+							<li v-for="commodity in commodityAdd" class="user-addresslist defaultAddr">
+								<span v-if="commodity.status === 1" class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
 								<div class="address-left">
 									<div class="user DefaultAddr">
 
-										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
-										<span class="buy-phone">15871145629</span>
+										<span class="buy-address-detail">
+                                      <span class="buy-user">{{commodity.consigneeName}} </span>
+										<span class="buy-phone">{{commodity.consigneePhone}}</span>
 										</span>
 									</div>
 									<div class="default-address DefaultAddr">
 										<span class="buy-line-title buy-line-title-type">收货地址：</span>
 										<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span>
+								   <span class="province">{{commodity.consigneeAddress}}</span>
 										</span>
 
-										</span>
+
 									</div>
-									<ins class="deftip">默认地址</ins>
+
 								</div>
 								<div class="address-right">
 									<a href="person/address.html">
@@ -113,51 +108,13 @@
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
-									<a href="#" class="hidden">设为默认</a>
-									<span class="new-addr-bar hidden">|</span>
-									<a href="#">编辑</a>
+									<input type="button" :name="commodity.addressId" onclick="defaultAddress(this.name)" value="设为默认">
 									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
+									<input type="button" :name="commodity.addressId" onclick="deleteAddress(this.name)" value="删除">
 								</div>
 
 							</li>
-							<div class="per-border"></div>
-							<li class="user-addresslist">
-								<div class="address-left">
-									<div class="user DefaultAddr">
 
-										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
-										<span class="buy-phone">15871145629</span>
-										</span>
-									</div>
-									<div class="default-address DefaultAddr">
-										<span class="buy-line-title buy-line-title-type">收货地址：</span>
-										<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">武昌</span>区
-										<span class="street">东湖路75号众环大厦2栋9层902</span>
-										</span>
-
-										</span>
-									</div>
-									<ins class="deftip hidden">默认地址</ins>
-								</div>
-								<div class="address-right">
-									<span class="am-icon-angle-right am-icon-lg"></span>
-								</div>
-								<div class="clear"></div>
-
-								<div class="new-addr-btn">
-									<a href="#">设为默认</a>
-									<span class="new-addr-bar">|</span>
-									<a href="#">编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);"  onclick="delClick(this);">删除</a>
-								</div>
-
-							</li>
 
 						</ul>
 
@@ -166,7 +123,7 @@
 
 
 					<!--订单 -->
-					<div class="concent">
+					<div  class="concent">
 						<div id="payTable">
 							<h3>确认订单信息</h3>
 							<div class="cart-table-th">
@@ -191,97 +148,95 @@
 								</div>
 							</div>
 							<div class="clear"></div>
+<div id="commodity">
 
-							<tr class="item-list">
-								<div class="bundle  bundle-last">
-
-
-									<div  class="bundle-main">
-										<ul class="item-content clearfix">
-											<div class="pay-phone">
-												<li class="td td-item">
-													<div class="item-pic">
-														<a href="#" class="J_MakePoint">
-															<img :src="oneCommodity.commodityImgUrl" style="height: 80px;width: 80px" class="itempic J_ItemImg"></a>
-													</div>
-													<div class="item-info">
-														<div class="item-basic-info">
-															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">{{oneCommodity.commodityName}}</a>
-														</div>
-													</div>
-												</li>
-												<li class="td td-info">
-													<div class="item-props">
-														<span class="sku-line"></span>
-														<span class="sku-line"></span>
-													</div>
-												</li>
-												<li class="td td-price">
-													<div class="item-price price-promo-promo">
-														<div class="price-content">
-															<em class="J_Price price-now">{{oneCommodity.commodityPrice}}</em>
-														</div>
-													</div>
-												</li>
-											</div>
-											<li class="td td-amount">
-												<div class="amount-wrapper ">
-													<div class="item-amount ">
-														<span class="phone-title">购买数量</span>
-														<div class="sl">
-															<input class="min am-btn" name="" type="button" value="-" />
-															<input class="text_box" name="" type="text" :value="num" style="width:30px;" />
-															<input class="add am-btn" name="" type="button" value="+" />
-														</div>
-													</div>
-												</div>
-											</li>
-											<li class="td td-sum">
-												<div class="td-inner">
-													<em tabindex="0" class="J_ItemSum number">{{oneCommodity.commodityPrice*num}}</em>
-												</div>
-											</li>
-											<li class="td td-oplist">
-												<div class="td-inner">
-													<span class="phone-title">配送方式</span>
-													<div class="pay-logis">
-														快递<b class="sys_item_freprice">免邮</b>
-													</div>
-												</div>
-											</li>
-
-										</ul>
-										<div class="clear"></div>
-
-									</div>
-							</tr>
+	<tr class="item-list">
+		<div class="bundle  bundle-last">
 
 
-
-							<div class="clear"></div>
+			<div  class="bundle-main">
+				<ul class="item-content clearfix">
+					<div class="pay-phone">
+						<li class="td td-item">
+							<div class="item-pic">
+								<a href="#" class="J_MakePoint">
+									<img :src="oneCommodity.commodityImgUrl" style="height: 80px;width: 80px" class="itempic J_ItemImg"></a>
 							</div>
-
-
-
-
+							<div class="item-info">
+								<div class="item-basic-info">
+									<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">{{oneCommodity.commodityName}}</a>
+								</div>
 							</div>
+						</li>
+						<li class="td td-info">
+							<div class="item-props">
+								<span class="sku-line"></span>
+								<span class="sku-line"></span>
+							</div>
+						</li>
+						<li class="td td-price">
+							<div class="item-price price-promo-promo">
+								<div class="price-content">
+									<em class="J_Price price-now">{{oneCommodity.commodityPrice}}</em>
+								</div>
+							</div>
+						</li>
+					</div>
+					<li class="td td-amount">
+						<div class="amount-wrapper ">
+							<div class="item-amount ">
+								<span class="phone-title">购买数量</span>
+								<div class="sl">
+									<input class="min am-btn" name="" type="button" value="-" />
+									<input class="text_box" name="" type="text" :value="num" style="width:30px;" />
+									<input class="add am-btn" name="" type="button" value="+" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="td td-sum">
+						<div class="td-inner">
+							<em tabindex="0" class="J_ItemSum number">{{oneCommodity.commodityPrice*num}}</em>
+						</div>
+					</li>
+					<li class="td td-oplist">
+						<div class="td-inner">
+							<span class="phone-title">配送方式</span>
+							<div class="pay-logis">
+								快递<b class="sys_item_freprice">免邮</b>
+							</div>
+						</div>
+					</li>
+
+				</ul>
+				<div class="clear"></div>
+
+			</div>
+	</tr>
+
+
+
+	<div class="clear"></div>
+
+
+</div>
 							<div class="clear"></div>
 							<div class="pay-total">
-						<!--留言-->
-							<div class="order-extra">
-								<div class="order-user-info">
-									<div id="holyshit257" class="memo">
-										<label>买家留言：</label>
-										<input type="text" title="选填,对本次交易的说明（建议填写已经和卖家达成一致的说明）" placeholder="选填,建议填写和卖家达成一致的说明" class="memo-input J_MakePoint c2c-text-default memo-close">
-										<div class="msg hidden J-msg">
-											<p class="error">最多输入500个字符</p>
+								<!--留言-->
+								<div class="order-extra">
+									<div class="order-user-info">
+										<div id="holyshit257" class="memo">
+											<label>买家留言：</label>
+											<input type="text" title="选填,对本次交易的说明（建议填写已经和卖家达成一致的说明）" placeholder="选填,建议填写和卖家达成一致的说明" class="memo-input J_MakePoint c2c-text-default memo-close">
+											<div class="msg hidden J-msg">
+												<p class="error">最多输入500个字符</p>
+											</div>
 										</div>
 									</div>
+
 								</div>
 
-							</div>
-
-							<div class="clear"></div>
+								<div class="clear"></div>
 							</div>
 							<!--含运费小计 -->
 							<div class="buy-point-discharge ">
@@ -289,34 +244,40 @@
 									合计（含运费） <span>¥</span><em class="pay-sum">{{oneCommodity.commodityPrice*num}}</em>
 								</p>
 							</div>
-
-							<!--信息 -->
-							<div class="order-go clearfix">
-								<div class="pay-confirm clearfix">
-									<div class="box">
-										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
-											<span class="price g_price ">
+							<div class="box">
+								<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
+									<span class="price g_price ">
                                     <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">{{oneCommodity.commodityPrice*num}}</em>
 											</span>
-										</div>
+								</div>
+
+							</div>
+</div>
+
+
+
+
+
+							<!--信息 -->
+							<div id="default" class="order-go clearfix">
+								<div class="pay-confirm clearfix">
+
 
 										<div id="holyshit268" class="pay-address">
 
 											<p class="buy-footer-address">
 												<span class="buy-line-title buy-line-title-type">寄送至：</span>
 												<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-												<span class="city">武汉</span>市
-												<span class="dist">洪山</span>区
-												<span class="street">雄楚大道666号(中南财经政法大学)</span>
+								   <span class="province">{{commoditydefault.consigneeAddress}}</span>
+
 												</span>
 												</span>
 											</p>
 											<p class="buy-footer-address">
 												<span class="buy-line-title">收货人：</span>
-												<span class="buy-address-detail">   
-                                         <span class="buy-user">艾迪 </span>
-												<span class="buy-phone">15871145629</span>
+												<span class="buy-address-detail">
+                                         <span class="buy-user">{{commoditydefault.consigneeName}} </span>
+												<span class="buy-phone">{{commoditydefault.consigneePhone}}</span>
 												</span>
 											</p>
 										</div>
@@ -425,6 +386,118 @@
 			<div class="clear"></div>
 
 	<script type="text/javascript">
+		var fromLocalStorage = getFromLocalStorage("seller");
+		$(function () {
+
+			if (fromLocalStorage==null){
+				alert("未登录哦！");
+				location.href="http://localhost:8080//taobao_html/登录.html";
+				return;
+			}
+
+
+		})
+
+		var vm2 = new Vue({
+			el: '#default',
+			data: {
+				commoditydefault:[]
+			},
+			methods: {
+				refreshSellerList: function () {
+					//发起http请求后台获取商家列表数据
+					let url = "selectDefaultAddress.t?userId="+fromLocalStorage.id;
+					let thisObj = this;
+					get(url, function (data) {
+						thisObj.commoditydefault = data;
+					})
+				}
+			},
+			mounted: function () {
+				//页面加载完成，并且vue对象加载完成之后调用
+				this.refreshSellerList();
+			}
+		});
+
+
+		var vm1 = new Vue({
+			el: '#div_add',
+			data: {
+				commodityAdd:[]
+			},
+			methods: {
+				refreshSellerList: function () {
+					//发起http请求后台获取商家列表数据
+					let url = "selectAddress.t?userId="+fromLocalStorage.id;
+					let thisObj = this;
+					get(url, function (data) {
+						thisObj.commodityAdd = data;
+					})
+				}
+			},
+			mounted: function () {
+				//页面加载完成，并且vue对象加载完成之后调用
+				this.refreshSellerList();
+			}
+		});
+
+
+
+
+
+		function deleteAddress(id){
+
+			var url="deleteAddress.t?addressId="+id+"&userId="+fromLocalStorage.id;
+			get(url,function (data) {
+				alert("删除成功");
+				vm1.commodityAdd=data;
+
+			})
+
+
+		}
+
+
+		function defaultAddress(id){
+
+			var url="setDefaultAddress.t?addressId="+id+"&userId="+fromLocalStorage.id;
+			get(url,function (data) {
+
+				vm1.commodityAdd=data;
+
+			})
+
+			let ur2 = "selectDefaultAddress.t?userId="+fromLocalStorage.id;
+			get(ur2, function (data) {
+				vm2.commoditydefault = data;
+			})
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		var urlParam = getUrlParam("commodityId");
 		var urlParam1 = getUrlParam("num");
 

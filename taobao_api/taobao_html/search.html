@@ -147,9 +147,9 @@
                 </div>
                 <div id="div_classify" class="search-content">
                     <div class="sort">
-                        <li class="first"><a title="综合">综合排序</a></li>
-                        <li><a title="销量">销量排序</a></li>
-                        <li><a title="价格">价格优先</a></li>
+                        <li class="first"><a href="#"  onclick="synthesis()" title="综合">综合排序</a></li>
+                        <li><a href="#" onclick="sales1()" title="销量">销量排序</a></li>
+                        <li><a href="#" onclick="price1()" title="价格">价格优先</a></li>
                         <li class="big"><a title="评价" href="#">评价为主</a></li>
                     </div>
 
@@ -398,14 +398,15 @@
 
 <script type="text/javascript">
 
-
+    var sales=0;
+    var price2=true;
 	var urlParam = getUrlParam("num");
     if (urlParam == 0) {
         alert("无此分类哦");
         location.href = "http://localhost:8080//taobao_html/首页.html";
     }
     var urlParam1 = getUrlParam("name");
-    console.log(urlParam1);
+
 
     var vm = new Vue({
         el: '#div_Name',
@@ -459,11 +460,30 @@
 
 
    function pages(id){
+       if (sales==0){
+           let url = "classifyCommodity.t?num=" + urlParam + "&pages="+id;
+           get(url,function (data) {
+               v.classifyList=data;
+           })
+       }else if (sales==1){
+           let url = "salesClassify.t?num=" + urlParam + "&pages="+id;
+           get(url,function (data) {
+               v.classifyList=data;
+           })
 
-        let url = "classifyCommodity.t?num=" + urlParam + "&pages="+id;
-                   get(url,function (data) {
-                        v.classifyList=data;
-                   })
+       }else if (sales==2){
+
+           let url = "priceBig.t?num=" + urlParam + "&pages="+id;
+           get(url,function (data) {
+               v.classifyList=data;
+           })
+       }else if (sales==3){
+           let url = "priceSmallClassify.t?num=" + urlParam + "&pages="+id;
+
+           get(url, function (data) {
+               v.classifyList = data;
+           })
+       }
 
    }
 
@@ -516,6 +536,55 @@
 
 
         location.href = "http://localhost:8080//taobao_html/search.html?num=" + id+"&name="+name;
+
+
+    }
+    //综合
+    function synthesis(){
+        let url = "classifyCommodity.t?num=" + urlParam + "&pages=1";
+
+        get(url, function (data) {
+            v.classifyList = data;
+        })
+
+        sales=0;
+    }
+//排序
+   function sales1(){
+
+       let url = "salesClassify.t?num=" + urlParam + "&pages=1";
+       get(url,function (data) {
+           v.classifyList=data;
+       })
+       sales=1;
+
+   }
+
+//价格降序
+   function price1(){
+
+        if (price2){
+            let url = "priceBig.t?num=" + urlParam + "&pages=1";
+
+            get(url, function (data) {
+                v.classifyList = data;
+            })
+            sales=2;
+
+            price2=false;
+
+        }else {
+            let url = "priceSmallClassify.t?num=" + urlParam + "&pages=1";
+
+            get(url, function (data) {
+                v.classifyList = data;
+            })
+            sales=3;
+            price2=true;
+
+        }
+
+
 
 
     }

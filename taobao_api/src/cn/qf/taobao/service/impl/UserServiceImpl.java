@@ -74,7 +74,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Address> addAddress(Address address) {
 
+        List<Address> addresses = selectUserAddressService(address.getUserId());
+        for (Address address1 : addresses) {
+            if (address1.getConsigneeName().equals(address.getConsigneeName())){
+                throw new RuntimeException("收货地址中已存在"+address.getConsigneeName());
+
+            }
+
+        }
+
         int i = userDao.addAddress(address);
+
+
         if (i==0){
             throw new RuntimeException("添加用户收获地址失败");
         }
@@ -92,5 +103,39 @@ public class UserServiceImpl implements UserService {
         }
        return selectUserAddressService(userId);
 
+    }
+
+    @Override
+    public Address selectOneAddress(Long userId, Long addressId) {
+
+        Address address = userDao.selectOneAddress(userId, addressId);
+        if (address==null){
+            throw new RuntimeException("查询单个地址失败");
+        }
+        return address;
+    }
+
+    @Override
+    public List<Address> setDefaultAddress(Long userId, Long addressId) {
+
+        int i = userDao.modifyOneAddress(userId, addressId);
+        if (i==0){
+            throw new RuntimeException("设置默认地址失败");
+        }
+        int i1 = userDao.modifyAllAddress(userId, addressId);
+        if (i1==0){
+            throw new RuntimeException("设置其他为非默认地址失败");
+        }
+        return  selectUserAddressService(userId);
+
+    }
+
+    @Override
+    public Address selectDefaultAddressService(Long userId) {
+        Address address = userDao.selectDefaultAddress(userId);
+        if (address==null){
+            throw new RuntimeException("查询用户默认地址失败");
+        }
+        return address;
     }
 }

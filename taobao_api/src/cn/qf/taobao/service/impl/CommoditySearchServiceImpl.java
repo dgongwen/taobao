@@ -14,47 +14,87 @@ import java.util.List;
  */
 public class CommoditySearchServiceImpl implements CommoditySearchService {
     CommoditySearchDao commoditySearch = new CommoditySearchDaoImpl();
-    private Page<Commodity> page = new Page<>();
+    Page<Commodity> page = new Page<>();
 
-    public Page<Commodity> getPage() {
-        page.setPageSize(12);
-        return page;
-    }
-
-    @Override
-    public List<Commodity> searchByPriceDesc(int currentPage) {
-        List<Commodity> searchByPriceDesc = commoditySearch.searchByPriceDesc(currentPage,page.getPageSize());
+    /*@Override
+    public List<Commodity> searchByPriceDesc(int page,int pageSize) {
+        List<Commodity> searchByPriceDesc = commoditySearch.searchByPriceDesc(page,pageSize);
         if(null != searchByPriceDesc){
             return searchByPriceDesc;
         }
         return null;
-    }
+    }*/
 
-    @Override
-    public List<Commodity> searchByPriceAsc(int currentPage) {
-        List<Commodity> searchByPriceAsc = commoditySearch.searchByPriceAsc(currentPage,page.getPageSize());
+    /*@Override
+    public List<Commodity> searchByPriceAsc() {
+        List<Commodity> searchByPriceAsc = commoditySearch.searchByPriceAsc();
         if(null != searchByPriceAsc){
             return searchByPriceAsc;
         }
         return null;
-    }
+    }*/
 
-    @Override
-    public List<Commodity> searchBySaleCount(int currentPage) {
-        List<Commodity> commodityList = commoditySearch.searchBySaleCount(currentPage,page.getPageSize());
+    /*@Override
+    public List<Commodity> searchBySaleCount() {
+        List<Commodity> commodityList = commoditySearch.searchBySaleCount();
         if(null != commodityList){
             return commodityList;
         }
         return null;
-    }
+    }*/
 
-    @Override
-    public List<Commodity> searchByKeyWord(String searchContent,int currentPage) {
-        List<Commodity> commodities = commoditySearch.searchByKeyWord(searchContent,currentPage,page.getPageSize());
+    /*@Override
+    public List<Commodity> searchByKeyWord(String searchContent) {
+        List<Commodity> commodities = commoditySearch.searchByKeyWord(searchContent);
         if(null != commodities){
             return commodities;
         }
         return null;
+    }*/
+
+    @Override
+    public Page<Commodity> searchByKeyWord(String searchContent, int currentPage) {
+        int pageSize = 12;
+        currentPage = (currentPage-1)*pageSize;
+        List<Commodity> searchByKeyWord = commoditySearch.searchByKeyWord(searchContent, currentPage, pageSize);
+        int searchCountByWord = commoditySearch.searchByWordCount(searchContent).intValue();
+        return getCommodityPage(currentPage,pageSize,searchByKeyWord,searchCountByWord);
+    }
+
+    @Override
+    public Page<Commodity> searchByPriceDesc(int currentPage) {
+        int pageSize = 12;
+        currentPage = (currentPage-1)*pageSize;
+        List<Commodity> searchByPriceDesc = commoditySearch.searchByPriceDesc(currentPage,pageSize);
+        int searchCount = commoditySearch.searchCount().intValue();
+        return getCommodityPage(currentPage, pageSize, searchByPriceDesc, searchCount);
+    }
+
+    @Override
+    public Page<Commodity> searchByPriceAsc(int currentPage) {
+        int pageSize = 12;
+        currentPage = (currentPage-1)*pageSize;
+        List<Commodity> searchByPriceAsc = commoditySearch.searchByPriceAsc(currentPage, pageSize);
+        int searchCount = commoditySearch.searchCount().intValue();
+        return getCommodityPage(currentPage,pageSize,searchByPriceAsc,searchCount);
+    }
+
+    @Override
+    public Page<Commodity> searchBySaleCount(int currentPage) {
+        int pageSize = 12;
+        currentPage = (currentPage-1)*pageSize;
+        List<Commodity> searchBySaleCount = commoditySearch.searchBySaleCount(currentPage, pageSize);
+        int searchCount = commoditySearch.searchCount().intValue();
+        return getCommodityPage(currentPage,pageSize,searchBySaleCount,searchCount);
+    }
+
+    private Page<Commodity> getCommodityPage(int currentPage, int pageSize, List<Commodity> searchByPriceDesc, int searchCount) {
+        page.setCurrentPage(currentPage);
+        page.setPageSize(pageSize);
+        page.setTotalCount(searchCount);
+        page.setList(searchByPriceDesc);
+        page.setTotalPage((int) Math.ceil(page.getTotalCount()*1.0/pageSize));
+        return page;
     }
 
 }

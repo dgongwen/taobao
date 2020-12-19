@@ -53,6 +53,13 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("updateById.t");
         whiteList.add("updateState.t");
 
+        whiteList.add("selectOneAddress.t");
+        whiteList.add("setDefaultAddress.t");
+        whiteList.add("selectDefaultAddress.t");
+        whiteList.add("deleteFootprint.t");
+        whiteList.add("salesClassify.t");
+        whiteList.add("priceBig.t");
+        whiteList.add("priceSmallClassify.t");
 
 
 

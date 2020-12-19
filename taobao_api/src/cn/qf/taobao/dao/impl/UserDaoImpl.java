@@ -89,4 +89,58 @@ public class  UserDaoImpl implements UserDao {
         }
         return 0;
     }
+
+    @Override
+    public Address selectOneAddress(Long userId,Long addressId) {
+        String sql="SELECT * FROM address WHERE address_id=? AND user_id=? ";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanHandler<Address> addressBeanHandler = new BeanHandler<>(Address.class,processor);
+        try {
+           return queryRunner.query(sql,addressBeanHandler,addressId,userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Address selectDefaultAddress(Long userId) {
+        String sql="SELECT * FROM address WHERE user_id=? AND `status`=1";
+        //开启下划线->驼峰转换所用
+        BeanProcessor bean = new GenerousBeanProcessor();
+        RowProcessor processor = new BasicRowProcessor(bean);
+        BeanHandler<Address> addressBeanHandler = new BeanHandler<>(Address.class,processor);
+
+        try {
+            return  queryRunner.query(sql,addressBeanHandler,userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public int modifyOneAddress(Long userId, Long addressId) {
+
+        String sql="UPDATE `taobao`.`address` SET  `status` = 1 WHERE `address_id` = ? AND user_id=?";
+        try {
+          return   queryRunner.update(sql,addressId,userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int modifyAllAddress(Long userId, Long addressId) {
+        String sql="UPDATE `taobao`.`address` SET  `status` = 0 WHERE `address_id` != ? AND user_id=?";
+        try {
+           return queryRunner.update(sql,addressId,userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

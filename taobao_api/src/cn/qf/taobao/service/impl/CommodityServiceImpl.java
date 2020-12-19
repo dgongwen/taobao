@@ -126,16 +126,26 @@ public class CommodityServiceImpl  implements CommodityService {
     }
 
     @Override
+    public List<Commodity> deleteFootprintService(Long commodityId, Long userId) {
+
+        int i = commodityDao.deleteFootprint(commodityId, userId);
+        if (i==0){
+            throw new RuntimeException("删除足迹失败");
+        }
+
+        return selectFootprint(userId);
+    }
+
+    @Override
     public boolean addShopCatService(Long commodityId, Long userId,Long num) {
 
         Commodity commodity = commodityDao.oneCommodity(commodityId);
-        String commodityPrice = commodity.getCommodityPrice();
-        Double totalPrices = Double.valueOf(commodityPrice)*num;
-        String Prices = totalPrices.toString();
+        Double commodityPrice = commodity.getCommodityPrice();
+        Double totalPrices = commodityPrice*num;
 
         Favorite favorite = commodityDao.existShopCat(commodityId, userId);
         if (favorite==null){
-            int i = commodityDao.addShopCat(commodityId, userId,num,Prices);
+            int i = commodityDao.addShopCat(commodityId, userId,num,totalPrices);
             if (i==0){
                 throw new RuntimeException("添加购物车失败！");
             }
@@ -154,10 +164,10 @@ public class CommodityServiceImpl  implements CommodityService {
             throw new RuntimeException("删除购物车失败！");
         }
         Commodity commodity = commodityDao.oneCommodity(commodityId);
-        String commodityPrice = commodity.getCommodityPrice();
-        Double totalPrices = Double.valueOf(commodityPrice)*num;
-        String Prices = totalPrices.toString();
-        int i1 = commodityDao.addShopCat(commodityId, userId, num, Prices);
+        Double commodityPrice = commodity.getCommodityPrice();
+        Double totalPrices = commodityPrice*num;
+
+        int i1 = commodityDao.addShopCat(commodityId, userId, num, totalPrices);
         if (i1==0){
             throw new RuntimeException("修改添加购物车失败！");
         }
@@ -202,6 +212,36 @@ public class CommodityServiceImpl  implements CommodityService {
             throw new RuntimeException("查询分类商品失败!");
         }
 
+        return commodities;
+    }
+
+    @Override
+    public List<Commodity> salesClassifyCommodityService(Long classifyId, Long pages) {
+
+        List<Commodity> commodities = commodityDao.salesClassifyCommodity(classifyId, pages);
+        if (commodities==null){
+            throw new RuntimeException("销量查询分类商品失败!");
+        }
+        return commodities;
+    }
+
+    @Override
+    public List<Commodity> priceBigClassifyCommodityService(Long classifyId, Long pages) {
+
+        List<Commodity> commodities = commodityDao.priceBigClassifyCommodity(classifyId, pages);
+        if (commodities==null){
+            throw new RuntimeException("价格降序查询分类商品失败!");
+
+        }        return commodities;
+    }
+
+    @Override
+    public List<Commodity> priceSmallClassifyCommodityService(Long classifyId, Long pages) {
+
+        List<Commodity> commodities = commodityDao.priceSmallClassifyCommodity(classifyId, pages);
+        if (commodities==null){
+            throw new RuntimeException("价格升序查询分类商品失败!");
+        }
         return commodities;
     }
 

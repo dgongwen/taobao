@@ -47,4 +47,28 @@ public interface UserService {
      * @return
      */
     List<Address> deleteAddress(Long userId, Long addressId);
+
+    /**
+     * 查询单个用户收货地址
+     * @param userId
+     * @param addressId
+     * @return
+     */
+    Address selectOneAddress(Long userId,Long addressId);
+
+    /**
+     * 设置默认收货地址
+     * @param userId
+     * @param addressId
+     * @return
+     */
+    List<Address>setDefaultAddress(Long userId,Long addressId);
+
+    /**
+     * 查询用户默认收货地址
+     * @param userId
+     * @return
+     */
+    Address selectDefaultAddressService(Long userId);
+
 }

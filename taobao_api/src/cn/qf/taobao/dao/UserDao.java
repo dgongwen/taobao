@@ -25,7 +25,7 @@ public interface UserDao {
     Integer userRegister(String userName,String password);
 
     /**
-     * 查询用户地址
+     * 查询用户所有地址
      * @param userId
      * @return
      */
@@ -45,4 +45,36 @@ public interface UserDao {
      * @return
      */
     int deleteAddress(Long userId,Long addressId);
+
+    /**
+     * 查询单个地址
+     * @param addressId
+     * @return
+     */
+     Address selectOneAddress(Long userId,Long addressId);
+
+    /**
+     * 查询用户默认地址
+     * @param userId
+     * @return
+     */
+    Address selectDefaultAddress(Long userId);
+
+    /**
+     * 修改收货地址为默认地址
+     * @param userId
+     * @param addressId
+     * @return
+     */
+     int modifyOneAddress(Long userId,Long addressId);
+
+    /**
+     * |修改其他收货地址为非默认地址
+     * @param userId
+     * @param addressId
+     * @return
+     */
+     int modifyAllAddress(Long userId,Long addressId);
+
+
 }

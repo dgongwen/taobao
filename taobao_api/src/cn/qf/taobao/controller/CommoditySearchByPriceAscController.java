@@ -1,6 +1,7 @@
 package cn.qf.taobao.controller;
 
 import cn.qf.taobao.pojo.entity.Commodity;
+import cn.qf.taobao.pojo.entity.Page;
 import cn.qf.taobao.service.CommoditySearchService;
 import cn.qf.taobao.service.impl.CommoditySearchServiceImpl;
 
@@ -9,13 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author dian
  * @date 2020/12/15
  */
-@WebServlet("/commditySearchByPriceAsc.t")
+@WebServlet("/commditySearchByPriceAsc")
 public class CommoditySearchByPriceAscController extends BaseController {
     private CommoditySearchService commoditySearchService = new CommoditySearchServiceImpl();
     @Override
@@ -27,11 +27,14 @@ public class CommoditySearchByPriceAscController extends BaseController {
     }
 
     private void sortByPriceAsc(HttpServletRequest req, HttpServletResponse resp) {
-        String currentpage = req.getParameter("currentpage");
-        int currentPage = Integer.parseInt(currentpage);
+        String currentPage = req.getParameter("currentPage");
+        int pageCount = 1;
+        if(currentPage != null){
+            pageCount = Integer.parseInt(currentPage);
+        }
         try {
-            List<Commodity> commodities = commoditySearchService.searchByPriceAsc(currentPage);
-            writerSuccessResult(commodities,resp);
+            Page<Commodity> commodityPage = commoditySearchService.searchByPriceAsc(pageCount);
+            writerSuccessResult(commodityPage,resp);
         } catch (Exception e) {
             String message = e.getMessage();
             writerErrorResult(message,resp);
