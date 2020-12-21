@@ -1,6 +1,4 @@
 package cn.qf.taobao.filter;
-
-
 import cn.qf.taobao.pojo.vo.BaseRespVO;
 import com.alibaba.fastjson.JSON;
 
@@ -35,7 +33,6 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("addShop.t");
         whiteList.add("selectShop.t");
         whiteList.add("classifyCommodity.t");
-
         whiteList.add("register.t");
         whiteList.add("classifyPages.t");
         whiteList.add("alterShopCat.t");
@@ -52,7 +49,6 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("updateCancel.t");
         whiteList.add("updateById.t");
         whiteList.add("updateState.t");
-
         whiteList.add("selectOneAddress.t");
         whiteList.add("setDefaultAddress.t");
         whiteList.add("selectDefaultAddress.t");
@@ -60,12 +56,10 @@ public class AuthenticationFilter implements Filter {
         whiteList.add("salesClassify.t");
         whiteList.add("priceBig.t");
         whiteList.add("priceSmallClassify.t");
-
-
-
-
         whiteList.add("logout.t");
-
+        whiteList.add("cancelIndent.t");
+        whiteList.add("indentList.t");
+        whiteList.add("indent.t");
     }
 
     @Override

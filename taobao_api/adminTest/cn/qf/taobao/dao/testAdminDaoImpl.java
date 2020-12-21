@@ -1,8 +1,6 @@
 package cn.qf.taobao.dao;
 
 import cn.qf.taobao.dao.impl.AdminDaoImpl;
-import cn.qf.taobao.pojo.qo.AdminCommodityQO;
-import cn.qf.taobao.pojo.qo.AdminLoginQO;
 import org.junit.Test;
 
 public class testAdminDaoImpl {

@@ -1,5 +1,4 @@
 package cn.qf.taobao.dao.impl;
-
 import cn.qf.taobao.dao.AdminDao;
 import cn.qf.taobao.pojo.qo.AdminCommodityQO;
 import cn.qf.taobao.pojo.qo.AdminLoginQO;

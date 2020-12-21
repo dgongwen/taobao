@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>订单管理</title>
+
+		<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+
+		<link href="css/personal.css" rel="stylesheet" type="text/css">
+		<link href="css/orstyle.css" rel="stylesheet" type="text/css">
+
+		<script src="AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		<script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+
+		<!--bootstrap 依赖jQuery-->
+		<script src="js/jquery.js"></script>
+
+		<!--自定义工具-->
+		<script src="tao_js/HttpUtil.js"></script>
+		<script src="tao_js/Data.js"></script>
+		<!--参数校验工具-->
+		<script src="tao_js/vue.min.js"></script>
+
+	</head>
+
+	<body>
+		<!--头 -->
+		<header>
+			<article>
+				<div class="mt-logo">
+					<!--顶部导航条 -->
+					<div class="am-container header">
+						<ul class="message-l">
+							<div class="topMessage">
+								<div class="menu-hd">
+									<a href="#" target="_top" class="h">亲，请登录</a>
+									<a href="#" target="_top">免费注册</a>
+								</div>
+							</div>
+						</ul>
+						<ul class="message-r">
+							<div class="topMessage home">
+								<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+							</div>
+							<div class="topMessage my-shangcheng">
+								<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+							</div>
+							<div class="topMessage mini-cart">
+								<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+							</div>
+							<div class="topMessage favorite">
+								<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+						</ul>
+						</div>
+
+						<!--悬浮搜索框-->
+
+						<div class="nav white">
+							<div class="logoBig">
+								<li><img src="images/logobig.png" /></li>
+							</div>
+
+							<div class="search-bar pr">
+								<a name="index_none_header_sysc" href="#"></a>
+								<form>
+									<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+									<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+								</form>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+					</div>
+				</div>
+			</article>
+		</header>
+            <div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="index"><a href="#">首页</a></li>
+                                <li class="qc"><a href="#">闪购</a></li>
+                                <li class="qc"><a href="#">限时抢</a></li>
+                                <li class="qc"><a href="#">团购</a></li>
+                                <li class="qc last"><a href="#">大包装</a></li>
+							</ul>
+						    <div class="nav-extra">
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+						    </div>
+						</div>
+			</div>
+			<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-order">
+
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> / <small>Order</small></div>
+						</div>
+						<hr/>
+
+						<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
+								<li class="am-active"><a href="#tab1">所有订单</a></li>
+								<li><a href="#tab2">待付款</a></li>
+								<li><a href="#tab3">待发货</a></li>
+								<li><a href="#tab4">待收货</a></li>
+								<li><a href="#tab5">待评价</a></li>
+							</ul>
+
+							<div class="am-tabs-bd">
+								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div style="padding-left: 300px" class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div style="padding-left: 150px"class="th th-change">
+											<td class="td-inner">交易操作</td>
+										</div>
+									</div>
+
+									<div class="order-main">
+										<div class="order-list">
+											<div id="div">
+											<!--交易成功-->
+												<div v-for="indent in indentList" class="order-status5">
+													<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;">{{indent.indentSn}}</a></div>
+													<span>{{indent.createTime}}</span>
+												</div>
+												<div class="order-content">
+													<div class="order-left">
+														<ul class="item-list">
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img :src="indent.commodityImgUrl" class="itempic J_ItemImg">
+																	</a>
+
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<p>{{indent.commodityName}}</p>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>{{indent.commodityNumber}}</span>
+																</div>
+															</li>
+														</ul>
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																<p>{{indent.totalAmount}}¥</p>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+																	<p class="order-info"><a href="logistics.html">查看物流</a></p>
+																</div>
+															</li>
+															<li class="td td-change">
+																<div class="am-btn am-btn-danger anniu">
+																	删除订单</div>
+															</li>
+													</div>
+												</div>
+											</div>
+
+
+
+			</div>
+			<aside class="menu">
+				<ul>
+					<li class="person">
+						<a href="index.html">个人中心</a>
+					</li>
+					<li class="person">
+						<a href="#">个人资料</a>
+						<ul>
+							<li> <a href="information.html">个人信息</a></li>
+							<li> <a href="safety.html">安全设置</a></li>
+							<li> <a href="address.html">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的交易</a>
+						<ul>
+							<li class="active"><a href="order.html">订单管理</a></li>
+							<li> <a href="change.html">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的资产</a>
+						<ul>
+							<li> <a href="coupon.html">优惠券 </a></li>
+							<li> <a href="bonus.html">红包</a></li>
+							<li> <a href="bill.html">账单明细</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">我的小窝</a>
+						<ul>
+							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="foot.html">足迹</a></li>
+							<li> <a href="comment.html">评价</a></li>
+							<li> <a href="news.html">消息</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
+		</div>
+	</body>
+</html>
+<script>
+
+
+	var vm = new Vue({
+		el: '#div',
+		data: {
+			indentList:[]
+		},
+		methods: {
+			refreshSellerList: function () {
+
+				//发起http请求后台获取商家列表数据
+				let url = "indentList.t";
+				let thisObj = this;
+				get(url, function (data) {
+					thisObj.indentList = data;
+				})
+			}
+		},
+		mounted: function () {
+			//页面加载完成，并且vue对象加载完成之后调用
+			this.refreshSellerList();
+		}
+	});
+</script>

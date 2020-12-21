@@ -1,6 +1,5 @@
 package cn.qf.taobao.pojo.entity;
 
-import java.math.BigDecimal;
 
 /**
  * 商品实体
@@ -14,6 +13,7 @@ public class Commodity {
     private Long classificationId;//分类id
     private Long commoditySales;//商品销量
     private Long cartNum;//商品数量
+    private long commodityNum;
     private String commodityState;//商品上下架 1 上架 0 下架
     private String creationTime;//时间
     private String commodityTotalPrice;//单个商品价格X数量
@@ -28,10 +28,19 @@ public class Commodity {
                 ", classificationId=" + classificationId +
                 ", commoditySales=" + commoditySales +
                 ", cartNum=" + cartNum +
+                ", commodityNum=" + commodityNum +
                 ", commodityState='" + commodityState + '\'' +
                 ", creationTime='" + creationTime + '\'' +
                 ", commodityTotalPrice='" + commodityTotalPrice + '\'' +
                 '}';
+    }
+
+    public long getCommodityNum() {
+        return commodityNum;
+    }
+
+    public void setCommodityNum(long commodityNum) {
+        this.commodityNum = commodityNum;
     }
 
     public Long getId() {
